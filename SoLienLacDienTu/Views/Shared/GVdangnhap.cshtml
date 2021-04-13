@@ -1,0 +1,405 @@
+﻿@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>@ViewBag.Title -SoLienLac</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/5a60c74158.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <section class="topbar-w">
+        <div class="container topbar">
+            <div class="col-md-9">
+                <ul class="list-inline topbar_left hidden-sm hidden-xs">
+
+                    <li>
+
+
+                        <a href="/"><span class="logo">  <img src="~/Images/logo1.png" /></span></a>
+
+
+                    </li>
+
+                    <li class="topbar-Search">
+
+
+
+                        <form class="searchBar" action="#">
+                            <input type="text" name="" placeholder="Tìm kiếm trường học">
+                            <a class="search-btn" href="#">
+                                <i class="fas fa-search"></i>
+                            </a>
+
+                        </form>
+
+                    </li>
+
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <div class="userGroup pull-right">
+                    <div class="loginList">
+                        <!-- Button to login -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="background-color :deepskyblue; color:white">
+
+                            </a>
+                            <a href="@Url.Action("Index","Home")">Logout</a>
+                        </button>
+                        <!-- The Modal -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--topbar-->
+    <section class="delete">
+
+
+        <!-- Header -->
+        @*<section class="header">
+                <nav class="navbarTop">
+                    <div class="container style="height:10px;">
+                        <div class="col-md-3 navbartopLeft">
+                            <a href="/"><span class="logo">  <img src="~/Images/logo1.png" /></span></a>
+                            <span id="openMenu" class=""><i class="fa fa-bars" aria-hidden="true"></i></span>
+                                <span id="toggleSearch" class="" aria-hidden="true"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                <form class="searchBar" action="#">
+                                    <input type="text" placeholder="Tìm kiếm trường học">
+                                    <button><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </form>
+                        </div>
+                        <div class="col-md-3">
+                            <span id="openMenu" class=""><i class="fa fa-bars" aria-hidden="true"></i></span>
+                            <span id="toggleSearch" class="" aria-hidden="true"><i class="fa fa-search" aria-hidden="true"></i></span>
+                            <form class="searchBar" action="#">
+                                <input type="text" placeholder="Tìm kiếm trường học">
+                                <button><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                        <script type="text/javascript">
+                            $(".searchBar input").focus(function () {
+                                $(".searchBar").addClass('selected');
+                            });
+                            $(".searchBar input").blur(function () {
+                                $(".searchBar").removeClass('selected');
+                            });
+                        </script>
+                        <div class="col-xs-4 navbarTopMiddle">
+                            <center><a href="/"><span class="logo"><img src="/common/v1/image/logo.png" alt=""></span></a></center>
+                        </div>
+                        <div class="col-xs-5 navbarTopRight">
+                            <div class="userGroup pull-right">
+                                <div class="loginList">
+                                    <span id="notLoginedMenu" class="barLogin" data-toggle="modal" data-target="#myModal">
+                                        <a href="/gv-dang-nhap">Đăng nhập</a>
+                                    </span>
+                                    <div id="myModal" class="modal fade" role="dialog" style="display: none;">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                                    <h4 class="modal-title">Đăng nhập</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <center>
+                                                        <h4>Chào mừng bạn trở lại</h4>
+                                                        <p>Đăng nhập với tư cách là</p>
+                                                        <a class="btn btn-success" href="/gv-dang-nhap">Giáo viên đăng nhập</a>
+                                                        <a class="btn btn-info" href="http://tracuu.vnedu.vn/so-lien-lac/">Phụ huynh đăng nhập</a>
+                                                        <a class="btn btn-primary" href="/vnedu-connect.html"> Sinh viên đăng nhập</a>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+            </section>*@
+        <!-- Header -->
+        @*<section class=" navtop">
+                <div class="navbar navbar-inverse navbar-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("About", "About", "Home")</li>
+                                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>*@
+    </section>
+    <div class="container body-content" style=" background:#f4f1f1;padding-left:15px;padding-right:15px">
+        <div class="col-lg-3" style="background:#f4f1f1;padding-left:0px;padding-right:15px">
+            <div style=" color: black; font-family: Arial;background:white">
+                <div id="page-menu" class="page-menu">
+                    <div id="P160199">
+                        <div class="topmenu">
+                            <div class="groupNav">
+                                <h4 class="navHeader">DÀNH CHO</h4>
+                                <ul class="navList">
+
+                                    <li class="navItem">
+                                        <a class="navItemLink" href="https://localhost:44345/PH/IndexPH" title="Phụ huynh"> </a>
+                                        <div class="linkWrap">
+                                            <a class="navItemLink" href="https://localhost:44345/PH/IndexPH" title="Phụ huynh">
+                                                <span class="imgWrap fa fa-lg  fa fa-user-circle-o fa"></span>
+                                                <span class="textWrap">Phụ huynh</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="navItem"><a class="navItemLink" href="https://localhost:44345/SV/IndexSV" title=" Sinh viên"></a><div class="linkWrap"><a class="navItemLink" href="https://localhost:44345/SV/IndexSV" title=" Sinh viên"><span class="imgWrap fa fa-lg  fa fa fa-user-o fa fa fa fa"></span><span class="textWrap"> Sinh viên</span></a></div></li>
+                                </ul>
+                                <h4 class="navHeader">CHỨC NĂNG</h4>
+                                <ul class="navList">
+                                    <li class="navItem">
+                                        <a class="navItemLink" href="https://localhost:44345/GV/XemTKBGVTong" title="Xem thời khóa biểu"></a>
+                                        <div class="linkWrap">
+                                            <a class="navItemLink" href="https://localhost:44345/GV/XemTKBGVTong" title="Xem thời khóa biểu">
+                                                <span class="imgWrap fa fa-lg  fa fa-calendar fa"></span><span class="textWrap">Xem thời khóa biểu</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="navItem">
+                                        <a class="navItemLink" href="https://localhost:44345/GV/TBchoSV" title="Thông báo cho Sinh viên"></a>
+                                        <div class="linkWrap">
+                                            <a class="navItemLink" href="https://localhost:44345/GV/TBchoSV" title="Thông báo cho Sinh viên">
+                                                <span class="imgWrap fas fa-bell"></span><span class="textWrap">Thông báo cho Sinh viên</span>
+                                            </a>
+                                        </div>
+                                    </li>
+
+                                </ul>
+
+
+
+
+                            </div>
+
+                            <div id="parentcate" style="display: none;">
+                                <div id="28" class="diendan.vnedu.vn" data-avatar="">DÀNH CHO</div>
+                                <div id="30" class="diendan.vnedu.vn" data-avatar="">TRƯỜNG HỌC</div>
+
+                            </div>
+                            <div id="subcate" style="display: none;color:black;font-size:10px;">
+
+                                <div id="40" class="28" data-avatar="fa fa-user-circle-o fa" title="https://localhost:44345/PH/IndexPH">Phụ huynh</div>
+                                <div id="38" class="28" data-avatar="fa fa fa-user-o fa fa fa fa" title="https://localhost:44345/SV/IndexSV"> Sinh viên</div>
+                                <div id="46" class="30" data-avatar="fa fa-calendar fa" title="https://localhost:44345/GV/XemTKBGV">Xem thời khóa biểu</div>
+                                <div id="47" class="30" data-avatar="fa fa-calendar fa" title="https://localhost:44345/GV/TBchoSV">Thông báo cho Sinh viên</div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div style=" background : #f4f1f1">
+
+                <br />
+            </div>
+            <div class="col-md-12" style="background:white">
+                <div class="rightPanel">
+                    <div class="panelHeader">
+                        <h4 style="text-transform: uppercase;">Tin nhà trường</h4>
+                    </div>
+                    <div class="panelContent">
+                        <ul style="margin-top: -10px">
+                            <li>
+                                <div class="newsItem">
+                                    <a href="http://thcs.dienthap.dienchau.nghean.vnedu.vn/tin-tuc/tin-hoat-dong-phong-trao/hoat-dong-ky-niem-ngay-quoc-te-phu-nu-832018" title="" target="_blank">
+                                        <span class="imgWrap">
+                                            <img src="https://cdnhub.vnedu.vn//webtube/128x128/201803/3453556/28685332_2062863977304598_8727321507821068864_n.jpg?f=k9/e0KfPJ51Bi9wn0klkqQ==" title="Hoạt động kỷ niệm ngày quốc tế phụ nữ 8/3/2018 " style="height:50px;">
+                                        </span><span class="newsContent">
+                                            Hoạt động kỷ niệm ngày quốc tế phụ nữ 8/3/2018
+                                        </span>
+                                    </a>
+                                </div>
+                            </li>
+                            <br />
+                            <li>
+                                <div class="newsItem">
+                                    <a href="http://thcs.vinhmya.hoabinh.baclieu.vnedu.vn/tin-tuc/cong-an-huyen-hoa-binh-den-truong-lam-giay-cmnd-cho-hoc" title="" target="_blank">
+                                        <span class="imgWrap">
+                                            <img src="https://cdnhub.vnedu.vn//webtube/128x128/201704/3257995/17796426_304295936652227_5081252116287137131_n.jpg?f=rQ17Nyvnlboe1Z0DRJOLyg==" title="Công An Huyện Hòa Bình đến trường làm giấy CMND cho  Sinh viên " style="height:38px;">
+                                        </span><span class="newsContent">
+                                            Công An Huyện Hòa Bình đến trường làm giấy CMND cho  Sinh viên
+                                        </span>
+                                    </a>
+                                </div>
+                            </li>
+                            <br />
+                            <li>
+                                <div class="newsItem">
+                                    <a href="http://vnedu.vn/tin-nha-truong/vinaphone-chinh-thuc-ra-mat-dong-ho-dinh-vi-cho-tre-em" title="" target="_blank">
+                                        <span class="imgWrap">
+                                            <img src="https://cdnhub.vnedu.vn//webtube/128x128/201611/3190974/kidzon_260.jpg?f=I0hKEdMW8EQaQbbiE/RcTw==" title="VinaPhone chính thức ra mắt đồng hồ định vị cho trẻ em - KIDZON " style="height:70px;">
+                                        </span><span class="newsContent">
+                                            VinaPhone chính thức ra mắt đồng hồ định vị cho trẻ em - KIDZON
+                                        </span>
+                                    </a>
+                                </div>
+                            </li>
+                            <br />
+                            <li>
+                                <div class="newsItem">
+                                    <a href="http://thpt.hahuytap.nghean.vnedu.vn/tin-tuc" title="" target="_blank">
+                                        <span class="imgWrap">
+                                            <img src="https://cdnhub.vnedu.vn//webtube/128x128/201607/3055913/13508991_606742562827639_6586405184356007638_n.jpg?f=7N75tVzuB4rCQLQQCX61Jg==" title=" Tin tức " style="height:49px;">
+                                        </span><span class="newsContent">
+                                            Tin tức
+                                        </span>
+                                    </a>
+                                </div>
+                            </li>
+                            <br />
+                            <li>
+                                <div class="newsItem">
+                                    <a href="http://vnedu.vn/tin-nha-truong/6-meo-dat-mat-khau-an-toan-de-nho" title="" target="_blank">
+                                        <span class="imgWrap">
+                                            <img src="https://cdnhub.vnedu.vn//webtube/128x128/201606/3049191/hinh_anh_1.jpg?f=82HC/bxxTIdDLHjK8KXpXQ==" title=" 6 mẹo đặt mật khẩu an toàn, dễ nhớ " style="height:37px;">
+                                        </span><span class="newsContent">
+                                            6 mẹo đặt mật khẩu an toàn, dễ nhớ
+                                        </span>
+                                    </a>
+                                </div>
+                            </li>
+                            <br />
+                            <li>
+                                <div class="newsItem">
+                                    <a href="http://ttktth-hnthanhhoa.thanhhoa.vnedu.vn/giao-duc-huong-nghiep/huong-dan-su-dung-website-day-du" title="" target="_blank">
+                                        <span class="imgWrap">
+
+                                            <img src="~/Images/35.jpg" title=" Hướng dẫn sử dụng website đầy đủ" style="height:75px;">
+                                        </span><span class="newsContent">
+                                            Hướng dẫn sử dụng website đầy đủ
+                                        </span>
+                                    </a>
+                                </div>
+                            </li>
+                            <br />
+                            <li>
+                                <div class="newsItem">
+                                    <a href="http://ttktth-hnthanhhoa.thanhhoa.vnedu.vn/tin-tuc/tin-giao-duc-do-day/tai-lieu-huong-dan-su-dung-website-huongnghiephocduongcom" title="" target="_blank">
+                                        <span class="imgWrap">
+                                            <img src="https://cdnhub.vnedu.vn//webtube/128x128/201604/3024744/huongnghiephocduong.jpg?f=TaGvJ88Cojn382mHmzup2Q==" title=" Tài liệu hướng dẫn sử dụng Website huongnghiephocduong.com" style="height:80px;">
+                                        </span><span class="newsContent">
+                                            Tài liệu hướng dẫn sử dụng Website huongnghiephocduong.com
+                                        </span>
+                                    </a>
+                                </div>
+                            </li>
+                            <br />
+                            <li>
+                                <div class="newsItem">
+                                    <a href="http://ttktth-hnthanhhoa.thanhhoa.vnedu.vn/tin-tuc/van-hoa-the-thao/hoa-thang-nam" title="" target="_blank">
+                                        <span class="imgWrap">
+                                            <img src="~/Images/35.jpg" title=" Hướng dẫn sử dụng website đầy đủ" style="height:75px;">
+                                        </span><span class="newsContent">
+                                            Hoa tháng Năm
+                                        </span>
+                                    </a>
+                                </div>
+                            </li>
+                            <br />
+                            <li>
+                                <div class="newsItem">
+                                    <a href="http://thcs.dienthap.dienchau.nghean.vnedu.vn/hoat-dong-nha-truong/hoat-dong-ky-niem-gay-quoc-te-phu-nu-832016" title="" target="_blank">
+                                        <span class="imgWrap">
+                                            <img src="https://cdnhub.vnedu.vn//webtube/128x128/201603/3009940/img20160307071719.jpg?f=oKR74rEVPKKpX|W|sXWMZg==" title=" Hoạt động kỷ niệm gày quốc tế phụ nữ 8/3/2016 " style="height:55px;">
+                                        </span><span class="newsContent">
+                                            Hoạt động kỷ niệm gày quốc tế phụ nữ 8/3/2016
+                                        </span>
+                                    </a>
+                                </div>
+                            </li>
+                            <br />
+                            <li>
+                                <div class="newsItem">
+                                    <a href="http://thpt.nguyencongphuong.quangngai.vnedu.vn/qua-tang/thu-chuc-tet-binh-than-cua-hieu-truong-truong-thpt-nguyen-cong" title="" target="_blank">
+                                        <span class="imgWrap">
+                                            <img src="https://cdnhub.vnedu.vn//webtube/128x128/201602/3003841/2016.png?f=c||MpCds3UjPWdhnosdBJg==" title="  Thư chúc Tết Bính Thân của Hiệu trưởng Trường THPT Nguyễn Công Phương " style="height:50px;">
+                                        </span><span class="newsContent">
+                                            Thư chúc Tết Bính Thân của Hiệu trưởng Trường THPT Nguyễn Công Phương
+                                        </span>
+                                    </a>
+                                </div>
+                            </li>
+                            <br />
+                            <li>
+                                <div class="newsItem">
+                                    <a href="http://thcs.dienthap.dienchau.nghean.vnedu.vn/tin-tuc/tin-giao-duc-dien-chau/phong-giao-duc-va-dao-tao-huyen-dien-chau-da-to-chuc" title="" target="_blank">
+                                        <span class="imgWrap">
+                                            <img src="https://cdnhub.vnedu.vn//webtube/128x128/201512/2978023/new_picture_3_1.png?f=GHdBG/i2fps4|ai2Rjj/mg==" title=" Phòng Giáo dục và Đào tạo huyện Diễn Châu đã tổ chức tổng kết hội thi giáo viên dạy giỏi cấp huyện bậc THCS năm học 2015 -2016 " style="height:60px;">
+                                        </span><span class="newsContent">
+                                            Phòng Giáo dục và Đào tạo huyện Diễn Châu đã tổ chức tổng kết hội thi giáo viên dạy giỏi cấp huyện bậc THCS năm học 2015 -2016
+                                        </span>
+                                    </a>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-9" style="background:white;padding-top:10px;padding-left:15px">
+            <div class="container body-content" style=" width :100%;padding-left:0px">
+                @RenderBody()
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--coppyright-->
+    <section class="coppyright-w">
+        <div class="container coppyright">
+            <p>&copy; @DateTime.Now.Year - Sổ Liên Lạc Điện tử dành cho Đại học :  Nguyễn công thành _ Võ công cảnh _ Nguyễn bảo duy</p>
+        </div>
+    </section>
+    <!--coppyright-->
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+

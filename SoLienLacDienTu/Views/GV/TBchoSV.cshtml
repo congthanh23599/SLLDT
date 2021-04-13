@@ -1,0 +1,64 @@
+﻿@model IEnumerable<SoLienLacDienTu.Models.ThongBao>
+
+@{
+    ViewBag.Title = "TBchoSV";
+    Layout = "~/Views/Shared/_GDGiangVien.cshtml";
+}
+
+<h2>TBchoSV</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateLNT")
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.MaGV)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayDang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaLop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaLM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaSV)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.MaGV)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiDung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayDang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaLop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaLM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaSV)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditLNT", new { id=item.IDTB }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDTB }) |
+            @Html.ActionLink("Delete", "DeleteLNT", new { id=item.IDTB })
+        </td>
+    </tr>
+}
+
+</table>

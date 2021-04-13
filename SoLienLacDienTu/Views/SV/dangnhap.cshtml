@@ -1,0 +1,129 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title>Đăng nhập sinh viên</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" href="~/Content/DN-DK/images/icons/favicon.ico">
+
+    <link href="~/Content/DN-DK/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DN-DK/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DN-DK/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DN-DK/fonts/iconic/css/material-design-iconic-font.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DN-DK/vendor/animate/animate.css" rel="stylesheet" />
+
+    <link href="~/Content/DN-DK/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DN-DK/vendor/animsition/css/animsition.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DN-DK/vendor/select2/select2.min.css" rel="stylesheet" />
+
+    <link href="~/Content/DN-DK/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" />
+
+    <link href="~/Content/DN-DK/css/util.css" rel="stylesheet" />
+    <link href="~/Content/DN-DK/css/main.css" rel="stylesheet" />
+
+
+
+</head>
+<body style="background-color: #999999;">
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="login100-more" style="background-image: url('../../Content/img/dangnhap.jpg');">
+
+            </div>
+            @*<img src="~/Content/DN-DK/images/bg-01.jpg" />*@
+            <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
+                @using (Html.BeginForm())
+                {
+                    @Html.ValidationSummary(true)
+                    <form class="login100-form validate-form">
+                        <span class="login100-form-title p-b-59">
+                            LOGIN
+                        </span>
+
+                        <h5 style="color:red;text-align:center">@ViewBag.ThongBao</h5>
+
+                        <div class="wrap-input100 validate-input alert-validate" data-validate="Username is required">
+                            <span class="label-input100">Username</span>
+                            <input class="input100" type="number"  name="username" placeholder="Username...">
+                            <span class="focus-input100"></span>
+                            @ViewData["Loi1"]
+                        </div>
+                        <div class="wrap-input100 validate-input alert-validate" data-validate="Password is required">
+                            <span class="label-input100">Password</span>
+                            <input class="input100" type="password"  name="pass" placeholder="*************">
+                            <span class="focus-input100"></span>
+                            @ViewData["Loi2"]
+                        </div>
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button class="login100-form-btn">
+                                    Sign in
+
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+                }
+
+
+                @*<div class="flex-m w-full p-b-33">
+                        <div class="contact100-form-checkbox">
+                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                            <label class="label-checkbox100" for="ckb1">
+                                <span class="txt1">
+                                    I agree to the
+                                    <a href="#" class="txt2 hov1">
+                                        Terms of User
+                                    </a>
+                                </span>
+                            </label>
+                        </div>
+                    </div>*@
+
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+    <script src="~/Content/DN-DK/vendor/jquery/jquery-3.2.1.min.js"></script>
+
+    <script src="~/Content/DN-DK/vendor/animsition/js/animsition.min.js"></script>
+
+    <script src="~/Content/DN-DK/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/Content/DN-DK/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="~/Content/DN-DK/vendor/select2/select2.min.js"></script>
+    <script src="~/Content/DN-DK/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/Content/DN-DK/vendor/daterangepicker/daterangepicker.js"></script>
+
+    <script src="~/Content/DN-DK/vendor/countdowntime/countdowntime.js"></script>
+
+    <script src="~/Content/DN-DK/js/main.js"></script>
+
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-23581568-13');
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+﻿@model IEnumerable<SoLienLacDienTu.Models.DkMon>
+
+@{
+    ViewBag.Title = "QLTKB";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h2>QLTKB</h2>
+
+<div id="layoutSidenav" style="margin-left:0">
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable</div>
+
+                    <div class="card-body">
+                        
+                        @using (Html.BeginForm("QLTKB", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <input type="file" name="file" />
+                            <br />
+                            <input type="submit" value="Import to database" class="btn btn-primary" />
+                        }
+                        <a class="btn btn-primary" href="@Url.Action("ExportToExcel","HomeAdmin")">Export Excel</a>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Mã Môn</th>
+                                        <th>Tên Môn</th>
+                                        <th>Mã GV</th>
+                                        <th>Phòng </th>
+                                        <th>Tiết BD </th>
+                                        <th>Thứ </th>
+                                        <th>TH </th>
+                                        <th>ST </th>
+                                        <th>TGBD </th>
+                                        <th>TGKT </th>
+                                        <th>HK </th>
+                                        <th>MALM </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.MaMon</td>
+                                                <td>@item.TenMon</td>
+                                                <td>@item.MaGV</td>
+                                                <td>@item.Phong</td>
+                                                <td>@item.TietBD</td>
+                                                <td>@item.Thu</td>
+                                                <td>@item.TH</td>
+                                                <td>@item.SoTiet</td>
+                                                <td>@item.ThoiGianBD</td>
+                                                <td>@item.ThoiGianKT</td>
+                                                <td>@item.HocKy</td>
+                                                <td>@item.MaLop</td>
+                                            </tr>
+
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

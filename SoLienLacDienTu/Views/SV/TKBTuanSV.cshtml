@@ -1,0 +1,408 @@
+﻿@model IEnumerable<SoLienLacDienTu.Models.SVXemDiem>
+@{
+    ViewBag.Title = "TKBTuanSV";
+    Layout = "~/Views/Shared/_GDSinhVien.cshtml";
+
+}
+<style>
+    /* Style The Dropdown Button */
+    .dropbtn {
+        background-color: #808080;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {
+                background-color: #f1f1f1
+            }
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+</style>
+@{ DateTime tghocbd = Convert.ToDateTime("01/01/4000");
+    DateTime tghockt = Convert.ToDateTime("01/01/1000");
+}
+<div style="width:100%">
+    <div style=" background:white;padding-left:15px">
+        <div class="title-base">
+            <div class="title">
+                <table style="width: 480px">
+                    <tbody>
+                        <tr>
+                            <td width="10px">
+                                <i class="fas fa-calendar-week"></i>
+                            </td>
+                            <td>
+                                <span id="ctl00_ContentPlaceHolder1_ctl00_lbltieudetkb" class="Label">Thông Tin Thời Khóa Biểu</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <table>
+            <tbody class="row">
+
+
+                @using (Html.BeginForm("TKBTuanSV", "SV", FormMethod.Post))
+                {
+
+                    <tr class="col-sm-4">
+                        <td rowspan="3" width="80px" height="65px">
+                            <img src="~/Images/icon_lich.png" / style="padding-right:10px">
+                        </td>
+                        <td align="left" valign="top">
+                            Chọn học kỳ xem TKB
+
+
+
+                            <select @*name="dropdown" id="myID"*@ id="ddlselect" onChange="ddlselect();" class="DropDown" name="idhk" @*multiple*@ style="width:300px;">
+
+                                @{
+                                    for (int i = 1; i <= 2; i++)
+                                    {
+                                        <option onchange="validateSelectBox(this)" value="@i">Học kỳ @i </option>
+
+                                    }
+                                }
+                            </select>
+                            @*<input name="submit" type="text" value="submit" />*@
+                            @*<div class="dropdown">
+                        <button class="dropbtn">Học kỳ 2 - Năm học 2019-2020</button>
+                        <div class="dropdown-content">
+                            <a href="#">Học kỳ 1 - Năm học 2019-2020</a>
+                            <a href="#">Học kỳ 3 - Năm học 2018-2019</a>
+
+                        </div>
+                    </div>*@
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr class="col-sm-4">
+                       
+                        <td style="height:20px;">
+                            Chọn tuàn xem TKB
+                            <select @*name="dropdown" id="myID"*@ id="bcl" onchange="SelectChanged(this)" class="DropDown" name="ids" @*multiple*@ style="width:300px;">
+
+
+                                @foreach (var m in Model)
+                                {
+                                    if (Convert.ToDateTime(m.TKBDetail.ThoiGianBD) < tghocbd)
+                                    {
+                                        tghocbd = Convert.ToDateTime(m.TKBDetail.ThoiGianBD);
+                                    }
+                                    if (Convert.ToDateTime(m.TKBDetail.ThoiGianKT) > tghockt)
+                                    {
+                                        tghockt = Convert.ToDateTime(m.TKBDetail.ThoiGianKT);
+                                    }
+                                    Session["hk"] = m.TKBDetail.HocKy;
+                                }
+                                @{
+                                    TimeSpan time1 = tghockt - tghocbd;
+                                    int ngayktt = time1.Days;
+
+                                    //if (Convert.ToInt32(Session["idhk"]) == Convert.ToInt32(Session["hkid"]))
+                                    //{
+                                    for (int i = 1; i <= (ngayktt / 7); i++)
+                                    {
+                                        TimeSpan a = new TimeSpan(168, 00, 00);
+                                        DateTime dt = tghocbd + a;
+
+                                        //k = i;
+                                        if (i == 3)
+                                        {
+                                            //KT1 = m.TKBDetail.ThoiGianBD + KT;
+                                            <option onchange="validateSelectBox(this)" selected="selected" value="@i">Tuần @i [Từ  @tghocbd.ToString("dd/MM/yyyy")-- Đến @dt.ToString("dd/MM/yyyy")] </option>
+                                            tghocbd = dt;
+                                        }
+                                        else
+                                        {
+                                            <option selected="selected" value="@i">Tuần @i [Từ  @tghocbd.ToString("dd/MM/yyyy")-- Đến @dt.ToString("dd/MM/yyyy")] </option>
+                                            tghocbd = dt;
+                                        }
+                                    }
+                                }
+                                @*else { }*@
+                                }
+                            </select>
+                            <input name="submit" type="submit" value="submit" />
+                        </td>
+
+                        
+                    </tr>
+                   
+                    <tr class="col-sm-3">
+
+                        <td align="left" class="style1" style="font-size: 10pt;height:20px; width:250px">
+                            <div class="dropdown">
+                                <button class="dropbtn">Thoi khoa bieu </button>
+                                <div class="dropdown-content">
+                                    <a href="~/SV/TKBTuanSV">TKB theo tuan</a>
+                                    <a href="~/SV/XemTKB">TKB-Hoc ky ca nhan</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+
+
+                    }
+
+                </tbody>
+        </table>
+        <div style="width: 100%">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col ">
+
+        </div>
+        <span class="col " align="center" style="font-size:25px">THỜI KHÓA BIỂU</span>
+        <div class="col ">
+        </div>
+
+
+    </div>
+    @*@using (Html.BeginForm("TKBTuanSV", "SV", FormMethod.Get))*@
+    @*{*@
+    <div id="ctl00_ContentPlaceHolder1_ctl00_pnlTuan">
+
+
+        <table id="ctl00_ContentPlaceHolder1_ctl00_Table1" class="classTable" cellspacing="0" cellpadding="1" border="0" style="border-color:#999999;border-width:1px;border-style:Solid;height:100%;width:100%;border-collapse:collapse;">
+            <thead>
+                <tr>
+                    <td style="border-color:Gray;border-width:1px;border-style:solid;height:22px;"></td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ HAI</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ BA</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ TƯ</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ NĂM</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ SÁU</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ BẢY</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">CHỦ NHẬT</td>
+                    <td style="border-color:Gray;border-width:1px;border-style:solid;height:22px;"></td>
+                </tr>
+            </thead>
+
+
+            <tbody id="txtvalue">
+
+                @for (int i = 1; i <= 4; i++)
+                {
+                    string rw = "white";
+                    <tr style="height:100px">
+                        <td title="ca @i   (từ 06:45 đến 07:30)" align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:50px;">Ca @i</td>
+
+
+                        @for (int j = 2; j < 8; j++)
+                        {
+
+                            <td style="border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">
+                                @foreach (var m in Model)
+                                {
+
+
+                                    if (m.TKBDetail.Thu == j && i == (m.TKBDetail.TietBD) / 2 && m.TKBDetail.HocKy == Convert.ToInt32(Session["idhk"]))
+                                    {
+                                        if (m.TKBDetail.HocKy == 1)
+                                        {
+                                            if (Convert.ToInt32(Session["i"]) <= 11)
+                                            {
+                                                if (m.TKBDetail.TH == 3)
+                                                {
+                                                    if (Convert.ToInt32(Session["i"]) >= 3)
+                                                    {
+                                                        <p>@m.TKBDetail.TenMon </p> <br /><p> @m.TKBDetail.Phong</p>
+
+                                                    }
+                                                    else
+                                                    {
+
+                                                    }
+                                                }
+                                                else
+                                                {
+
+
+                                                    <p>@m.TKBDetail.TenMon </p> <br /><p> @m.TKBDetail.Phong</p>
+
+                                                }
+                                            }
+                                            else
+                                            {
+
+                                            }
+
+                                        }
+                                        else if (m.TKBDetail.HocKy == 2)
+                                        {
+
+                                            if (Convert.ToInt32(Session["i"]) > 11)
+                                            {
+                                                if (m.TKBDetail.TH == 3)
+                                                {
+                                                    if (Convert.ToInt32(Session["i"]) >= 14)
+                                                    {
+                                                        <p>@m.TKBDetail.TenMon </p> <br /><p> @m.TKBDetail.Phong</p>
+
+                                                    }
+                                                    else
+                                                    {
+
+                                                    }
+                                                }
+                                                else
+                                                {
+
+
+                                                    <p>@m.TKBDetail.TenMon </p> <br /><p> @m.TKBDetail.Phong</p>
+
+                                                }
+                                            }
+                                            else
+                                            {
+
+                                            }
+                                        }
+
+                                    }
+                                    else
+                                    {
+
+                                    }
+
+
+                                }
+                            </td>
+
+                        }
+
+                        <td style="border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">
+                        </td>
+                        <td title="ca @i (từ 06:45 đến 07:30)" align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:50px;">Ca @i</td>
+
+
+                    </tr>
+
+                }
+
+                <tr>
+                    <td style="border-color:Gray;border-width:1px;border-style:solid;height:22px;"></td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ HAI</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ BA</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ TƯ</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ NĂM</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ SÁU</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ BẢY</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">CHỦ NHẬT</td>
+                    <td style="border-color:Gray;border-width:1px;border-style:solid;height:22px;"></td>
+                </tr>
+
+
+
+            </tbody>
+        </table>
+
+
+    </div>
+
+
+    @*}*@
+    @section Scripts{
+        <script type="text/javascript">
+
+        $(document).ready(function () {
+            var dropDownVal = $("#dropdown").val();
+            $("#myID").change(function (evt) {
+                alert($("#myID").val());   //Display Selected ID
+
+                alert($("#myID option:selected").text()) //Display Selected Text
+                  @ViewData["d"] = ($("#myID"));
+                $.ajax({
+                    url: SVController / TKBTuanSV,
+                    type: "POST",
+                    data: {
+                        dropdown: dropDownVal
+                    }
+                });
+            });
+
+        });
+        </script>
+        <script language="javascript">
+            function validateSelectBox(obj) {
+                var options = obj.children;
+                var html = '';
+                for (var i = 0; i < options.length; i++) {
+                    if (options[i].selected) {
+                        html += '<li>' + options[i].value + '</li>';
+                        k = options[i].value;
+
+                    }
+                }
+
+                document.getElementById('result').innerHTML = html;
+            }
+            window.onload = function () {
+                var selectBox = document.getElementById("selectBox");
+                selectBox.addEventListener('change', changeFunc);
+                function changeFunc() {
+                    alert(this.value);
+                }
+            }
+        </script>
+        @*<script>
+                function ddlselect()
+                {
+                    var d = document.getElementById("ddlselect");
+                    var displaytext = d.options[d.selectedIndex].text;
+                    document.getElementById("txtvalue").value = displaytext;
+                }
+            </script>*@
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#ddlselect").on('change', function () {
+                    $(".data").hide();
+                    $("#" + $(this).val()).fadeIn(700);
+                }).change();
+            })
+        </script>
+    }

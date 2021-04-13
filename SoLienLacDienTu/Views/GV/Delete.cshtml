@@ -1,0 +1,73 @@
+﻿@model SoLienLacDienTu.Models.GV
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_GiaoDIenGV.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Bạn có chắc là muốn xóa không ?</h3>
+<div>
+    <h4>Chi Tiết Thông Báo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaGV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaGV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaLop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaLop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaLM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaLM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaSV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaSV)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "TBchoSV")
+        </div>
+    }
+</div>

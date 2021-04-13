@@ -1,0 +1,74 @@
+﻿@model IEnumerable<SoLienLacDienTu.Models.DiemCTViews>
+
+
+@{
+    ViewBag.Title = "QLD";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h2>QLD</h2>
+<div id="layoutSidenav" style="margin-left:0">
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable</div>
+
+                    <div class="card-body">
+
+                     
+                        <div class="col-12">
+                            <div class="col-2" style="float:left">
+                                @using (Html.BeginForm("QLD", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    <input type="file" name="file" />
+                                    <br />
+                                    <input type="submit" value="Import to database" class="btn btn-primary" />
+                                }
+                            </div>
+                            <div class="col-2" style="float:left;padding-top:2.3%">
+                                <a class="btn btn-primary" href="@Url.Action("ExcelToDiemCT","HomeAdmin")">Export Excel</a>
+
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>MaMon</th>
+                                        <th>MaSV</th>
+                                        <th>Điểm giữa kỳ</th>
+                                        <th>Điểm cuối kỳ</th>
+                                        <th>DTB Môn </th>
+                                        <th>Năm học</th>
+                                        <th>Học kỳ </th>
+                                        <th>KQ </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        foreach (var items in Model)
+                                        {
+                                            <tr>
+                                                <td>@items.MaMon</td>
+                                                <td>@items.MaSV</td>
+                                                <td>@items.DiemGK</td>
+                                                <td>@items.DiemCK</td>
+                                                <td>@items.DTBMon</td>
+                                                <td>@items.NamHoc</td>
+                                                <td>@items.HocKy</td>
+                                                <td>@items.KQ</td>
+                                            </tr>
+
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

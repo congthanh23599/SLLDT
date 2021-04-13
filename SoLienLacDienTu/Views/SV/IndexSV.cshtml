@@ -1,0 +1,70 @@
+﻿@model SoLienLacDienTu.Models.SinhVien
+@{
+    ViewBag.Title = "IndexSV";
+    Layout = "~/Views/Shared/_DangNhapSV.cshtml";
+
+}
+
+
+<!--Bottom-->
+
+    <div class=" container " style="height:50%;padding-top:5%">
+
+
+        <div class="user-cotainer" style=" padding-left: 20%; padding-right: 20%">
+            <h4 class="heading" style="padding-left:35%;background:#e0dfdf;height:50px;padding-top:3%;border-top-right-radius: 10px;border-top-left-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;box-shadow: 1px 1px 10px 1px #808080">Đăng nhập</h4>
+            <div id="login-div" style="background:#e0dfdf" >
+                @using (Html.BeginForm("Login", "SV", FormMethod.Post))
+                {
+                    <table  style=" border-radius:5px;  box-shadow: 1px 1px 10px 1px #808080;width:100% ">
+                       
+                        <tr >
+                            <td style="padding-top:5%;padding-left:5%" >
+                                <input class="input100" type="text" name="username" placeholder="Username...">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top:5%">
+                                @Html.EditorFor(model => model.MaSV)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>@Html.ViewBag.mess</td>
+                            
+                        </tr>
+                        <tr>
+                            <td style="padding-top:5%;padding-left:5%">
+                                @Html.LabelFor(model => model.Password)
+                            </td>
+                            <td style="padding-top:5%">
+                                @Html.PasswordFor(model => model.Password  )
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>@Html.ViewBag.mess</td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                @*<label class="field-vadation-error" style="color:red">@Html.DisplayFor(model => model.loginError)</label>*@
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="padding-bottom:5%">
+                                <input type="submit" name="name" value="Đăng nhập" />
+                            </td>
+                        </tr>
+                    </table>
+                }
+            </div>
+
+            <div  style="background:#ffffff;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px; box-shadow: 1px 10px 10px -5px #808080"></div>
+        </div>
+    </div>
+
+<!--Bottom-->
+
+

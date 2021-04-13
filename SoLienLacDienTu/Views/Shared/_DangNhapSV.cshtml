@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>@ViewBag.Title -SoLienLac</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/5a60c74158.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+ 
+
+</head>
+<body style="        background: url('../../Images/93868994_254889515665997_5051115199201804288_n.jpg') no-repeat;">
+    
+    <section class="header-w">
+        <div class="header">
+            <ul></ul><br />
+            <ul></ul><br />
+            <ul></ul><br />
+            <ul></ul><br />
+        </div>
+    </section>
+  
+
+    <!--topbar-->
+
+    <div>
+        @RenderBody()
+    </div>
+    <section class="coppyright-w">
+        <div class="footer" style="height:80px ;padding: 15px; position: fixed;  width: 100%;  bottom: 0;   left: 0;   padding: 0; margin: 0;background:black">
+            <div class="col-lg-4" style="color:yellow">
+                <p>VnEdu Connect là ứng dụng tiện ích dành cho Phụ huynh sinh viên trên hệ sinh thái Mạng Giáo dục Việt Nam - vnEdu giúp kết nối giữa Phụ huynh Sinh viên  và Nhà trường. Ứng dụng cho phép Phụ huynh cập nhật tức thời thông tin của con em mình tại nhà trường.</p>
+            </div>
+            <div class="col-lg-4" style="color:white ">
+                <li>
+                    Xem tin nhắn của nhà trường
+                </li>
+                <li>
+                    Xem điểm
+                </li>
+                <li>
+                    Xem thời khóa biêu của con em
+                </li>
+            </div>
+            <div class="col-lg-4" style="color:white">
+                <li>
+                    Xem thông báo của nhà trường
+                </li>
+                <li>
+                    Xem điểm chi tiết, điểm tổng kết của con
+                </li>
+                <li>
+                    Và nhiều tính năng hữu ích khác sẽ được cập nhật định kỳ trong thời gian tới.
+                </li>
+            </div>
+        </div>
+    </section>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

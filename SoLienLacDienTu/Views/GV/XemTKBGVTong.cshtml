@@ -1,0 +1,253 @@
+﻿@model IEnumerable<SoLienLacDienTu.Models.SVXemDiem>
+@{
+    ViewBag.Title = "XemTKBGVTong";
+    Layout = "~/Views/Shared/_GDGiangVien.cshtml";
+}
+<style>
+    /* Style The Dropdown Button */
+    .dropbtn {
+        background-color: deepskyblue;
+        color: white;
+        /*padding: 16px;*/
+        font-size: 14px;
+        border: none;
+        cursor: pointer;
+        min-width: 100px;
+        height:50px;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 100px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {
+                background-color: #f1f1f1
+            }
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+</style>
+
+<div style="width:100%">
+
+    <div style=" background:white;padding-left:15px">
+        <div class="title-base">
+            <div class="title">
+                <table style="width: 480px">
+                    <tbody>
+                        <tr>
+                            <td width="10px">
+                                <i class="fas fa-calendar-week"></i>
+                            </td>
+                            <td>
+                                <span id="ctl00_ContentPlaceHolder1_ctl00_lbltieudetkb" class="Label">Thông Tin Thời Khóa Biểu</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <table>
+            <tbody>
+                <tr id="ctl00_ContentPlaceHolder1_ctl00_pnlTTCanhan">
+                    <td colspan="2">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td rowspan="3" width="80px" height="65px">
+                        <img src="~/Images/icon_lich.png" / style="padding-right:10px">
+                    </td>
+                    <td align="left" valign="top">
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblTT" class="Label" style="font-size:10pt;height:20px">Chọn học kỳ xem TKB</span>&nbsp;
+                        <select name="ctl00$ContentPlaceHolder1$ctl00$ddlChonNHHK" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ctl00$ddlChonNHHK\',\'\')', 0)" id="ctl00_ContentPlaceHolder1_ctl00_ddlChonNHHK" class="DropDown" style="height:20px;width:215px;">
+                            <option selected="selected" value="20192">Học kỳ 2 - Năm học 2019-2020</option>
+                            <option value="20191">Học kỳ 1 - Năm học 2019-2020</option>
+                            <option value="20183">Học kỳ 3 - Năm học 2018-2019</option>
+
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td align="left" class="style1" style="font-size: 10pt;height:20px">
+                        @*<select name="ctl00$ContentPlaceHolder1$ctl00$ddlLoai" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ctl00$ddlLoai\',\'\')', 0)" id="ctl00_ContentPlaceHolder1_ctl00_ddlLoai" class="DropDown" style="width:150px;">
+                            <option value="0">TKB theo tuần   </option>
+                            <option value="2">TKB Toàn Trường</option>
+                            <option selected="selected" value="1">TKB học kỳ cá nhân</option>
+
+                        </select>*@
+                        @*<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.3.min.js"></script>
+                        <script src="//kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js"></script>
+                        <script src="js/graph-js-sdk-web.js"></script>
+                        <script src="js/Login365_1.js"></script>
+                        <script language="javascript" type="text/javascript">
+                            function Kiemtra() {
+                                if (Option.toString() == "TKB theo tuần")
+                                    self.location = " default.cshtml?page=TKBTuanGV";
+                            }
+                        </script>*@
+                         <div class="dropdown">
+                            <button class="dropbtn">Thời khóa biểu</button>
+                            <div class="dropdown-content">
+                                <a href="~/GV/TKBTuanGV">TKB theo tuan</a>
+                                <a href="~/GV/XemTKBGVTong">TKB ca nhan</a>
+                            </div>
+                        </div>
+
+
+
+                        <select name="ctl00$ContentPlaceHolder1$ctl00$ddlTuan" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ctl00$ddlTuan\',\'\')', 0)" id="ctl00_ContentPlaceHolder1_ctl00_ddlTuan" class="DropDown" style="width:300px;">
+                            <option value="Tuần 24 [Từ 10/02/2020 -- Đến 16/02/2020]">Tuần 24 [Từ 10/02/2020 -- Đến 16/02/2020]</option>
+                            <option value="Tuần 25 [Từ 17/02/2020 -- Đến 23/02/2020]">Tuần 25 [Từ 17/02/2020 -- Đến 23/02/2020]</option>
+                            <option value="Tuần 26 [Từ 24/02/2020 -- Đến 01/03/2020]">Tuần 26 [Từ 24/02/2020 -- Đến 01/03/2020]</option>
+                            <option value="Tuần 27 [Từ 02/03/2020 -- Đến 08/03/2020]">Tuần 27 [Từ 02/03/2020 -- Đến 08/03/2020]</option>
+                            <option value="Tuần 28 [Từ 09/03/2020 -- Đến 15/03/2020]">Tuần 28 [Từ 09/03/2020 -- Đến 15/03/2020]</option>
+                            <option value="Tuần 29 [Từ 16/03/2020 -- Đến 22/03/2020]">Tuần 29 [Từ 16/03/2020 -- Đến 22/03/2020]</option>
+                            <option value="Tuần 30 [Từ 23/03/2020 -- Đến 29/03/2020]">Tuần 30 [Từ 23/03/2020 -- Đến 29/03/2020]</option>
+                            <option value="Tuần 31 [Từ 30/03/2020 -- Đến 05/04/2020]">Tuần 31 [Từ 30/03/2020 -- Đến 05/04/2020]</option>
+                            <option value="Tuần 32 [Từ 06/04/2020 -- Đến 12/04/2020]">Tuần 32 [Từ 06/04/2020 -- Đến 12/04/2020]</option>
+                            <option value="Tuần 33 [Từ 13/04/2020 -- Đến 19/04/2020]">Tuần 33 [Từ 13/04/2020 -- Đến 19/04/2020]</option>
+                            <option selected="selected" value="Tuần 34 [Từ 20/04/2020 -- Đến 26/04/2020]">Tuần 34 [Từ 20/04/2020 -- Đến 26/04/2020]</option>
+                            <option value="Tuần 35 [Từ 27/04/2020 -- Đến 03/05/2020]">Tuần 35 [Từ 27/04/2020 -- Đến 03/05/2020]</option>
+                            <option value="Tuần 36 [Từ 04/05/2020 -- Đến 10/05/2020]">Tuần 36 [Từ 04/05/2020 -- Đến 10/05/2020]</option>
+                            <option value="Tuần 37 [Từ 11/05/2020 -- Đến 17/05/2020]">Tuần 37 [Từ 11/05/2020 -- Đến 17/05/2020]</option>
+                            <option value="Tuần 38 [Từ 18/05/2020 -- Đến 24/05/2020]">Tuần 38 [Từ 18/05/2020 -- Đến 24/05/2020]</option>
+                            <option value="Tuần 39 [Từ 25/05/2020 -- Đến 31/05/2020]">Tuần 39 [Từ 25/05/2020 -- Đến 31/05/2020]</option>
+                            <option value="Tuần 40 [Từ 01/06/2020 -- Đến 07/06/2020]">Tuần 40 [Từ 01/06/2020 -- Đến 07/06/2020]</option>
+                            <option value="Tuần 41 [Từ 08/06/2020 -- Đến 14/06/2020]">Tuần 41 [Từ 08/06/2020 -- Đến 14/06/2020]</option>
+                            <option value="Tuần 42 [Từ 15/06/2020 -- Đến 21/06/2020]">Tuần 42 [Từ 15/06/2020 -- Đến 21/06/2020]</option>
+                            <option value="Tuần 43 [Từ 22/06/2020 -- Đến 28/06/2020]">Tuần 43 [Từ 22/06/2020 -- Đến 28/06/2020]</option>
+                            <option value="Tuần 44 [Từ 29/06/2020 -- Đến 05/07/2020]">Tuần 44 [Từ 29/06/2020 -- Đến 05/07/2020]</option>
+                            <option value="Tuần 45 [Từ 06/07/2020 -- Đến 12/07/2020]">Tuần 45 [Từ 06/07/2020 -- Đến 12/07/2020]</option>
+                            <option value="Tuần 46 [Từ 13/07/2020 -- Đến 19/07/2020]">Tuần 46 [Từ 13/07/2020 -- Đến 19/07/2020]</option>
+                            <option value="Tuần 47 [Từ 20/07/2020 -- Đến 26/07/2020]">Tuần 47 [Từ 20/07/2020 -- Đến 26/07/2020]</option>
+                            <option value="Tuần 48 [Từ 27/07/2020 -- Đến 02/08/2020]">Tuần 48 [Từ 27/07/2020 -- Đến 02/08/2020]</option>
+                            <option value="Tuần 49 [Từ 03/08/2020 -- Đến 09/08/2020]">Tuần 49 [Từ 03/08/2020 -- Đến 09/08/2020]</option>
+                            <option value="Tuần 50 [Từ 10/08/2020 -- Đến 16/08/2020]">Tuần 50 [Từ 10/08/2020 -- Đến 16/08/2020]</option>
+                            <option value="Tuần 51 [Từ 17/08/2020 -- Đến 23/08/2020]">Tuần 51 [Từ 17/08/2020 -- Đến 23/08/2020]</option>
+                            <option value="Tuần 52 [Từ 24/08/2020 -- Đến 30/08/2020]">Tuần 52 [Từ 24/08/2020 -- Đến 30/08/2020]</option>
+
+                        </select>
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblNote2" class="Label">Đối với học phần Đồ án, sinh viên xem lịch làm đồ án trên website Khoa quản lý.</span>
+                        <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="width: 100%">
+
+        </div>
+        <hr>
+
+
+    </div>
+
+
+    <span style="padding-left:40%;font-size:25px">THỜI KHÓA BIỂU</span>
+    <table cellspacing="0" cellpadding="0" class="title-table" style="border-color:black;border-width:1px;border-style:Solid;height:100%;width:100%;border-collapse:collapse;background:#54b9f7">
+        <tbody>
+            <tr align="center">
+
+                <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Mã Môn Học" class="Label">Mã MH</span>
+                </td>
+                <td width="26%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblTenMH" title="Tên Môn Học" class="Label">Tên MH</span>
+                </td>
+                <td width="5%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblTTH" title="Thực Hành" class="Label">TH</span>
+                </td>
+                <td width="5%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblThu" title="Thứ" class="Label">Thứ</span>
+                </td>
+                <td width="5%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblTBD" title="Tiết Bắt Đầu" class="Label">Tiết BD</span>
+                </td>
+                <td width="5%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblST" title="Số Tiết" class="Label">ST </span>
+                </td>
+                <td width="10%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblPhong" title="Phòng Học" class="Label">Phòng</span>
+                </td>
+                <td width="10%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblPhong" title="Phòng Học" class="Label">Mã LM</span>
+                </td>
+
+                <td width="20%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblTuan" class="Label">Thời gian học</span>
+                </td>
+            </tr>
+            @foreach (var item in Model)
+            {
+
+                <tr align="center" style="background:#eeebeb" >
+                    <td style="border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                        @item.TKBDetail.MaMon
+
+                    </td>
+                    <td style="border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                        @item.TKBDetail.TenMon
+                    </td>
+                    <td style="border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                        @item.TKBDetail.TH
+                    </td>
+                    <td style="border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                        @item.TKBDetail.Thu
+                    </td>
+                    <td style="border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                        @item.TKBDetail.TietBD
+                    </td>
+                    <td style="border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                        @item.TKBDetail.ST
+                    </td>
+                    <td style="border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                        @item.TKBDetail.Phong
+                    </td>
+                       <td style="border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                        @item.TKBDetail.MaLM
+                    <td style="border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                              @item.TKBDetail.ThoiGianBD -   @item.TKBDetail.ThoiGianKT
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

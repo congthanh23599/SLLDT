@@ -1,0 +1,327 @@
+﻿@model IEnumerable<SoLienLacDienTu.Models.SVXemDiem>
+@{
+    ViewBag.Title = "TKBTuanGV";
+    Layout = "~/Views/Shared/_GDGiangVien.cshtml";
+}
+<style>
+    /* Style The Dropdown Button */
+    .dropbtn {
+        background-color: deepskyblue;
+        color: white;
+        /*padding: 16px;*/
+        font-size: 14px;
+        border: none;
+        cursor: pointer;
+        min-width: 100px;
+        height: 50px;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 100px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {
+                background-color: #f1f1f1
+            }
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+</style>
+
+<div style="width:100%">
+
+    <div style=" background:white;padding-left:15px">
+        <div class="title-base">
+            <div class="title">
+                <table style="width: 480px">
+                    <tbody>
+                        <tr>
+                            <td width="10px">
+                                <i class="fas fa-calendar-week"></i>
+                            </td>
+                            <td>
+                                <span id="ctl00_ContentPlaceHolder1_ctl00_lbltieudetkb" class="Label">Thông Tin Thời Khóa Biểu</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <table>
+            <tbody>
+                <tr id="ctl00_ContentPlaceHolder1_ctl00_pnlTTCanhan">
+                    <td colspan="2">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td rowspan="3" width="80px" height="65px">
+                        <img src="~/Images/icon_lich.png" / style="padding-right:10px">
+                    </td>
+                    <td align="left" valign="top">
+
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblTT" class="Label" style="font-size:10pt;height:20px">Chọn học kỳ xem TKB</span>&nbsp;
+
+                        <div class="dropdown">
+                            <button class="dropbtn">Học kỳ 2 - Năm học 2019-2020</button>
+                            <div class="dropdown-content">
+                                <a href="#">Học kỳ 1 - Năm học 2019-2020</a>
+                                <a href="#">Học kỳ 3 - Năm học 2018-2019</a>
+
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr style="padding-top:1000px">
+                    <td align="left" class="style1" style="font-size: 10pt;height:20px; width:250px">
+                        <div class="dropdown">
+                            <button class="dropbtn">Thoi khoa bieu </button>
+                            <div class="dropdown-content">
+                                <a href="~/GV/TKBTuanSV">TKB theo tuan</a>
+                                <a href="~/GV/XemTKBGVTong">TKB-Hoc ky ca nhan</a>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                    </td>
+                    @using (Html.BeginForm("TKBTuanGV", "GV", FormMethod.Post))
+                    {
+                        <td align="left" class="style1" style="font-size: 10pt;height:20px">
+
+
+
+
+
+                            <select @*name="dropdown" id="myID"*@ class="DropDown" name="ids" @*multiple*@ onchange="validateSelectBox(this)" selected="selected" style="width:300px;">
+
+
+
+                                @foreach (var m in Model)
+                                {
+                                    DateTime ngaybd = Convert.ToDateTime(m.TKBDetail.ThoiGianBD);
+                                    DateTime ngaykt = Convert.ToDateTime(m.TKBDetail.ThoiGianKT);
+                                    DateTime ngaythem = Convert.ToDateTime("07/07/2020");
+                                    TimeSpan Time = ngaykt - ngaybd;
+                                    TimeSpan time1 = ngaybd - ngaythem;
+
+                                    int TongSoNgay = Time.Days;
+                                    int ngayktt = time1.Days;
+
+
+                                    if (m.TKBDetail.MaMon == "CE102")
+                                    {
+
+
+                                        for (int i = 1; i < (TongSoNgay / 7); i++)
+                                        {
+                                            TimeSpan a = new TimeSpan(168, 00, 00);
+                                            DateTime dt = ngaybd + a;
+
+                                            //KT1 = m.TKBDetail.ThoiGianBD + KT;
+                                            <!--<a--> @*href="#"*@ <!--value="@i" name="i">Tuần @i [Từ  @ngaybd.ToString("dd/MM/yyyy")-- Đến @dt.ToString("dd/MM/yyyy")]</a>-->
+                                            <option @*selected="selected"*@ value="@i">Tuần @i [Từ  @ngaybd.ToString("dd/MM/yyyy")-- Đến @dt.ToString("dd/MM/yyyy")] </option>
+                                            ngaybd = dt;
+                                            //k = i;
+
+                                        }
+                                    }
+
+
+                                }
+                            </select>
+
+
+                        </td>
+                        <td><input name="submit" type="submit" value="submit" /></td>
+                    }
+                </tr>
+                <tr>
+                    <td align="left">
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblNote2" class="Label">Đối với học phần Đồ án, sinh viên xem lịch làm đồ án trên website Khoa quản lý.</span>
+                        <br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="width: 100%">
+
+        </div>
+        <hr />
+
+
+    </div>
+
+
+    <span style="padding-left:40%;font-size:25px">THỜI KHÓA BIỂU</span>
+    <div id="ctl00_ContentPlaceHolder1_ctl00_pnlTuan">
+
+
+        <table id="ctl00_ContentPlaceHolder1_ctl00_Table1" class="classTable" cellspacing="0" cellpadding="1" border="0" style="border-color:#999999;border-width:1px;border-style:Solid;height:100%;width:100%;border-collapse:collapse;">
+            <thead>
+                <tr>
+                    <td style="border-color:Gray;border-width:1px;border-style:solid;height:22px;"></td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ HAI</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ BA</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ TƯ</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ NĂM</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ SÁU</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ BẢY</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">CHỦ NHẬT</td>
+                    <td style="border-color:Gray;border-width:1px;border-style:solid;height:22px;"></td>
+                </tr>
+            </thead>
+
+
+            <tbody>
+
+                @for (int i = 1; i <= 4; i++)
+                {
+                    string rw = "white";
+                    <tr style="height:100px">
+                        <td title="ca @i   (từ 06:45 đến 07:30)" align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:50px;">Ca @i</td>
+
+
+                        @for (int j = 2; j < 8; j++)
+                        {
+
+                            <td style="border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">
+                                @foreach (var m in Model)
+                                {
+
+
+                                    if (m.TKBDetail.Thu == j && i == (m.TKBDetail.TietBD) / 2)
+                                    {
+
+                                        if (m.TKBDetail.TH == 3)
+                                        {
+                                            if (Convert.ToInt32(Session["i"]) >= 3)
+                                            {
+                                                <p>@m.TKBDetail.TenMon </p> <br /><p> @m.TKBDetail.Phong</p>
+
+                                            }
+                                            else
+                                            {
+
+                                            }
+                                        }
+                                        else
+                                        {
+
+
+                                            <p>@m.TKBDetail.TenMon </p> <br /><p> @m.TKBDetail.Phong</p>
+
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                    }
+
+
+                                }
+                            </td>
+
+                        }
+
+                        <td style="border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">
+                        </td>
+                        <td title="ca @i (từ 06:45 đến 07:30)" align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:50px;">Ca @i</td>
+
+
+                    </tr>
+
+                }
+
+                <tr>
+                    <td style="border-color:Gray;border-width:1px;border-style:solid;height:22px;"></td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ HAI</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ BA</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ TƯ</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ NĂM</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ SÁU</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">THỨ BẢY</td>
+                    <td align="center" style="color:White;background-color:#6699cc;border-color:Gray;border-width:1px;border-style:solid;height:22px;width:110px;">CHỦ NHẬT</td>
+                    <td style="border-color:Gray;border-width:1px;border-style:solid;height:22px;"></td>
+                </tr>
+
+
+
+            </tbody>
+        </table>
+
+
+    </div>
+
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var dropDownVal = $("#dropdown").val();
+            $("#myID").change(function (evt) {
+                alert($("#myID").val());   //Display Selected ID
+
+                alert($("#myID option:selected").text()) //Display Selected Text
+                  @ViewData["d"] = ($("#myID"));
+                $.ajax({
+                    url: SVController / TKBTuanSV,
+                    type: "POST",
+                    data: {
+                        dropdown: dropDownVal
+                    }
+                });
+            });
+
+        });
+    </script>
+    <script language="javascript">
+        function validateSelectBox(obj) {
+            var options = obj.children;
+            var html = '';
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].selected) {
+                    html += '<li>' + options[i].value + '</li>';
+                    k = options[i].value;
+
+                }
+            }
+
+            document.getElementById('result').innerHTML = html;
+        }
+    </script>
+}

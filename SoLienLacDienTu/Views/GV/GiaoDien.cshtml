@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "GiaoDien";
+    Layout = "~/Views/Shared/_GDGiangVien.cshtml";
+    if(Session["MaGV"]== null)
+    {
+        Response.Redirect("~/GV/IndexGV");
+    }
+}
+
+   
+

@@ -1,0 +1,6 @@
+namespace SoLienLacDienTu.Areas.HelpPage.ModelDescriptions
+{
+    public class DictionaryModelDescription : KeyValuePairModelDescription
+    {
+    }
+}

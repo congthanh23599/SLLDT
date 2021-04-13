@@ -1,0 +1,84 @@
+﻿@model IEnumerable<SoLienLacDienTu.Models.SVXemDiem>
+@{
+    ViewBag.Title = "ChucNangvaTTSV";
+    Layout = "~/Views/Shared/_GDPhuHuynh.cshtml";
+
+}
+
+
+
+<div class="main">
+    <div class="infor-member" id="id_form">
+        <div class="top"></div>
+        <div class="main">
+            <div style="padding-left:10%">
+                <span style="padding-left:20%;color:#808080;font-size:30Px;font-family:'Times New Roman'"><strong><em>Thông Tin Sinh Viên</em>&nbsp;&nbsp;</strong></span>
+                <table cellpadding="0" cellspacing="1">
+                    <tbody>
+
+
+
+
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="text-align: left; width:150px">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_MaSinhVien" class="Label">Mã sinh viên :</span>
+                                </td>
+                                <td>
+                                    @item.SinhVienDetail.MaSV
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_TenSinhVien" class="Label">Tên sinh viên :</span>
+                                </td>
+                                <td>
+                                    @item.SinhVienDetail.TenSV
+
+                                </td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td style="text-align: left">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_NoiSinh" class="Label">Nơi sinh :</span>
+                                </td>
+                                <td>
+                                    @item.SinhVienDetail.Diachi
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="text-align: left">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Lop" class="Label">Lớp :</span>
+                                </td>
+                                <td>
+                                    @item.SV_lopDetail.Malop
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Nganh" class="Label">Ngành :</span>
+                                </td>
+                                <td>
+                                    @item.SV_nganhDetail.MaNganh
+                                </td>
+                            </tr>
+                          
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+        <div class="bottom">
+        </div>
+    </div>
+
+</div>
+

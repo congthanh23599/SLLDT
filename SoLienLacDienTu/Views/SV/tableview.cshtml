@@ -1,0 +1,113 @@
+﻿@model IEnumerable<SoLienLacDienTu.Models.DkMon>
+@{
+    ViewBag.Title = "tableview";
+    Layout = "~/Views/Shared/_GDSinhVien.cshtml";
+}
+@{
+    
+    IEnumerable<DO_AN_Thu_nghiem.Models.SV_MON> svmon = ViewData["svmon"] as IEnumerable<DO_AN_Thu_nghiem.Models.SV_MON>;
+    IEnumerable<DO_AN_Thu_nghiem.Models.LopMon> lopmon = ViewData["lopmon"] as IEnumerable<DO_AN_Thu_nghiem.Models.LopMon>;
+}
+
+@*<div>
+    @ViewBag.Message1
+    @Session["b"]
+    @Session["s"]
+    @Session["x"]
+    @Session["y"]
+
+    mon chon
+    @Session["mondachon"]
+    mon tq
+    @Session["q"]
+    @Html.ViewBag.mess
+    @Html.ViewBag.chuahoc
+</div>*@
+
+
+
+@if (TempData["AlertMessage"] != null)
+{
+    <div id="AlertBox" class="alert @TempData["AlertType"] hide" role="alert">
+        @TempData["AlertMessage"]
+    </div>
+}
+@*<input class="btn btn-default"   href="https://localhost:44314/SV/DKMonHoc" value="quay lại" name="mondachon"/>*@
+<div id="layoutSidenav" style="margin-left:0">
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="margin-bottom:0px">
+                                <thead style="background:deepskyblue">
+                                    <tr>
+
+                                        <th>Mã môn</th>
+                                        <th>Tên môn</th>
+                                        <th>số tín chỉ</th>
+                                        <th>Mã lớp</th>
+                                        <th>Phòng</th>
+                                        <th>Tiết Bắc đầu</th>
+                                        <th>Số tiết</th>
+                                        <th>Thời gian </th>
+                                        <th>Thực hành</th>
+                                        <th>Mã giảng viên</th>
+                                        <th>Môn tiên quyết</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+
+                                            <td>
+
+                                                @item.MaMon
+                                            </td>
+                                            <td>@item.TenMon</td>
+                                            <td>@item.SoTinChi</td>
+                                            <td>@item.MaLop</td>
+                                            <td>@item.Phong</td>
+                                            <td>@item.TietBD</td>
+                                            <td>@item.SoTiet</td>
+                                            <td>@item.ThoiGianBD.Value.ToString("dd/MM/yyyy") -@item.ThoiGianKT.Value.ToString("dd/MM/yyyy") </td>
+                                            <td>@item.TH</td>
+                                            <td>@item.Montienquyet</td>
+                                            <td>@item.MaGV</td>
+                                            <td>@Html.ActionLink("Delete", "EditTTSV", new { id = item.MaMon })</td>
+
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+
+                            </table>
+                            @using (Html.BeginForm("tableview", "SV", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Lưu vào DataBase" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            $('#AlertBox').removeClass('hide');
+            $('#AlertBox').delay(200000000).slideUp(500);
+        });
+
+    </script>
+}
