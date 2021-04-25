@@ -1,0 +1,39 @@
+﻿@model SoLienLacDienTu.Models.LoaiDK
+@{
+    ViewBag.Title = "Hotro";
+    Layout = "~/Views/Shared/_GDSinhVien.cshtml";
+}
+
+<h2>Hotro</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+      
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Sortby", new SelectListItem[]{new SelectListItem() { Text = "Đăng Ký Lớp", Value = "DangkyLop" },new SelectListItem() { Text = "Đăng Ký Xin Bảng Điểm", Value = "DangKyXBD" } },
+                new{
+                    @onchange = "CallChangefunc(this.value)"
+                })
+                @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+   
+
+    
+}
+
+
+<script>
+    function CallChangefunc(val) {
+        window.location.href = "/SV/" + val;
+    }
+</script>

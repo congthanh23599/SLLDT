@@ -54,6 +54,9 @@ namespace SoLienLacDienTu.Models
     partial void InsertLichThi(LichThi instance);
     partial void UpdateLichThi(LichThi instance);
     partial void DeleteLichThi(LichThi instance);
+    partial void InsertLoaiDK(LoaiDK instance);
+    partial void UpdateLoaiDK(LoaiDK instance);
+    partial void DeleteLoaiDK(LoaiDK instance);
     partial void InsertLop(Lop instance);
     partial void UpdateLop(Lop instance);
     partial void DeleteLop(Lop instance);
@@ -87,7 +90,7 @@ namespace SoLienLacDienTu.Models
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SoLienLacDTConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SoLienLacDTConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -193,6 +196,14 @@ namespace SoLienLacDienTu.Models
 			get
 			{
 				return this.GetTable<LichThi>();
+			}
+		}
+		
+		public System.Data.Linq.Table<LoaiDK> LoaiDKs
+		{
+			get
+			{
+				return this.GetTable<LoaiDK>();
 			}
 		}
 		
@@ -2262,6 +2273,92 @@ namespace SoLienLacDienTu.Models
 						this._MaSV = default(string);
 					}
 					this.SendPropertyChanged("SinhVien");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LoaiDK")]
+	public partial class LoaiDK : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _TenLoaiDK;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnTenLoaiDKChanging(string value);
+    partial void OnTenLoaiDKChanged();
+    #endregion
+		
+		public LoaiDK()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenLoaiDK", DbType="NVarChar(50)")]
+		public string TenLoaiDK
+		{
+			get
+			{
+				return this._TenLoaiDK;
+			}
+			set
+			{
+				if ((this._TenLoaiDK != value))
+				{
+					this.OnTenLoaiDKChanging(value);
+					this.SendPropertyChanging();
+					this._TenLoaiDK = value;
+					this.SendPropertyChanged("TenLoaiDK");
+					this.OnTenLoaiDKChanged();
 				}
 			}
 		}

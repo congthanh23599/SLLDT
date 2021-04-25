@@ -7,6 +7,9 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using SoLienLacDienTu.Models;
+using System.Data.OleDb;
+using System.IO;
+using System.Linq;
 
 namespace test.Controllers
 {
@@ -723,6 +726,36 @@ namespace test.Controllers
             {
                 return View("IndexSV");
             }
+        }
+
+        public ActionResult Hotro()
+        {
+            Setviewbag();
+            return View();
+        }
+        [HttpPost] 
+        public ActionResult Hotro(LoaiDK ldk)
+        {
+            if(ModelState.IsValid)
+            {
+
+            }
+            Setviewbag();
+            return View();
+        }
+
+        public void Setviewbag (int? selectedId =null)
+        {
+            var dao = new getldk();
+            ViewBag.ID = new SelectList(dao.ListAll(), "ID", "TenLoaiDK", selectedId);
+        }
+        public ActionResult DangkyLop()
+        {
+            return View();
+        }
+        public ActionResult DangKyXBD()
+        {
+            return View();
         }
     }
 }

@@ -84,13 +84,13 @@
                             <span id="ctl00_ContentPlaceHolder1_ctl00_lblTT" class="Label" style="font-size:10pt;height:20px">Chọn học kỳ xem TKB</span>&nbsp;
 
                             @*<div class="dropdown">
-                <button class="dropbtn">Học kỳ 2 - Năm học 2019-2020</button>
-                <div class="dropdown-content">
-                    <a href="#">Học kỳ 1 - Năm học 2019-2020</a>
-                    <a href="#">Học kỳ 3 - Năm học 2018-2019</a>
+            <button class="dropbtn">Học kỳ 2 - Năm học 2019-2020</button>
+            <div class="dropdown-content">
+                <a href="#">Học kỳ 1 - Năm học 2019-2020</a>
+                <a href="#">Học kỳ 3 - Năm học 2018-2019</a>
 
-                </div>
-            </div>*@
+            </div>
+        </div>*@
                             @using (Html.BeginForm("XemTKB", "SV", FormMethod.Post))
                             {
                                 <select @*name="dropdown" id="myID"*@ id="ddlselect" onChange="ddlselect();" class="DropDown" name="idhk" @*multiple*@ style="width:300px;">
@@ -103,11 +103,11 @@
                                         }
                                     }
                                 </select>
+                                <input type="submit" name="submit" value="Xem học kỳ" />
 
                             }
                         </td>
                         <td>
-                            <input type="submit" name="submit" value="Xem học kỳ" />
                         </td>
                     </tr>
                         <tr>
