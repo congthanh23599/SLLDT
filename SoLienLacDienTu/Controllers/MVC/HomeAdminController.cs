@@ -215,11 +215,15 @@ namespace DO_AN_Thu_nghiem.Controllers
                             DataTable dtExcelSchema;
                             dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
                             string sheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
+                          
                             connExcel.Close();
 
                             //Read Data from First Sheet.
                             connExcel.Open();
                             cmdExcel.CommandText = "SELECT * From [" + sheetName + "]";
+
+                            //cmdExcel.CommandText = "UPDATE [" + sheetName + "] ";
+
                             odaExcel.SelectCommand = cmdExcel;
                             odaExcel.Fill(dt);
                             connExcel.Close();
@@ -431,6 +435,7 @@ namespace DO_AN_Thu_nghiem.Controllers
                             DataTable dtExcelSchema;
                             dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
                             string sheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
+                            //string mamon = dtExcelSchema.Rows[3]
                             connExcel.Close();
 
                             //Read Data from First Sheet.
@@ -577,8 +582,8 @@ namespace DO_AN_Thu_nghiem.Controllers
             {
                 MaLM = x.MaLM,
                 MaMon = x.MaMon,
-                Lop =x.Lop,
-                
+                Lop = x.Lop,
+
             }).ToList();
             //List<DiemCT> DiemCTnames = db.DiemCTs.ToList();
             //List<Diem> Diemnames = db.Diems.ToList();
@@ -669,7 +674,7 @@ namespace DO_AN_Thu_nghiem.Controllers
 
                         sqlBulkCopy.ColumnMappings.Add("Lop", "Lop");
                         sqlBulkCopy.ColumnMappings.Add("MaMon", "MaMon");
-                        
+
 
                         con.Open();
                         sqlBulkCopy.WriteToServer(dt);
@@ -758,6 +763,185 @@ namespace DO_AN_Thu_nghiem.Controllers
             Response.End();
 
         }
+        public ActionResult QLLop()
+        {
+            List<SoLienLacDienTu.Models.LamQuenCodeFirst.Lop> emplist = db.Lops.Select(x => new SoLienLacDienTu.Models.LamQuenCodeFirst.Lop
+            {
+                Malop = x.Malop,
+                MaGV = x.MaGV,
 
+            }).ToList();
+            //List<DiemCT> DiemCTnames = db.DiemCTs.ToList();
+            //List<Diem> Diemnames = db.Diems.ToList();
+            //var maSV = (from dct in DiemCTnames
+            //            join d in Diemnames on dct.IDDiem equals d.IDDiem
+            //            select new DiemCTViews
+            //            {
+            //                MaSV = d.MaSV,
+            //                MaMon = dct.MaMon,
+            //                IDD = dct.IDDiem,
+            //                DiemGK = dct.DiemGK,
+            //                DiemCK = dct.DiemCK,
+            //                DTBMon = dct.DiemTBM,
+            //                NamHoc = dct.NamHoc,
+            //                HocKy = dct.HocKy,
+            //                KQ = dct.KQ,
+            //            }).ToList();
+            return View(emplist);
+
+        }
+        [HttpPost]
+        public ActionResult QLLop(HttpPostedFileBase file)
+        {
+            string filePath = string.Empty;
+            if (file != null)
+            {
+                string path = Server.MapPath("~/Uploads/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                filePath = path + Path.GetFileName(file.FileName);
+                string extension = Path.GetExtension(file.FileName);
+                file.SaveAs(filePath);
+
+                string conString = string.Empty;
+
+                switch (extension)
+                {
+                    case ".xls": //Excel 97-03.
+                        conString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filePath + ";Extended Properties='Excel 8.0;HDR=YES'";
+                        break;
+                    case ".xlsx": //Excel 07 and above.
+                        conString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath + ";Extended Properties='Excel 8.0;HDR=YES'";
+                        break;
+                }
+
+                DataTable dt = new DataTable();
+                conString = string.Format(conString, filePath);
+
+                using (OleDbConnection connExcel = new OleDbConnection(conString))
+                {
+                    using (OleDbCommand cmdExcel = new OleDbCommand())
+                    {
+                        using (OleDbDataAdapter odaExcel = new OleDbDataAdapter())
+                        {
+                            cmdExcel.Connection = connExcel;
+
+                            //Get the name of First Sheet.
+                            connExcel.Open();
+                            DataTable dtExcelSchema;
+                            dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                            string sheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
+                            connExcel.Close();
+
+                            //Read Data from First Sheet.
+                            connExcel.Open();
+                            cmdExcel.CommandText = "SELECT * From [" + sheetName + "]";
+                            odaExcel.SelectCommand = cmdExcel;
+                            odaExcel.Fill(dt);
+                            connExcel.Close();
+                        }
+                    }
+                }
+
+                conString = @"Server=LAPTOP-TUUBPQO5\SQLEXPRESS;Database=SoLienLacDT;Trusted_Connection=True;";
+                using (SqlConnection con = new SqlConnection(conString))
+                {
+                    using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+                    {
+                        //Set the database table name.
+                        sqlBulkCopy.DestinationTableName = "dbo.Lop";
+
+                        // Map the Excel columns with that of the database table, this is optional but good if you do
+                        // 
+                        sqlBulkCopy.ColumnMappings.Add("Malop", "Malop");
+
+                        sqlBulkCopy.ColumnMappings.Add("MaGV", "MaGV");
+              
+
+
+                        con.Open();
+                        sqlBulkCopy.WriteToServer(dt);
+                        con.Close();
+                    }
+                }
+            }
+            //if the code reach here means everthing goes fine and excel data is imported into database
+            ViewBag.Success = "File Imported and excel data saved into database";
+            List<Lop> emplist = db.Lops.Select(x => new Lop
+            {
+                MaGV = x.MaGV,
+                Malop = x.Malop,
+             
+            }).ToList();
+
+            return View(emplist);
+
+        }
+        public void ExcelToLop()
+        {
+            List<Lop> emplist = db.Lops.Select(x => new Lop
+            {
+                Malop = x.Malop,
+                MaGV = x.MaGV,
+
+            }).ToList();
+            //List<DiemCTViews> emplist = db.DiemCTs.Select(x => new DiemCTViews
+            //{
+            //    MaMon = x.MaMon,
+            //    IDD = x.IDDiem,
+            //    MaSV =
+            //    DiemGK = x.DiemGK,
+            //    DiemCK = x.DiemCK,
+            //    DTBMon = x.DiemTBM,
+            //    NamHoc = x.NamHoc,
+            //    HocKy = x.HocKy,
+            //    KQ = x.KQ,
+            //}).ToList();
+
+            ExcelPackage pck = new ExcelPackage();
+            ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
+
+            ws.Cells["A1"].Value = "Bảng Lớp";
+            ws.Cells["B1"].Value = " ";
+
+            ws.Cells["A2"].Value = "";
+            ws.Cells["B2"].Value = "Phòng đào tạo";
+
+            ws.Cells["A3"].Value = "Ngày xuất";
+            ws.Cells["B3"].Value = string.Format("{0:dd MMMM yyyy} at {0:H: mm tt}", DateTimeOffset.Now);
+
+            ws.Cells["A6"].Value = "MaLop";
+            ws.Cells["B6"].Value = "MaGV";
+         
+
+
+            int rowStart = 7;
+            foreach (var item in emplist)
+            {   /*
+                if (item.Experience < 5)
+                {
+                    ws.Row(rowStart).Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                    ws.Row(rowStart).Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml(string.Format("pink")));
+
+                }*/
+
+                ws.Cells[string.Format("A{0}", rowStart)].Value = item.Malop;
+                ws.Cells[string.Format("B{0}", rowStart)].Value = item.MaGV;
+
+
+                rowStart++;
+            }
+
+            ws.Cells["A:AZ"].AutoFitColumns();
+            Response.Clear();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposition", "attachment: filename=" + "Lop.xls");
+            Response.BinaryWrite(pck.GetAsByteArray());
+            Response.End();
+
+        }
     }
 }

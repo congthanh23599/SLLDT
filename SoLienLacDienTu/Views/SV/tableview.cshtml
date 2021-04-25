@@ -5,8 +5,8 @@
 }
 @{
     
-    IEnumerable<DO_AN_Thu_nghiem.Models.SV_MON> svmon = ViewData["svmon"] as IEnumerable<DO_AN_Thu_nghiem.Models.SV_MON>;
-    IEnumerable<DO_AN_Thu_nghiem.Models.LopMon> lopmon = ViewData["lopmon"] as IEnumerable<DO_AN_Thu_nghiem.Models.LopMon>;
+    IEnumerable<SoLienLacDienTu.Models.SV_MON> svmon = ViewData["svmon"] as IEnumerable<SoLienLacDienTu.Models.SV_MON>;
+    IEnumerable<SoLienLacDienTu.Models.LopMon> lopmon = ViewData["lopmon"] as IEnumerable<SoLienLacDienTu.Models.LopMon>;
 }
 
 @*<div>
@@ -102,7 +102,7 @@
         </main>
     </div>
 </div>
-@section scripts{
+
     <script>
         $(function () {
             $('#AlertBox').removeClass('hide');
@@ -110,4 +110,3 @@
         });
 
     </script>
-}

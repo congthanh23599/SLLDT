@@ -5,114 +5,114 @@
     Layout = "~/Views/Shared/_GDPhuHuynh.cshtml";
 
 }
-    <div style="height:1000px">
-        <section class="D">
-            <div class="col-lg-3">
-                <div class="rightPanel" style="background:deepskyblue;height:80px">
-                    <div class="panelContent" style="padding-left:4%">
-                        <div class="sll-form-seach">
-                            <div class="header_form " style="color:white">Tra cứu kết quả học tập</div>
-                            <div id="login-div">
-                                @using (Html.BeginForm("Login", "PH"))
-                                {
-                                    <table style=" border-radius:5px;  box-shadow: 1px 1px 10px 1px #808080;width:100% ">
-
-                                        <tr>
-
-                                            <td style="padding-top:5%;width:50px">
-                                                @Html.EditorFor(model => model.MaSV)
-                                            </td>
-                                            <td></td>
-                                            <td style="padding-top:5%">
-                                                <input type="submit" name="name" value="Tìm kiếm" />
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td></td>
-                                            <td>@Html.ViewBag.mess</td>
-                                        </tr>
-
-
-
-
-                                    </table>
-
-                                }
-                            </div>
-                            <div class="result-search"><ul id="sll-list-item"></ul></div>
-                        </div>
+<div class="col-lg-4">
+    <div class="portfolio-info">
+        <h3>Tìm kiếm sinh viên</h3>
+        <div style="height:80px">
+            <div class="panelContent" style="padding-left:4%">
+                <div class="sll-form-seach">
+                    <div>Tra cứu kết quả học tập</div>
+               
+                    <div id="login-div">
+                        @using (Html.BeginForm("Login", "PH"))
+                        {
+                            <table>
+                                <tr>
+                                    <td style="padding-top:5%;width:50px">
+                                        @Html.EditorFor(model => model.MaSV)
+                                    </td>
+                                    <td></td>
+                                    <td style="padding-top:5%">
+                                        <input type="submit" name="name" value="Tìm kiếm" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>@Html.ViewBag.mess</td>
+                                </tr>
+                            </table>
+                        }
+                        <p> Vui lòng nhập mã sinh viên</p>
                     </div>
-                </div>
-                <div class="col-md-1 " style=" background: #f4f1f1;height:10px">
-
-                </div>
-                <div class="col-md-12" style="background:white">
-                    <div class="rightPanel">
-                        <div class="panelHeader">
-                            <h4>HỖ TRỢ KỸ THUẬT</h4>
-                        </div>
-                        <div class="panelContent">
-                            <ul>
-                                <li>
-                                    <a href="tel:18001260">
-                                        <div class="textWrap">
-                                            <span class="imgWrap fa fa-lg fa-phone-square"></span>
-                                            <span class="textWrap">Hotline 24/7: <span class="hotline">18001260</span> <i>(Miễn phí)</i></span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="textWrap">
-                                            <span class="imgWrap fa fa-lg fa-lg fa-envelope"></span>
-                                            <span class="hotlineMail">hotline@vnedu.vn</span>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-1 " style=" background: #f4f1f1;height:10px">
-
-                </div>
-                <div class="col-md-12" style="padding:0%">
-
-                    <div class="panelContent">
-                        <div class="adImg">
-                            <ul style="padding-left:0%">
-                                <li>
-                                    <a href="http://lms.vnedu.vn" target="_blank"><span class="imgWrap"><center><img src="~/Images/vnedu_smartid.jpg" style="width:100% " /></center></span></a>
-                                    <br />
-                                </li>
-
-                                <li>
-                                    <a href="#" target="_blank"><span class="imgWrap"><center><img src="~/Images/vnedu_lms.jpg" style="width:100% " /></center></span></a><br />
-                                </li>
-                                <li>
-                                    <a href="https://play.google.com/store/apps/developer?id=VNPT+Group&amp;hl=vi" target="_blank"><span class="imgWrap"><center><img src="~/Images/banner_dong_2.gif" style="width:100% " /></center></span></a>
-                                    <br />
-                                </li>
-                                <li>
-                                    <a href="http://tkb.vnedu.vn/gioi-thieu/" target="_blank"><span class="imgWrap"><center><img src="~/Images/tkb1.jpg" style="width:100% " /></center></span></a>
-                                    <br />
-                                </li>
-
-                                <li>
-                                    <div class="fb-like-box" data-href="https://www.facebook.com/vnedu/likes" data-width="280" data-height="260" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true" style="background: #FFF"></div>
-                                    <br />
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <div class="result-search"><ul id="sll-list-item"></ul></div>
                 </div>
             </div>
-        </section>
-        <div class="col-lg-9" style="background:white">
+        </div>
+        <br />
+        <br />
+
+        <div class="col-md-12" style="background:white">
+            <div class="rightPanel">
+                <div class="panelHeader">
+                    <h4>HỖ TRỢ KỸ THUẬT</h4>
+                </div>
+                <div class="panelContent">
+                    <ul>
+                        <li>
+                            <a href="tel:18001260">
+                                <div class="textWrap">
+                                    <span class="imgWrap fa fa-lg fa-phone-square"></span>
+                                    <span class="textWrap">Hotline 24/7: <span class="hotline">18001260</span> <i>(Miễn phí)</i></span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="textWrap">
+                                    <span class="imgWrap fa fa-lg fa-lg fa-envelope"></span>
+                                    <span class="hotlineMail">hotline@vnedu.vn</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-1 " style=" background: #f4f1f1;height:10px">
+
+        </div>
+        <div class="col-md-12" style="padding:0%">
+
+            <div class="panelContent">
+                <div class="adImg">
+                    <ul style="padding-left:0%">
+                        <li>
+                            <a href="http://lms.vnedu.vn" target="_blank"><span class="imgWrap"><center><img src="~/Images/vnedu_smartid.jpg" style="width:100% " /></center></span></a>
+                            <br />
+                        </li>
+
+                        <li>
+                            <a href="#" target="_blank"><span class="imgWrap"><center><img src="~/Images/vnedu_lms.jpg" style="width:100% " /></center></span></a><br />
+                        </li>
+                        <li>
+                            <a href="https://play.google.com/store/apps/developer?id=VNPT+Group&amp;hl=vi" target="_blank"><span class="imgWrap"><center><img src="~/Images/banner_dong_2.gif" style="width:100% " /></center></span></a>
+                            <br />
+                        </li>
+                        <li>
+                            <a href="http://tkb.vnedu.vn/gioi-thieu/" target="_blank"><span class="imgWrap"><center><img src="~/Images/tkb1.jpg" style="width:100% " /></center></span></a>
+                            <br />
+                        </li>
+
+                        <li>
+                            <div class="fb-like-box" data-href="https://www.facebook.com/vnedu/likes" data-width="280" data-height="260" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true" style="background: #FFF"></div>
+                            <br />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+    
+
+
+    <div class="col-lg-8">
+        <div class="portfolio-info">
             <div class="all-editor-webtube-item">
-                <h1 class="title">Sổ liên lạc</h1>
+                <h3 class="title">Sổ liên lạc</h3>
                 <div class="item text">
                     <div class="item-header">vnEdu Connect</div>
                     <div class="item-content">
@@ -159,35 +159,6 @@
 
             </div>
             <div class="clear"></div>
-
         </div>
     </div>
-  
-@*<div id="login-div">
-    @using (Html.BeginForm("Login", "PH", FormMethod.Post))
-    {
-        <table style=" border-radius:5px;  box-shadow: 1px 1px 10px 1px #808080;width:100% ">
 
-            <tr>
-                <td style="padding-top:5%;padding-left:5%">
-                    @Html.LabelFor(model => model.MaSV)
-                </td>
-                <td style="padding-top:5%">
-                    @Html.EditorFor(model => model.MaSV)
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>@Html.ValidationMessageFor(model => model.MaSV)</td>
-            </tr>
-           
-             
-            <tr>
-                <td></td>
-                <td style="padding-bottom:5%">
-                    <input type="submit" name="name" value="Đăng nhập" />
-                </td>
-            </tr>
-        </table>
-    }
-</div>*@

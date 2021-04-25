@@ -57,7 +57,9 @@
 @{ DateTime tghocbd = Convert.ToDateTime("01/01/4000");
     DateTime tghockt = Convert.ToDateTime("01/01/1000");
 }
-<div style="width:100%">
+<div class="portfolio-info">
+    <h3>Thông Tin Thời Khóa Biểu</h3>
+
     <div style=" background:white;padding-left:15px">
         <div class="title-base">
             <div class="title">
@@ -103,13 +105,13 @@
                             </select>
                             @*<input name="submit" type="text" value="submit" />*@
                             @*<div class="dropdown">
-                        <button class="dropbtn">Học kỳ 2 - Năm học 2019-2020</button>
-                        <div class="dropdown-content">
-                            <a href="#">Học kỳ 1 - Năm học 2019-2020</a>
-                            <a href="#">Học kỳ 3 - Năm học 2018-2019</a>
+                                    <button class="dropbtn">Học kỳ 2 - Năm học 2019-2020</button>
+                                    <div class="dropdown-content">
+                                        <a href="#">Học kỳ 1 - Năm học 2019-2020</a>
+                                        <a href="#">Học kỳ 3 - Năm học 2018-2019</a>
 
-                        </div>
-                    </div>*@
+                                    </div>
+                                </div>*@
                         </td>
 
                     </tr>
@@ -117,7 +119,7 @@
 
 
                     <tr class="col-sm-4">
-                       
+
                         <td style="height:20px;">
                             Chọn tuàn xem TKB
                             <select @*name="dropdown" id="myID"*@ id="bcl" onchange="SelectChanged(this)" class="DropDown" name="ids" @*multiple*@ style="width:300px;">
@@ -166,9 +168,9 @@
                             <input name="submit" type="submit" value="submit" />
                         </td>
 
-                        
+
                     </tr>
-                   
+
                     <tr class="col-sm-3">
 
                         <td align="left" class="style1" style="font-size: 10pt;height:20px; width:250px">
@@ -184,9 +186,9 @@
 
 
 
-                    }
+                }
 
-                </tbody>
+            </tbody>
         </table>
         <div style="width: 100%">
         </div>
@@ -344,8 +346,6 @@
     </div>
 
 
-    @*}*@
-    @section Scripts{
         <script type="text/javascript">
 
         $(document).ready(function () {
@@ -405,4 +405,5 @@
                 }).change();
             })
         </script>
-    }
+    
+</div>

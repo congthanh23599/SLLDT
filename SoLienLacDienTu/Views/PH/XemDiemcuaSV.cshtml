@@ -1,335 +1,339 @@
-﻿@model IEnumerable<DO_AN_Thu_nghiem.Models.SVXemDiem>
+﻿@model IEnumerable<SoLienLacDienTu.Models.SVXemDiem>
 @{
     ViewBag.Title = "XemDiemcuaSV";
     Layout = "~/Views/Shared/_GDPhuHuynh.cshtml";
 }
+<div class="col-lg-12">
+    <div class="portfolio-info">
 
-    <div style=" background:white;padding-left:15px">
-        <div class="title-base">
-            <div class="title">
-                <table style="width: 480px">
-                    <tbody>
-                        <tr>
-                            <td width="10px">
-                                <i class="fas fa-calendar-week"></i>
+        <div style=" background:white;padding-left:15px">
+            <div class="title-base">
+                <div class="title">
+                    <table style="width: 480px">
+                        <tbody>
+                            <tr>
+                                <td width="10px">
+                                    <i class="fas fa-calendar-week"></i>
+                                </td>
+                                <td>
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_lbltieudetkb" class="Label">XEM ĐIỂM</span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <table align="center">
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="text-align: left; width:150px">
+                                        <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_MaSinhVien" class="Label">Mã sinh viên</span>
+                                    </td>
+                                    <td class="Left" style="text-align: left"><span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblMaSinhVien" class="Label" style="font-weight:bold;">@item.SinhVienDetail.MaSV</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left">
+                                        <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_TenSinhVien" class="Label">Tên sinh viên</span>
+                                    </td>
+
+                                    <td style="text-align: left"><span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblTenSinhVien" class="Label" style="font-weight:bold;">@item.SinhVienDetail.TenSV</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left">
+                                        <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_txtPhai" class="Label" style="text-align: center">Phái</span>
+                                    </td>
+
+                                    <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblPhai" class="Label">@item.SinhVienDetail.GioiTinh</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left">
+                                        <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_NoiSinh" class="Label" style="text-align: center">Nơi sinh</span>
+                                    </td>
+                                    <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.SinhVienDetail.Diachi</span></td>
+                                </tr>
+                                @*<tr>
+                                        <td style="text-align: left">
+                                            <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Lop" class="Label" style="text-align: center">Lớp</span>
+                                        </td>
+                                        <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.SV_lopDetail.Malop</span></td>
+                                    </tr>*@
+                                <tr>
+                                    <td style="text-align: left">
+                                        <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Nganh" class="Label">Ngành</span>
+                                    </td>
+                                    <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.NganhDetail.TenNganh</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left">
+                                        <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Khoa" class="Label">Khoa</span>
+                                    </td>
+                                    <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.NganhDetail.TenNganh</span></td>
+                                </tr>
+                                break;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <table>
+                <tbody style="width:1000px">
+                    <tr id="ctl00_ContentPlaceHolder1_ctl00_pnlTTCanhan">
+                        <td colspan="2">
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan="3" width="80px" height="65px">
+                            <img src="~/Images/images.jpg" / style="padding-right:10px;width:100px">
+                        </td>
+                        <td align="left" valign="top">
+                            <span id="ctl00_ContentPlaceHolder1_ctl00_lblTT" class="Label" style="font-size:10pt;height:20px; width: 300px">Chọn học kỳ xem TKB</span>&nbsp;
+                            <select name="ctl00$ContentPlaceHolder1$ctl00$ddlChonNHHK" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ctl00$ddlChonNHHK\',\'\')', 0)" id="ctl00_ContentPlaceHolder1_ctl00_ddlChonNHHK" class="DropDown" style="        height: 20px;
+        width: 230px;">
+                                <option selected="selected" value="20191">Học kỳ 1 - Năm học 2019-2020</option>
+                                <option value="20192">Học kỳ 2 - Năm học 2019-2020</option>
+                                <option value="20183">Học kỳ 3 - Năm học 2018-2019</option>
+                                <option selected="selected" value="20191">Học kỳ 1 - Năm học 2018-2019</option>
+                                <option value="20192">Học kỳ 2 - Năm học 2018-2019</option>
+                                <option value="20183">Học kỳ 3 - Năm học 2017-2018</option>
+                                <option selected="selected" value="20191">Học kỳ 1 - Năm học 2017-2018</option>
+                                <option value="20192">Học kỳ 2 - Năm học 2017-2018</option>
+                                <option value="20183">Học kỳ 3 - Năm học 2016-2017</option>
+                                <option selected="selected" value="20191">Học kỳ 1 - Năm học 2016-2017</option>
+                                <option value="20192">Học kỳ 2 - Năm học 2016-2017</option>
+                                <option value="20183">Học kỳ 3 - Năm học 2015-2016</option>
+
+                            </select>
+                        </td>
+
+                    </tr>
+            </table>
+
+
+
+            <span style="padding-left:40%;font-size:25px"></span>
+            <table cellspacing="0" cellpadding="0" class="title-table" style="border-color:black;border-width:1px;border-style:Solid;height:100%;width:100%;border-collapse:collapse;background:white">
+                <tbody style="width:100%" " >
+                    <tr align="center">
+
+                        <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:32px;white-space:nowrap;">
+                            <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="STT" class="Label">STT</span>
+                        </td>
+                        <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:100px;white-space:nowrap;">
+                            <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="MÃ Môn Học" class="Label">MÃ Môn Học</span>
+                        </td>
+                        <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:190px;white-space:nowrap;">
+                            <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Tên Môn Học" class="Label">Tên Môn Học</span>
+                        </td>
+                        <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:22px;white-space:nowrap;">
+                            <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="TC" class="Label">TC</span>
+                        </td>
+                        <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:109px;white-space:nowrap;">
+                            <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Giữa Kỳ" class="Label">Giữa Kỳ</span>
+                        </td>
+                        <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:109px;white-space:nowrap;">
+                            <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Cuối Kỳ" class="Label">Cuối Kỳ</span>
+                        </td>
+                        @*<td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:109px;white-space:nowrap;">*@
+                        @*<span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Tổng Kết(CH)" class="Label">Tổng Kết(CH)</span>
                             </td>
-                            <td>
-                                <span id="ctl00_ContentPlaceHolder1_ctl00_lbltieudetkb" class="Label">XEM ĐIỂM</span>
+                            <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:109px;white-space:nowrap;">
+                                <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Tổng Kết(4)" class="Label">Tổng Kết(4)</span>
+                            </td>*@
+
+                        @{ int? d = 0;
+                            int? tcd = 0;
+                            double? dtbheso = 0;
+                            double? dtl = 0;
+                            double? dtls = 0;
+                            double? dtbTL = 0;
+                            int? dem = 0;
+                        }
+                        @foreach (var item in Model)
+                        {
+                        <tr align="center" style="overflow:scroll;background:white;border-width:1px;border-style:solid">
+                            <td colspan="6" style="color:Black;height:25px;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                Học kỳ @item.DiemDetail.HocKy - Năm @item.DiemDetail.NamHoc
+                            </td>
+                        </tr>
+                        foreach (var i in Model)
+                        {
+                            if (item.DiemCTDetail.HocKy == i.DiemCTDetail.HocKy && item.DiemCTDetail.NamHoc == i.DiemCTDetail.NamHoc)
+                            {
+                                <tr align="center" style="overflow:scroll;background:white;">
+                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                    </td>
+                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                        @i.DiemCTDetail.MaMon
+
+                                    </td>
+                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                        @i.MonHocDetail.TenMon
+                                    </td>
+                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                        @i.MonHocDetail.Sotinchi
+                                    </td>
+                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                        @i.DiemCTDetail.DiemGK
+                                    </td>
+                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                        @i.DiemCTDetail.DiemCK
+                                    </td>
+
+                                    @*<td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                           0
+                                        </td>
+                                        <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                            0
+                                        </td>*@
+                                </tr>
+
+                                //Tín chỉ tích lũy
+                                {
+
+                                    {
+                                        d += Convert.ToInt32(i.MonHocDetail.Sotinchi);
+                                    }
+                                    ViewData["tinchiTichLuy"] = d;
+                                }
+                                //Tín chỉ đạt
+                                {
+                                    {
+                                        tcd += Convert.ToInt32(i.MonHocDetail.Sotinchi);
+                                        ViewData["tinchiDat"] = tcd;
+
+                                    }
+                                }
+
+                                //Điểm trung bình
+                                {
+                                    item.DiemDetail.DiemTBHK = Convert.ToDouble((item.DiemCTDetail.DiemGK * 0.3 + item.DiemCTDetail.DiemCK * 0.5) + 2);
+                                    {
+                                        ViewData["DTB"] = item.DiemDetail.DiemTBHK;
+                                        dtbheso = item.DiemDetail.DiemTBHK;
+
+                                    }
+                                }
+
+                            }
+
+                        }
+
+                        dem += 1;
+                        //if()
+                        //{
+
+                        //}
+                        <tr>
+                            <td colspan="6" style="color:Black;height:25px;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                <h4>
+                                    Số tín chỉ đạt   :  @Html.ViewData["tinchiDat"]
+                                </h4>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td colspan="6" style="color:Black;height:25px;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                <h4>
+                                    Số tín chỉ tích lũy  : @Html.ViewData["tinchiTichLuy"]
+                                </h4>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td colspan="6" style="color:Black;height:25px;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                <h4>
+                                    Điểm trung bình học kì   : @Html.ViewData["DTB"]
+                                </h4>
+
+                            </td>
+
+                        </tr>
+
+                        //tính điểm trung bình hệ số 4
+                        if (dtbheso >= 8.5)
+                        {
+                            ViewData["DTBHeSo"] = 4.0;
+                            dtl = 4;
+                        }
+                        else if (dtbheso < 8.5 && dtbheso >= 7.5)
+                        {
+                            ViewData["DTBHeSo"] = 3.5;
+                            dtl = 3.5;
+                        }
+                        else if (dtbheso < 7.5 && dtbheso >= 6.5)
+                        {
+                            ViewData["DTBHeSo"] = 3.0;
+                            dtl = 3.0;
+                        }
+                        else if (dtbheso < 6.5 && dtbheso >= 5.5)
+                        {
+                            ViewData["DTBHeSo"] = 2.5;
+                            dtl = 2.5;
+
+                        }
+                        else if (dtbheso < 5.5 && dtbheso >= 4.5)
+                        {
+                            ViewData["DTBHeSo"] = 2.0;
+                            dtl = 2.0;
+                        }
+                        else if (dtbheso < 4.5 && dtbheso >= 3.5)
+                        {
+                            ViewData["DTBHeSo"] = 1.5;
+                            dtl = 1.5;
+                        }
+                        else if (dtbheso < 3.5)
+                        {
+                            ViewData["DTBHeSo"] = 0;
+                            dtl = 0.0;
+
+                        }
+                        //Điểm tích lũy
+                        {
+                            dtls += dtl;
+                            dtbTL = dtls / dem;
+                            ViewData["DTBTL"] = dtbTL;
+                        }
+
+
+                        <tr>
+                            <td colspan="6" style="color:Black;height:25px;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                <h4>
+                                    Điểm trung bình học kì hệ số 4   : @Html.ViewData["DTBHeSo"]
+                                </h4>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td colspan="6" style="color:Black;height:25px;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                <h4>
+                                    Điểm trung bình tích lũy : @Html.ViewData["DTBTL"]
+                                </h4>
                             </td>
                         </tr>
 
-                    </tbody>
-                </table>
-                <table align="center">
-                    <tbody>
-                        @foreach (var item in Model)
                         {
-                            <tr>
-                                <td style="text-align: left; width:150px">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_MaSinhVien" class="Label">Mã sinh viên</span>
-                                </td>
-                                <td class="Left" style="text-align: left"><span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblMaSinhVien" class="Label" style="font-weight:bold;">@item.SinhVienDetail.MaSV</span></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_TenSinhVien" class="Label">Tên sinh viên</span>
-                                </td>
+                            ViewData["Tinchi"] = 0;
+                            ViewData["DTB"] = 0;
 
-                                <td style="text-align: left"><span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblTenSinhVien" class="Label" style="font-weight:bold;">@item.SinhVienDetail.TenSV</span></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_txtPhai" class="Label" style="text-align: center">Phái</span>
-                                </td>
-
-                                <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblPhai" class="Label">@item.SinhVienDetail.GioiTinh</span></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_NoiSinh" class="Label" style="text-align: center">Nơi sinh</span>
-                                </td>
-                                <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.SinhVienDetail.Diachi</span></td>
-                            </tr>
-                            @*<tr>
-                                <td style="text-align: left">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Lop" class="Label" style="text-align: center">Lớp</span>
-                                </td>
-                                <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.SV_lopDetail.Malop</span></td>
-                            </tr>*@
-                            <tr>
-                                <td style="text-align: left">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Nganh" class="Label">Ngành</span>
-                                </td>
-                                <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.NganhDetail.TenNganh</span></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Khoa" class="Label">Khoa</span>
-                                </td>
-                                <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.NganhDetail.TenNganh</span></td>
-                            </tr>
-                            break;
                         }
+
+                        tcd = 0;
+
+                    }
                     </tbody>
                 </table>
+
             </div>
-        </div>
-        <table>
-            <tbody style="width:1000px">
-                <tr id="ctl00_ContentPlaceHolder1_ctl00_pnlTTCanhan">
-                    <td colspan="2">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td rowspan="3" width="80px" height="65px">
-                        <img src="~/Images/images.jpg" / style="padding-right:10px;width:100px">
-                    </td>
-                    <td align="left" valign="top">
-                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblTT" class="Label" style="font-size:10pt;height:20px; width: 300px">Chọn học kỳ xem TKB</span>&nbsp;
-                        <select name="ctl00$ContentPlaceHolder1$ctl00$ddlChonNHHK" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ctl00$ddlChonNHHK\',\'\')', 0)" id="ctl00_ContentPlaceHolder1_ctl00_ddlChonNHHK" class="DropDown" style="        height: 20px;
-        width: 230px;">
-                            <option selected="selected" value="20191">Học kỳ 1 - Năm học 2019-2020</option>
-                            <option value="20192">Học kỳ 2 - Năm học 2019-2020</option>
-                            <option value="20183">Học kỳ 3 - Năm học 2018-2019</option>
-                            <option selected="selected" value="20191">Học kỳ 1 - Năm học 2018-2019</option>
-                            <option value="20192">Học kỳ 2 - Năm học 2018-2019</option>
-                            <option value="20183">Học kỳ 3 - Năm học 2017-2018</option>
-                            <option selected="selected" value="20191">Học kỳ 1 - Năm học 2017-2018</option>
-                            <option value="20192">Học kỳ 2 - Năm học 2017-2018</option>
-                            <option value="20183">Học kỳ 3 - Năm học 2016-2017</option>
-                            <option selected="selected" value="20191">Học kỳ 1 - Năm học 2016-2017</option>
-                            <option value="20192">Học kỳ 2 - Năm học 2016-2017</option>
-                            <option value="20183">Học kỳ 3 - Năm học 2015-2016</option>
-
-                        </select>
-                    </td>
-
-                </tr>
-        </table>
-
-
-
-        <span style="padding-left:40%;font-size:25px"></span>
-        <table cellspacing="0" cellpadding="0" class="title-table" style="border-color:black;border-width:1px;border-style:Solid;height:100%;width:100%;border-collapse:collapse;background:white">
-            <tbody style="width:100%" " >
-                <tr align="center">
-
-                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:32px;white-space:nowrap;">
-                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="STT" class="Label">STT</span>
-                    </td>
-                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:100px;white-space:nowrap;">
-                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="MÃ Môn Học" class="Label">MÃ Môn Học</span>
-                    </td>
-                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:190px;white-space:nowrap;">
-                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Tên Môn Học" class="Label">Tên Môn Học</span>
-                    </td>
-                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:22px;white-space:nowrap;">
-                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="TC" class="Label">TC</span>
-                    </td>
-                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:109px;white-space:nowrap;">
-                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Giữa Kỳ" class="Label">Giữa Kỳ</span>
-                    </td>
-                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:109px;white-space:nowrap;">
-                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Cuối Kỳ" class="Label">Cuối Kỳ</span>
-                    </td>
-                    @*<td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:109px;white-space:nowrap;">*@
-                    @*<span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Tổng Kết(CH)" class="Label">Tổng Kết(CH)</span>
-            </td>
-            <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:109px;white-space:nowrap;">
-                <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Tổng Kết(4)" class="Label">Tổng Kết(4)</span>
-            </td>*@
-              
-                @{ int? d = 0;
-                    int? tcd = 0;
-                    double? dtbheso = 0;
-                    double? dtl = 0;
-                    double? dtls = 0;
-                    double? dtbTL = 0;
-                    int? dem = 0;
-                }
-                @foreach (var item in Model)
-                {
-                    <tr align="center" style="overflow:scroll;background:white;border-width:1px;border-style:solid">
-                        <td colspan="6" style="color:Black;height:25px;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                            Học kỳ @item.DiemDetail.HocKy - Năm @item.DiemDetail.NamHoc
-                        </td>
-                    </tr>
-                    foreach (var i in Model)
-                    {
-                        if (item.DiemCTDetail.HocKy == i.DiemCTDetail.HocKy && item.DiemCTDetail.NamHoc == i.DiemCTDetail.NamHoc)
-                        {
-                            <tr align="center" style="overflow:scroll;background:white;">
-                                <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                                </td>
-                                <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                                    @i.DiemCTDetail.MaMon
-
-                                </td>
-                                <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                                    @i.MonHocDetail.TenMon
-                                </td>
-                                <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                                    @i.MonHocDetail.Sotinchi
-                                </td>
-                                <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                                    @i.DiemCTDetail.DiemGK
-                                </td>
-                                <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                                    @i.DiemCTDetail.DiemCK
-                                </td>
-
-                                @*<td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                           0
-                        </td>
-                        <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                            0
-                        </td>*@
-                            </tr>
-
-                            //Tín chỉ tích lũy
-                            {
-
-                                {
-                                    d += Convert.ToInt32(i.MonHocDetail.Sotinchi);
-                                }
-                                ViewData["tinchiTichLuy"] = d;
-                            }
-                            //Tín chỉ đạt
-                            {
-                                {
-                                    tcd += Convert.ToInt32(i.MonHocDetail.Sotinchi);
-                                    ViewData["tinchiDat"] = tcd;
-
-                                }
-                            }
-
-                            //Điểm trung bình
-                            {
-                                item.DiemDetail.DiemTBHK = Convert.ToDouble((item.DiemCTDetail.DiemGK * 0.3 + item.DiemCTDetail.DiemCK * 0.5) + 2);
-                                {
-                                    ViewData["DTB"] = item.DiemDetail.DiemTBHK;
-                                    dtbheso = item.DiemDetail.DiemTBHK;
-
-                                }
-                            }
-
-                        }
-
-                    }
-
-                    dem += 1;
-                    //if()
-                    //{
-
-                    //}
-                    <tr>
-                        <td colspan="6" style="color:Black;height:25px;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                            <h4>
-                                Số tín chỉ đạt   :  @Html.ViewData["tinchiDat"]
-                            </h4>
-
-                        </td>
-
-                    </tr>
-
-                    <tr>
-                        <td colspan="6" style="color:Black;height:25px;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                            <h4>
-                                Số tín chỉ tích lũy  : @Html.ViewData["tinchiTichLuy"]
-                            </h4>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-                        <td colspan="6" style="color:Black;height:25px;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                            <h4>
-                                Điểm trung bình học kì   : @Html.ViewData["DTB"]
-                            </h4>
-
-                        </td>
-
-                    </tr>
-
-                    //tính điểm trung bình hệ số 4
-                    if (dtbheso >= 8.5)
-                    {
-                        ViewData["DTBHeSo"] = 4.0;
-                        dtl = 4;
-                    }
-                    else if (dtbheso < 8.5 && dtbheso >= 7.5)
-                    {
-                        ViewData["DTBHeSo"] = 3.5;
-                        dtl = 3.5;
-                    }
-                    else if (dtbheso < 7.5 && dtbheso >= 6.5)
-                    {
-                        ViewData["DTBHeSo"] = 3.0;
-                        dtl = 3.0;
-                    }
-                    else if (dtbheso < 6.5 && dtbheso >= 5.5)
-                    {
-                        ViewData["DTBHeSo"] = 2.5;
-                        dtl = 2.5;
-
-                    }
-                    else if (dtbheso < 5.5 && dtbheso >= 4.5)
-                    {
-                        ViewData["DTBHeSo"] = 2.0;
-                        dtl = 2.0;
-                    }
-                    else if (dtbheso < 4.5 && dtbheso >= 3.5)
-                    {
-                        ViewData["DTBHeSo"] = 1.5;
-                        dtl = 1.5;
-                    }
-                    else if (dtbheso < 3.5)
-                    {
-                        ViewData["DTBHeSo"] = 0;
-                        dtl = 0.0;
-
-                    }
-                    //Điểm tích lũy
-                    {
-                        dtls += dtl;
-                        dtbTL = dtls / dem;
-                        ViewData["DTBTL"] = dtbTL;
-                    }
-
-
-                    <tr>
-                        <td colspan="6" style="color:Black;height:25px;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                            <h4>
-                                Điểm trung bình học kì hệ số 4   : @Html.ViewData["DTBHeSo"]
-                            </h4>
-
-                        </td>
-
-                    </tr>
-
-
-                    <tr>
-                        <td colspan="6" style="color:Black;height:25px;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                            <h4>
-                                Điểm trung bình tích lũy : @Html.ViewData["DTBTL"]
-                            </h4>
-                        </td>
-                    </tr>
-
-                    {
-                        ViewData["Tinchi"] = 0;
-                        ViewData["DTB"] = 0;
-
-                    }
-
-                    tcd = 0;
-
-                }
-            </tbody>
-        </table>
 
     </div>
-
+</div>

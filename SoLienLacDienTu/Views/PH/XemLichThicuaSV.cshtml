@@ -4,161 +4,162 @@
     Layout = "~/Views/Shared/_GDPhuHuynh.cshtml";
 }
 
-            <div style=" background:white;padding-left:15px">
-                <div class="title-base">
-                    <div class="title">
-                        <table style="width: 480px">
-                            <tbody>
-                                <tr>
-                                    <td width="10px">
-                                        <i class="fas fa-calendar-week"></i>
-                                    </td>
-                                    <td>
-                                        <span id="ctl00_ContentPlaceHolder1_ctl00_lbltieudetkb" class="Label">XEM LỊCH THI</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="infor-member" id="id_form">
-                        <div class="top"></div>
-                        <div class="main">
-                            <div class="col-lg-3">
+<div class="col-lg-12">
+    <div class="portfolio-info">
+        
+        <div class="title">
+            <table style="width: 480px">
+                <tbody>
+                    <tr>
+                        <td width="10px">
+                            <i class="fas fa-calendar-week"></i>
+                        </td>
+                        <td>
+                            <span id="ctl00_ContentPlaceHolder1_ctl00_lbltieudetkb" class="Label">XEM LỊCH THI</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="infor-member" id="id_form">
+            <div class="top"></div>
+            <div class="main">
+                <div class="col-lg-3">
 
-                            </div>
-                            <div class="col-lg-6" style="padding-left:10%">
-                                <table cellpadding="0" cellspacing="1">
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                            <tr>
-                                                <td style="text-align: left; width:150px">
-                                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_MaSinhVien" class="Label">Mã sinh viên :</span>
-                                                </td>
-                                                <td>
-                                                    @item.SinhVienDetail.MaSV
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: left">
-                                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_TenSinhVien" class="Label">Tên sinh viên :</span>
-                                                </td>
-                                                <td>
-                                                    @item.SinhVienDetail.TenSV
-
-                                                </td>
-                                            </tr>
-
-
-
-                                            <tr>
-                                                <td style="text-align: left">
-                                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_NoiSinh" class="Label">Nơi sinh :</span>
-                                                </td>
-                                                <td>
-                                                    @item.SinhVienDetail.Diachi
-                                                </td>
-                                            </tr>
-
-                                            @*<tr>
-                                                <td style="text-align: left">
-                                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Lop" class="Label">Lớp :</span>
-                                                </td>
-                                                <td>
-                                                    @item.SV_lopDetail.Malop
-                                                </td>
-                                            </tr>*@
-                                            <tr>
-                                                <td style="text-align: left">
-                                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Nganh" class="Label">Ngành :</span>
-                                                </td>
-                                                <td>
-                                                    @item.SV_nganhDetail.MaNganh
-                                                </td>
-                                            </tr>
-                                            break;
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-lg-3">
-
-                            </div>
-
-                        </div>
-                        <div class="bottom">
-                        </div>
-                    </div>
-                    <table cellspacing="0" cellpadding="0" class="title-table" style="border-color:black;border-width:1px;border-style:Solid;height:100%;width:100%;border-collapse:collapse;background:#54b9f7">
+                </div>
+                <div class="col-lg-6" style="padding-left:10%">
+                    <table cellpadding="0" cellspacing="1">
                         <tbody>
-                            <tr align="center">
-
-                                <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:30px;white-space:nowrap;">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="STT" class="Label">STT</span>
-                                </td>
-                                <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:80px;white-space:nowrap;">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="MÃ Môn Học" class="Label">MÃ Môn Học</span>
-                                </td>
-                                <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:150px;white-space:nowrap;">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Tên Môn Học" class="Label">Tên Môn Học</span>
-                                </td>
-                                <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:80px;white-space:nowrap;">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Nhóm Thi" class="Label">Nhóm Thi</span>
-                                </td>
-                                <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:80px;white-space:nowrap;">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Ngày Thi" class="Label">Ngày Thi</span>
-                                </td>
-                                <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:80px;white-space:nowrap;">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Giờ Báo Danh" class="Label">Giờ Báo Danh </span>
-                                </td>
-                                <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:100px;white-space:nowrap;">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Số Phút" class="Label">Số Phút</span>
-                                </td>
-                                <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:100px;white-space:nowrap;">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Phòng" class="Label">Phòng</span>
-                                </td>
-                                <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:100px;white-space:nowrap;">
-                                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Ghi Chú" class="Label">Ghi CHú</span>
-                                </td>
-                            </tr>
                             @foreach (var item in Model)
                             {
-
-
-                                <tr align="center" style="background:white;height:25px">
-                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                                <tr>
+                                    <td style="text-align: left; width:150px">
+                                        <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_MaSinhVien" class="Label">Mã sinh viên :</span>
                                     </td>
-                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                                        @item.LichThiDetail.MaMon
-
+                                    <td>
+                                        @item.SinhVienDetail.MaSV
                                     </td>
-                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                                        @item.LichThiDetail.TenMon
-                                    </td>
-                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                                        @item.LichThiDetail.NhomThi
-                                    </td>
-                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                                        @item.LichThiDetail.NgayThi
-                                    </td>
-                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                                        @item.LichThiDetail.GioBD
-                                    </td>
-                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                                        @item.LichThiDetail.SoPhut
-                                    </td>
-                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                                        @item.LichThiDetail.Phong
-                                    </td>
-                                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                                        @item.LichThiDetail.GhiChu
-                                    </td>
-
                                 </tr>
+                                <tr>
+                                    <td style="text-align: left">
+                                        <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_TenSinhVien" class="Label">Tên sinh viên :</span>
+                                    </td>
+                                    <td>
+                                        @item.SinhVienDetail.TenSV
+
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td style="text-align: left">
+                                        <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_NoiSinh" class="Label">Nơi sinh :</span>
+                                    </td>
+                                    <td>
+                                        @item.SinhVienDetail.Diachi
+                                    </td>
+                                </tr>
+
+                                @*<tr>
+                                        <td style="text-align: left">
+                                            <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Lop" class="Label">Lớp :</span>
+                                        </td>
+                                        <td>
+                                            @item.SV_lopDetail.Malop
+                                        </td>
+                                    </tr>*@
+                                <tr>
+                                    <td style="text-align: left">
+                                        <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Nganh" class="Label">Ngành :</span>
+                                    </td>
+                                    <td>
+                                        @item.SV_nganhDetail.MaNganh
+                                    </td>
+                                </tr>
+                                break;
                             }
                         </tbody>
                     </table>
+                </div>
+                <div class="col-lg-3">
 
                 </div>
+
+            </div>
+            <div class="bottom">
+            </div>
+        </div>
+        <table cellspacing="0" cellpadding="0" class="title-table" style="border-color:black;border-width:1px;border-style:Solid;height:100%;width:100%;border-collapse:collapse;background:#54b9f7">
+            <tbody>
+                <tr align="center">
+
+                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:30px;white-space:nowrap;">
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="STT" class="Label">STT</span>
+                    </td>
+                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:80px;white-space:nowrap;">
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="MÃ Môn Học" class="Label">MÃ Môn Học</span>
+                    </td>
+                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:150px;white-space:nowrap;">
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Tên Môn Học" class="Label">Tên Môn Học</span>
+                    </td>
+                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:80px;white-space:nowrap;">
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Nhóm Thi" class="Label">Nhóm Thi</span>
+                    </td>
+                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:80px;white-space:nowrap;">
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Ngày Thi" class="Label">Ngày Thi</span>
+                    </td>
+                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:80px;white-space:nowrap;">
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Giờ Báo Danh" class="Label">Giờ Báo Danh </span>
+                    </td>
+                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:100px;white-space:nowrap;">
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Số Phút" class="Label">Số Phút</span>
+                    </td>
+                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:100px;white-space:nowrap;">
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Phòng" class="Label">Phòng</span>
+                    </td>
+                    <td width="13%" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:100px;white-space:nowrap;">
+                        <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Ghi Chú" class="Label">Ghi CHú</span>
+                    </td>
+                </tr>
+                @foreach (var item in Model)
+                {
+
+
+                    <tr align="center" style="background:white;height:25px">
+                        <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                        </td>
+                        <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                            @item.LichThiDetail.MaMon
+
+                        </td>
+                        <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                            @item.LichThiDetail.TenMon
+                        </td>
+                        <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                            @item.LichThiDetail.NhomThi
+                        </td>
+                        <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                            @item.LichThiDetail.NgayThi
+                        </td>
+                        <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                            @item.LichThiDetail.GioBD
+                        </td>
+                        <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                            @item.LichThiDetail.SoPhut
+                        </td>
+                        <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                            @item.LichThiDetail.Phong
+                        </td>
+                        <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                            @item.LichThiDetail.GhiChu
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
 
 

@@ -16,87 +16,88 @@
 @Session["xtq"]
 
 @using (Html.BeginForm("DKMonHoc", "SV", FormMethod.Post))
-{
-    <div id="layoutSidenav" style="margin-left:0">
-        <div id="layoutSidenav_content">
-            <main>
+{<div class="portfolio-info">
+    <h3>Đăng ký môn học</h3>
 
-                <div class="container-fluid">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="margin-bottom:0px">
-                                    <thead style="background:deepskyblue">
-                                        <tr>
-                                            <th>
+    <main>
 
-                                            </th>
-                                            <th>Mã môn</th>
-                                            <th>Tên môn</th>
-                                            <th>số tín chỉ</th>
-                                            <th>Mã lớp</th>
-                                            <th>Phòng</th>
-                                            <th>Tiết Bắc đầu</th>
-                                            <th>Số tiết</th>
-                                            <th>Thời gian </th>
-                                            <th>Thực hành</th>
-                                            <th>Mã giảng viên</th>
-                                            <th>Môn tiên quyết</th>
+        <div class="container-fluid">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="margin-bottom:0px">
+                            <thead style="background:deepskyblue">
+                                <tr>
+                                    <th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                    </th>
+                                    <th>Mã môn</th>
+                                    <th>Tên môn</th>
+                                    <th>số tín chỉ</th>
+                                    <th>Mã lớp</th>
+                                    <th>Phòng</th>
+                                    <th>Tiết Bắc đầu</th>
+                                    <th>Số tiết</th>
+                                    <th>Thời gian </th>
+                                    <th>Thực hành</th>
+                                    <th>Mã giảng viên</th>
+                                    <th>Môn tiên quyết</th>
 
-                                        @foreach (var item in Model)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    <input type="checkbox" value="@item.MaLop " id="ids" name="ids" />
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                                                    <input type="text" hidden value="@item.MaMon" id="mondachon" name="mondachon" />
-                                                    <input type="text" hidden value="@item.Montienquyet" id="montq" name="montq" />
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" value="@item.MaLop " id="ids" name="ids" />
 
-
-
-                                                </td>
-                                                <td>
-                                                    @item.MaMon
-                                                </td>
-                                                <td>@item.TenMon</td>
-                                                <td>@item.SoTinChi</td>
-                                                <td>@item.MaLop</td>
-                                                <td>@item.Phong</td>
-                                                <td>@item.TietBD</td>
-                                                <td>@item.SoTiet</td>
-                                                <td>@item.ThoiGianBD.Value.ToString("dd/MM/yyyy") -@item.ThoiGianKT.Value.ToString("dd/MM/yyyy") </td>
-                                                <td>@item.TH</td>
-                                                <td>
-
-                                                    @item.Montienquyet
-                                                </td>
-                                                <td>@item.MaGV</td>
+                                            <input type="text" hidden value="@item.MaMon" id="mondachon" name="mondachon" />
+                                            <input type="text" hidden value="@item.Montienquyet" id="montq" name="montq" />
 
 
-                                            </tr>
-                                        }
+
+                                        </td>
+                                        <td>
+                                            @item.MaMon
+                                        </td>
+                                        <td>@item.TenMon</td>
+                                        <td>@item.SoTinChi</td>
+                                        <td>@item.MaLop</td>
+                                        <td>@item.Phong</td>
+                                        <td>@item.TietBD</td>
+                                        <td>@item.SoTiet</td>
+                                        <td>@item.ThoiGianBD.Value.ToString("dd/MM/yyyy") -@item.ThoiGianKT.Value.ToString("dd/MM/yyyy") </td>
+                                        <td>@item.TH</td>
+                                        <td>
+
+                                            @item.Montienquyet
+                                        </td>
+                                        <td>@item.MaGV</td>
 
 
-                                    </tbody>
+                                    </tr>
+                                }
 
-                                </table>
 
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Lưu vào DataBase" class="btn btn-default" />
-                                    </div>
-                                </div>
+                            </tbody>
 
+                        </table>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Lưu vào DataBase" class="btn btn-default" />
                             </div>
                         </div>
+
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
-    </div>
+    </main>
+
+</div>
+ 
 }
 

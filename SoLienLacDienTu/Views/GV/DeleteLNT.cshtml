@@ -5,69 +5,73 @@
     Layout = "~/Views/Shared/_GDGiangVien.cshtml";
 }
 
-<h2>DeleteLNT</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>ThongBao</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.MaGV)
-        </dt>
+<div class="portfolio-info">
+ 
 
-        <dd>
-            @Html.DisplayFor(model => model.MaGV)
-        </dd>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>ThongBao</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.MaGV)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NoiDung)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MaGV)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.NoiDung)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NoiDung)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayDang)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NoiDung)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.NgayDang)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NgayDang)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaLop)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NgayDang)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.MaLop)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MaLop)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaLM)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MaLop)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.MaLM)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MaLM)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaSV)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.MaLM)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.MaSV)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MaSV)
+            </dt>
 
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.MaSV)
+            </dd>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+        </dl>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "TBchoSV")
-        </div>
-    }
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "TBchoSV")
+            </div>
+        }
+    </div>
 </div>

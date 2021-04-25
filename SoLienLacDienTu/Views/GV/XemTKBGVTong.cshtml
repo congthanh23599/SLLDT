@@ -3,6 +3,7 @@
     ViewBag.Title = "XemTKBGVTong";
     Layout = "~/Views/Shared/_GDGiangVien.cshtml";
 }
+
 <style>
     /* Style The Dropdown Button */
     .dropbtn {
@@ -56,7 +57,8 @@
     }
 </style>
 
-<div style="width:100%">
+<div class="portfolio-info">
+    <h3>Thông Tin Thời Khóa Biểu</h3>
 
     <div style=" background:white;padding-left:15px">
         <div class="title-base">
@@ -100,22 +102,22 @@
                 <tr>
                     <td align="left" class="style1" style="font-size: 10pt;height:20px">
                         @*<select name="ctl00$ContentPlaceHolder1$ctl00$ddlLoai" onchange="javascript:setTimeout('__doPostBack(\'ctl00$ContentPlaceHolder1$ctl00$ddlLoai\',\'\')', 0)" id="ctl00_ContentPlaceHolder1_ctl00_ddlLoai" class="DropDown" style="width:150px;">
-                            <option value="0">TKB theo tuần   </option>
-                            <option value="2">TKB Toàn Trường</option>
-                            <option selected="selected" value="1">TKB học kỳ cá nhân</option>
+                                <option value="0">TKB theo tuần   </option>
+                                <option value="2">TKB Toàn Trường</option>
+                                <option selected="selected" value="1">TKB học kỳ cá nhân</option>
 
-                        </select>*@
+                            </select>*@
                         @*<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.3.min.js"></script>
-                        <script src="//kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js"></script>
-                        <script src="js/graph-js-sdk-web.js"></script>
-                        <script src="js/Login365_1.js"></script>
-                        <script language="javascript" type="text/javascript">
-                            function Kiemtra() {
-                                if (Option.toString() == "TKB theo tuần")
-                                    self.location = " default.cshtml?page=TKBTuanGV";
-                            }
-                        </script>*@
-                         <div class="dropdown">
+                            <script src="//kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js"></script>
+                            <script src="js/graph-js-sdk-web.js"></script>
+                            <script src="js/Login365_1.js"></script>
+                            <script language="javascript" type="text/javascript">
+                                function Kiemtra() {
+                                    if (Option.toString() == "TKB theo tuần")
+                                        self.location = " default.cshtml?page=TKBTuanGV";
+                                }
+                            </script>*@
+                        <div class="dropdown">
                             <button class="dropbtn">Thời khóa biểu</button>
                             <div class="dropdown-content">
                                 <a href="~/GV/TKBTuanGV">TKB theo tuan</a>
@@ -215,7 +217,7 @@
             @foreach (var item in Model)
             {
 
-                <tr align="center" style="background:#eeebeb" >
+                <tr align="center" style="background:#eeebeb">
                     <td style="border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
                         @item.TKBDetail.MaMon
 
@@ -238,10 +240,10 @@
                     <td style="border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
                         @item.TKBDetail.Phong
                     </td>
-                       <td style="border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
+                    <td style="border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
                         @item.TKBDetail.MaLM
                     <td style="border-width:1px;border-style:solid;font-size:11px;height:18px;white-space:nowrap;">
-                              @item.TKBDetail.ThoiGianBD -   @item.TKBDetail.ThoiGianKT
+                        @item.TKBDetail.ThoiGianBD -   @item.TKBDetail.ThoiGianKT
                     </td>
 
 

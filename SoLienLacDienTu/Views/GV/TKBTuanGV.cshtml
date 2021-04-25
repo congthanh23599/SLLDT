@@ -56,8 +56,7 @@
     }
 </style>
 
-<div style="width:100%">
-
+<div class="portfolio-info">
     <div style=" background:white;padding-left:15px">
         <div class="title-base">
             <div class="title">
@@ -286,10 +285,10 @@
 
     </div>
 
-</div>
 
-@section Scripts{
-    <script type="text/javascript">
+
+  
+        <script type="text/javascript">
 
         $(document).ready(function () {
             var dropDownVal = $("#dropdown").val();
@@ -308,20 +307,21 @@
             });
 
         });
-    </script>
-    <script language="javascript">
-        function validateSelectBox(obj) {
-            var options = obj.children;
-            var html = '';
-            for (var i = 0; i < options.length; i++) {
-                if (options[i].selected) {
-                    html += '<li>' + options[i].value + '</li>';
-                    k = options[i].value;
+        </script>
+        <script language="javascript">
+            function validateSelectBox(obj) {
+                var options = obj.children;
+                var html = '';
+                for (var i = 0; i < options.length; i++) {
+                    if (options[i].selected) {
+                        html += '<li>' + options[i].value + '</li>';
+                        k = options[i].value;
 
+                    }
                 }
-            }
 
-            document.getElementById('result').innerHTML = html;
-        }
-    </script>
-}
+                document.getElementById('result').innerHTML = html;
+            }
+        </script>
+    
+</div>

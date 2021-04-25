@@ -3,384 +3,388 @@
     ViewBag.Title = "XemHocPhi";
     Layout = "~/Views/Shared/_GDSinhVien.cshtml";
 }
-<div class="col-lg-12" style="padding-left:0px;padding-right:0px">
-    <div class="col-lg-12 " style="background:rgba(0, 0, 0, 0.72);color:white;padding:0px">
-        <span style="padding-left:7%" id="ctl00_ContentPlaceHolder1_ctl00_lbltieudetkb" class="Label">Thông Tin Hoc Phi</span>
+<div class="portfolio-info">
+    <h3>Project information</h3>
+
+    <div class="col-lg-12" style="padding-left:0px;padding-right:0px">
+        <div class="col-lg-12 " style="background:rgba(0, 0, 0, 0.72);color:white;padding:0px">
+            <span style="padding-left:7%" id="ctl00_ContentPlaceHolder1_ctl00_lbltieudetkb" class="Label">Thông Tin Hoc Phi</span>
+
+        </div>
 
     </div>
 
-</div>
-
-@{
-    foreach (var item in Model)
-    {
-
-
-        @*@((item.HocPhiDetail.HocPhi + item.HocPhiDetail.PhiTL) + (item.HocPhiDetail.HocPhi + item.HocPhiDetail.PhiTL))*@
-        if (item.TKBDetail.TH != 3)
+    @{
+        foreach (var item in Model)
         {
-            foreach (var i in Model)
+
+
+            @*@((item.HocPhiDetail.HocPhi + item.HocPhiDetail.PhiTL) + (item.HocPhiDetail.HocPhi + item.HocPhiDetail.PhiTL))*@
+            if (item.TKBDetail.TH != 3)
             {
+                foreach (var i in Model)
+                {
 
-                @*@(i.TongHP = Convert.ToInt32(i.HocPhiDetail.HocPhi + i.HocPhiDetail.PhiTL));*@
-                @*@(d = i.TongHP=Convert.ToInt32(i.HocPhiDetail.HocPhi + i.HocPhiDetail.PhiTL));*@
-                i.Tonghp = Convert.ToInt32(i.HocPhiDetail.HocPhi + i.HocPhiDetail.PhiTL) + i.Tonghp;
+                    @*@(i.TongHP = Convert.ToInt32(i.HocPhiDetail.HocPhi + i.HocPhiDetail.PhiTL));*@
+                    @*@(d = i.TongHP=Convert.ToInt32(i.HocPhiDetail.HocPhi + i.HocPhiDetail.PhiTL));*@
+                    i.Tonghp = Convert.ToInt32(i.HocPhiDetail.HocPhi + i.HocPhiDetail.PhiTL) + i.Tonghp;
 
-                i.TongTinchi = Convert.ToInt32(i.HocPhiDetail.TCHP + i.TongTinchi);
-                i.TongHP = Convert.ToInt32(i.HocPhiDetail.TCHP + i.TongHP);
-                i.TongPTL = Convert.ToInt32(i.HocPhiDetail.PhiTL + i.TongPTL);
-                i.TongHocPhi = Convert.ToInt32(i.HocPhiDetail.HocPhi + i.TongHocPhi);
+                    i.TongTinchi = Convert.ToInt32(i.HocPhiDetail.TCHP + i.TongTinchi);
+                    i.TongHP = Convert.ToInt32(i.HocPhiDetail.TCHP + i.TongHP);
+                    i.TongPTL = Convert.ToInt32(i.HocPhiDetail.PhiTL + i.TongPTL);
+                    i.TongHocPhi = Convert.ToInt32(i.HocPhiDetail.HocPhi + i.TongHocPhi);
+                }
+
             }
 
+
+            {
+                ViewBag.s = item.Tonghp;
+                ViewBag.h = item.TongTinchi;
+                ViewBag.tchp = item.TongHP;
+                ViewBag.PhiTL = item.TongPTL;
+                ViewBag.TongHocPhi = item.TongHocPhi;
+
+
+
+            }
+
+
         }
-
-
-        {
-            ViewBag.s = item.Tonghp;
-            ViewBag.h = item.TongTinchi;
-            ViewBag.tchp = item.TongHP;
-            ViewBag.PhiTL = item.TongPTL;
-            ViewBag.TongHocPhi = item.TongHocPhi;
-
-
-
-        }
-
 
     }
 
-}
+    <td height="500px" valign="top">
 
-<td height="500px" valign="top">
 
-
-    <style type="text/css">
-        .style2 {
-            width: 300px;
-        }
-
-        .style4 {
-            width: 149px;
-        }
-
-        .auto-style1 {
-            width: 300px;
-            margin-left: 40px;
-        }
-    </style>
-
-    <script type="text/javascript">
-        //<![CDATA[
-        Sys.WebForms.PageRequestManager._initialize('ctl00$ContentPlaceHolder1$ctl00$ScriptManager1', document.getElementById('aspnetForm'));
-        Sys.WebForms.PageRequestManager.getInstance()._updateControls([], [], [], 90);
-        //]]>
-    </script>
-
-    @*<span id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1">
-            <a id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_lbTarget" href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctl00$MessageBox1$lbTarget','')"></a><div id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_panelMessageBox" class="confirmBox" style="display:none">
-                <div id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_panelHeader" class="header" style="background: url(Images/header.png);">
-                    <div class="msg">
-                        <span id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_lblPopupHeader" class="Label" style="color:White;font-family:Arial Black;"></span>
-                    </div><input type="image" name="ctl00$ContentPlaceHolder1$ctl00$MessageBox1$imgCloseButton" id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_imgCloseButton" class="close" src="/WebResource.axd?d=db1BmIieEBiP7G2DWYbxiqd7sgiBktzATVbzkYifcYqVHCtFJEq-UnGVNSyAgeXKUxwyb33sUgBabzOAK79lfdc102Xzknyo7LGfGScVEfI1&amp;t=637206696680000000" style="border-width:0px;">
-                </div><div id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_panelBody" class="body" style="background-color:#E1E5F0;">
-                    <div class="body-left" style="background-color:#E1E5F0;">
-                        <img id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_ctl02" src="" style="border-width:0px;">
-                    </div><div id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_ctl03" class="body-right" style="background-color:#E1E5F0;">
-                        <span id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_lblMessageDisplay" class="Label" style="font-family:Tahoma;color:#263F75;"></span>
-                    </div>
-                </div><div id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_panelFooter" class="footer" style="background-color:#E1E5F0;">
-                    <div class="right" style="background-color:#E1E5F0;">
-                        <input type="image" name="ctl00$ContentPlaceHolder1$ctl00$MessageBox1$btnOk" id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_btnOk" class="button_small_active" src="/WebResource.axd?d=db1BmIieEBiP7G2DWYbxiqd7sgiBktzATVbzkYifcYqVHCtFJEq-UnGVNSyAgeXKUxwyb33sUgBabzOAK79lfRFuw49WFXxEjpdALECpW5E1&amp;t=637206696680000000" style="height:22px;width:70px;border-width:0px;">
-                    </div>
-                </div>
-            </div>
-        </span>*@
-
-
-
-
-    <div class="infor-member" align="center" id="id_form">
-        <div class="top"></div>
-        <div class="center">
-            <table cellpadding="0" cellspacing="1">
-                <tbody>
-
-
-                    <tr>
-                        <td style="text-align: left">
-                            <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_HeDaoTao" class="Label">Hệ đào tạo</span>
-                        </td>
-                        <td style="text-align: left">
-                            <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblHeDaoTao" class="Label">Đại học chính quy</span>
-                        </td>
-                    </tr>
-                    @*<tr>
-                            <td style="text-align: left">
-                                <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Khoahoc" class="Label">Khóa học</span>
-                            </td>
-                            <td style="text-align: left"><span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblKhoaHoc" class="Label" style="font-weight:bold;">2017-2021</span></td>
-                        </tr>*@
-
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td style="text-align: left; width:150px">
-                                <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_MaSinhVien" class="Label">Mã sinh viên</span>
-                            </td>
-                            <td class="Left" style="text-align: left"><span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblMaSinhVien" class="Label" style="font-weight:bold;">@item.SinhVienDetail.MaSV</span></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left">
-                                <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_TenSinhVien" class="Label">Tên sinh viên</span>
-                            </td>
-
-                            <td style="text-align: left"><span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblTenSinhVien" class="Label" style="font-weight:bold;">@item.SinhVienDetail.TenSV</span></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left">
-                                <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_txtPhai" class="Label" style="text-align: center">Phái</span>
-                            </td>
-
-                            <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblPhai" class="Label">@item.SinhVienDetail.GioiTinh</span></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left">
-                                <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_NoiSinh" class="Label" style="text-align: center">Nơi sinh</span>
-                            </td>
-                            <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.SinhVienDetail.Diachi</span></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left">
-                                <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Lop" class="Label" style="text-align: center">Lớp</span>
-                            </td>
-                            <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.SV_LopMonDetail.MaLM</span></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left">
-                                <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Nganh" class="Label">Ngành</span>
-                            </td>
-                            <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.SV_nganhDetail.MaNganh</span></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: left">
-                                <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Khoa" class="Label">Khoa</span>
-                            </td>
-                            <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.SV_nganhDetail.MaNganh</span></td>
-                        </tr>
-                        break;
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="bottom">
-        </div>
-    </div>
-    <p style="text-align: center">
-
-        <br>
-
-    </p>
-    <span id="ctl00_ContentPlaceHolder1_ctl00_Label1" class="Label" style="color:Red;font-weight: 700;">Lưu ý: Các học phần sinh viên vừa đăng ký online hiện đang có học phí bằng 0, hệ thống sẽ cập nhật học phí sau khi kết thúc đợt đăng ký môn học</span>
-    <div id="ctl00_ContentPlaceHolder1_ctl00_pnlHPOnline">
-
-        <span id="ctl00_ContentPlaceHolder1_ctl00_lblNHHKOnline" class="Label" style="color:Blue;font-size: large">HỌC KY BAO NHIEU_NAM HOC</span>
-        <table class="grid-view" cellspacing="0" cellpadding="2" rules="all" border="1" id="ctl00_ContentPlaceHolder1_ctl00_gvHocPhi" style="width:100%;border-collapse:collapse;">
-            <tbody>
-                <tr style="color:#F7F7F7;background-color:#4A3C8C;font-weight:bold;">
-
-                    <th scope="col">Mã Môn Học</th>
-                    <th scope="col">Tên Môn học</th>
-
-                    <th scope="col">Số TC</th>
-                    <th scope="col">TCHP</th>
-                    <th scope="col">Phí tài liệu</th>
-                    <th scope="col">Học phí</th>
-                    <th scope="col">Miễn giảm</th>
-                    <th scope="col">Phải đóng</th>
-                </tr>
-                @foreach (var item in Model)
-                {
-                    if (item.TKBDetail.TH != 3)
-                    {
-                        <tr>
-                            <td>
-                                @item.LopMonDetail.MaMon
-                            </td>
-                            <td>
-                                @item.MonHocDetail.TenMon
-
-                            </td>
-
-                            <td>
-                                @item.MonHocDetail.Sotinchi
-                            </td>
-                            <td>
-                                @item.HocPhiDetail.TCHP
-                            </td>
-                            <td>
-                                @item.HocPhiDetail.PhiTL
-                            </td>
-                            <td>
-                                @item.HocPhiDetail.HocPhi
-                            </td>
-                            <td>
-                                0
-                            </td>
-                            @*<td>
-                                    @(item.TongHP+item.HocPhiDetail.HocPhi+item.HocPhiDetail.PhiTL)
-                                </td>*@
-                            <td>
-                                @{long? s = item.HocPhiDetail.PhiTL + item.HocPhiDetail.HocPhi;}
-                                @s
-                            </td>
-                        </tr>
-
-                    }
-                    else
-                    {
-
-                    }
-                }
-                <tr>
-                    <td></td>
-                    <td></td>
-
-                    <td>@Html.ViewBag.h</td>
-
-                    <td>@Html.ViewBag.tchp</td>
-
-                    <td>@Html.ViewBag.PhiTL</td>
-
-                    <td>@Html.ViewBag.TongHocPhi</td>
-
-                    <td></td>
-                    <td>@Html.ViewBag.s</td>
-                </tr>
-            </tbody>
-        </table>
-        <div>
-        </div>
-        <div id="ctl00_ContentPlaceHolder1_ctl00_pnlHPOfflineTongKet">
-
-            <table id="ctl00_ContentPlaceHolder1_ctl00_DisplayInformation" style="width: 770px; font-weight: bold">
-                <tbody>
-
-                    <tr>
-                        <td align="left" class="style2">
-                            <span id="ctl00_ContentPlaceHolder1_ctl00_lblSTC" class="Label" style="text-align: left">Tổng số tín chỉ: </span>
-                        </td>
-                        <td>
-                            <span>@Html.ViewBag.h</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="left" class="style2">
-                            <span id="ctl00_ContentPlaceHolder1_ctl00_lblTinchihocphi" class="Label" style="text-align: right">Tổng số tín chỉ học phí: </span>
-                        </td>
-                        <td>
-                            <span>@Html.ViewBag.tchp</span>
-
-                        </td>
-                    </tr>
-                    @*<tr>
-                            <td align="left" class="style2">
-                                <span id="ctl00_ContentPlaceHolder1_ctl00_lblTongTien" class="Label">Tổng số tiền học phí hoc kỳ là: </span>
-                            </td>
-                            <td>
-                                <span>@Html.ViewBag.PhiTL</span>
-
-                            </td>
-                        </tr>*@
-                    <tr id="ctl00_ContentPlaceHolder1_ctl00_hpFirst">
-                        <td align="left" class="style2">
-                            <span id="ctl00_ContentPlaceHolder1_ctl00_lblDongLanDau" class="Label">Số tiền đóng tối thiểu lần đầu: </span>
-                        </td>
-                        <td>
-                            <span>@Html.ViewBag.s</span>
-
-                        </td>
-                    </tr>
-                    <tr id="ctl00_ContentPlaceHolder1_ctl00_trDadong">
-                        <td align="left" class="auto-style1">
-                            <span id="ctl00_ContentPlaceHolder1_ctl00_lblDaDongHKOffline1" class="Label">Số tiền đã đóng trong học kỳ:  </span>
-                        </td>
-                        <td>
-                            <span>@*@Html.ViewBag.TongHocPhi*@ 0</span>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="left" class="style2">
-                            <span id="ctl00_ContentPlaceHolder1_ctl00_lblConNoHocKy1" class="Label">Số tiền còn nợ: </span>
-                        </td>
-                        <td>
-                            <span>@Html.ViewBag.s</span>
-
-                        </td>
-                    </tr>
-
-                </tbody>
-            </table>
-
-
-        </div>
-
-
-
-
-        <span id="ctl00_ContentPlaceHolder1_ctl00_lblNHHKOffline" class="Label" style="color:Blue;font-size: large"></span>
-        <br>
-
-
-
-    </div>
-
-
-
-    <br>
-
-
-
-
-
-    <br>
-
-
-
-
-    <br>
-
-    <br>
-
-    <div id="ctl00_ContentPlaceHolder1_ctl00_pnlTongKetHocPhiCacHocKy" style="border-style:Solid;">
-
-    </div>
-
-    <div id="ctl00_ContentPlaceHolder1_ctl00_pnlhp" style="text-align:center;">
-
-        <script>
-            function help() {
-                window.open('upload/huongdanthanhtoan.pdf', '_Blank');
-                return false;
+        <style type="text/css">
+            .style2 {
+                width: 300px;
             }
+
+            .style4 {
+                width: 149px;
+            }
+
+            .auto-style1 {
+                width: 300px;
+                margin-left: 40px;
+            }
+        </style>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            Sys.WebForms.PageRequestManager._initialize('ctl00$ContentPlaceHolder1$ctl00$ScriptManager1', document.getElementById('aspnetForm'));
+            Sys.WebForms.PageRequestManager.getInstance()._updateControls([], [], [], 90);
+            //]]>
         </script>
 
+        @*<span id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1">
+                <a id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_lbTarget" href="javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctl00$MessageBox1$lbTarget','')"></a><div id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_panelMessageBox" class="confirmBox" style="display:none">
+                    <div id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_panelHeader" class="header" style="background: url(Images/header.png);">
+                        <div class="msg">
+                            <span id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_lblPopupHeader" class="Label" style="color:White;font-family:Arial Black;"></span>
+                        </div><input type="image" name="ctl00$ContentPlaceHolder1$ctl00$MessageBox1$imgCloseButton" id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_imgCloseButton" class="close" src="/WebResource.axd?d=db1BmIieEBiP7G2DWYbxiqd7sgiBktzATVbzkYifcYqVHCtFJEq-UnGVNSyAgeXKUxwyb33sUgBabzOAK79lfdc102Xzknyo7LGfGScVEfI1&amp;t=637206696680000000" style="border-width:0px;">
+                    </div><div id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_panelBody" class="body" style="background-color:#E1E5F0;">
+                        <div class="body-left" style="background-color:#E1E5F0;">
+                            <img id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_ctl02" src="" style="border-width:0px;">
+                        </div><div id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_ctl03" class="body-right" style="background-color:#E1E5F0;">
+                            <span id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_lblMessageDisplay" class="Label" style="font-family:Tahoma;color:#263F75;"></span>
+                        </div>
+                    </div><div id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_panelFooter" class="footer" style="background-color:#E1E5F0;">
+                        <div class="right" style="background-color:#E1E5F0;">
+                            <input type="image" name="ctl00$ContentPlaceHolder1$ctl00$MessageBox1$btnOk" id="ctl00_ContentPlaceHolder1_ctl00_MessageBox1_btnOk" class="button_small_active" src="/WebResource.axd?d=db1BmIieEBiP7G2DWYbxiqd7sgiBktzATVbzkYifcYqVHCtFJEq-UnGVNSyAgeXKUxwyb33sUgBabzOAK79lfRFuw49WFXxEjpdALECpW5E1&amp;t=637206696680000000" style="height:22px;width:70px;border-width:0px;">
+                        </div>
+                    </div>
+                </div>
+            </span>*@
 
 
 
-    </div>
+
+        <div class="infor-member" align="center" id="id_form">
+            <div class="top"></div>
+            <div class="center">
+                <table cellpadding="0" cellspacing="1">
+                    <tbody>
+
+
+                        <tr>
+                            <td style="text-align: left">
+                                <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_HeDaoTao" class="Label">Hệ đào tạo</span>
+                            </td>
+                            <td style="text-align: left">
+                                <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblHeDaoTao" class="Label">Đại học chính quy</span>
+                            </td>
+                        </tr>
+                        @*<tr>
+                                <td style="text-align: left">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Khoahoc" class="Label">Khóa học</span>
+                                </td>
+                                <td style="text-align: left"><span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblKhoaHoc" class="Label" style="font-weight:bold;">2017-2021</span></td>
+                            </tr>*@
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="text-align: left; width:150px">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_MaSinhVien" class="Label">Mã sinh viên</span>
+                                </td>
+                                <td class="Left" style="text-align: left"><span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblMaSinhVien" class="Label" style="font-weight:bold;">@item.SinhVienDetail.MaSV</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_TenSinhVien" class="Label">Tên sinh viên</span>
+                                </td>
+
+                                <td style="text-align: left"><span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblTenSinhVien" class="Label" style="font-weight:bold;">@item.SinhVienDetail.TenSV</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_txtPhai" class="Label" style="text-align: center">Phái</span>
+                                </td>
+
+                                <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblPhai" class="Label">@item.SinhVienDetail.GioiTinh</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_NoiSinh" class="Label" style="text-align: center">Nơi sinh</span>
+                                </td>
+                                <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.SinhVienDetail.Diachi</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Lop" class="Label" style="text-align: center">Lớp</span>
+                                </td>
+                                <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.SV_LopMonDetail.MaLM</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Nganh" class="Label">Ngành</span>
+                                </td>
+                                <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.SV_nganhDetail.MaNganh</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_Khoa" class="Label">Khoa</span>
+                                </td>
+                                <td style="text-align: left"> <span id="ctl00_ContentPlaceHolder1_ctl00_ucThongTinSV_lblNoiSinh" class="Label">@item.SV_nganhDetail.MaNganh</span></td>
+                            </tr>
+                            break;
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="bottom">
+            </div>
+        </div>
+        <p style="text-align: center">
+
+            <br>
+
+        </p>
+        <span id="ctl00_ContentPlaceHolder1_ctl00_Label1" class="Label" style="color:Red;font-weight: 700;">Lưu ý: Các học phần sinh viên vừa đăng ký online hiện đang có học phí bằng 0, hệ thống sẽ cập nhật học phí sau khi kết thúc đợt đăng ký môn học</span>
+        <div id="ctl00_ContentPlaceHolder1_ctl00_pnlHPOnline">
+
+            <span id="ctl00_ContentPlaceHolder1_ctl00_lblNHHKOnline" class="Label" style="color:Blue;font-size: large">HỌC KY BAO NHIEU_NAM HOC</span>
+            <table class="grid-view" cellspacing="0" cellpadding="2" rules="all" border="1" id="ctl00_ContentPlaceHolder1_ctl00_gvHocPhi" style="width:100%;border-collapse:collapse;">
+                <tbody>
+                    <tr style="color:#F7F7F7;background-color:#4A3C8C;font-weight:bold;">
+
+                        <th scope="col">Mã Môn Học</th>
+                        <th scope="col">Tên Môn học</th>
+
+                        <th scope="col">Số TC</th>
+                        <th scope="col">TCHP</th>
+                        <th scope="col">Phí tài liệu</th>
+                        <th scope="col">Học phí</th>
+                        <th scope="col">Miễn giảm</th>
+                        <th scope="col">Phải đóng</th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        if (item.TKBDetail.TH != 3)
+                        {
+                            <tr>
+                                <td>
+                                    @item.LopMonDetail.MaMon
+                                </td>
+                                <td>
+                                    @item.MonHocDetail.TenMon
+
+                                </td>
+
+                                <td>
+                                    @item.MonHocDetail.Sotinchi
+                                </td>
+                                <td>
+                                    @item.HocPhiDetail.TCHP
+                                </td>
+                                <td>
+                                    @item.HocPhiDetail.PhiTL
+                                </td>
+                                <td>
+                                    @item.HocPhiDetail.HocPhi
+                                </td>
+                                <td>
+                                    0
+                                </td>
+                                @*<td>
+                                        @(item.TongHP+item.HocPhiDetail.HocPhi+item.HocPhiDetail.PhiTL)
+                                    </td>*@
+                                <td>
+                                    @{long? s = item.HocPhiDetail.PhiTL + item.HocPhiDetail.HocPhi;}
+                                    @s
+                                </td>
+                            </tr>
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    <tr>
+                        <td></td>
+                        <td></td>
+
+                        <td>@Html.ViewBag.h</td>
+
+                        <td>@Html.ViewBag.tchp</td>
+
+                        <td>@Html.ViewBag.PhiTL</td>
+
+                        <td>@Html.ViewBag.TongHocPhi</td>
+
+                        <td></td>
+                        <td>@Html.ViewBag.s</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+            </div>
+            <div id="ctl00_ContentPlaceHolder1_ctl00_pnlHPOfflineTongKet">
+
+                <table id="ctl00_ContentPlaceHolder1_ctl00_DisplayInformation" style="width: 770px; font-weight: bold">
+                    <tbody>
+
+                        <tr>
+                            <td align="left" class="style2">
+                                <span id="ctl00_ContentPlaceHolder1_ctl00_lblSTC" class="Label" style="text-align: left">Tổng số tín chỉ: </span>
+                            </td>
+                            <td>
+                                <span>@Html.ViewBag.h</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" class="style2">
+                                <span id="ctl00_ContentPlaceHolder1_ctl00_lblTinchihocphi" class="Label" style="text-align: right">Tổng số tín chỉ học phí: </span>
+                            </td>
+                            <td>
+                                <span>@Html.ViewBag.tchp</span>
+
+                            </td>
+                        </tr>
+                        @*<tr>
+                                <td align="left" class="style2">
+                                    <span id="ctl00_ContentPlaceHolder1_ctl00_lblTongTien" class="Label">Tổng số tiền học phí hoc kỳ là: </span>
+                                </td>
+                                <td>
+                                    <span>@Html.ViewBag.PhiTL</span>
+
+                                </td>
+                            </tr>*@
+                        <tr id="ctl00_ContentPlaceHolder1_ctl00_hpFirst">
+                            <td align="left" class="style2">
+                                <span id="ctl00_ContentPlaceHolder1_ctl00_lblDongLanDau" class="Label">Số tiền đóng tối thiểu lần đầu: </span>
+                            </td>
+                            <td>
+                                <span>@Html.ViewBag.s</span>
+
+                            </td>
+                        </tr>
+                        <tr id="ctl00_ContentPlaceHolder1_ctl00_trDadong">
+                            <td align="left" class="auto-style1">
+                                <span id="ctl00_ContentPlaceHolder1_ctl00_lblDaDongHKOffline1" class="Label">Số tiền đã đóng trong học kỳ:  </span>
+                            </td>
+                            <td>
+                                <span>@*@Html.ViewBag.TongHocPhi*@ 0</span>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" class="style2">
+                                <span id="ctl00_ContentPlaceHolder1_ctl00_lblConNoHocKy1" class="Label">Số tiền còn nợ: </span>
+                            </td>
+                            <td>
+                                <span>@Html.ViewBag.s</span>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+
+            </div>
 
 
 
-    <br>
-    <span id="ctl00_ContentPlaceHolder1_ctl00_lblNote" class="Label" style="color:Blue;font-weight:bold;font-style:italic;text-align: right;">( Dữ liệu được cập nhật vào lúc: 16:52 Ngày: 23/12/2020)</span>
-    <br>
+
+            <span id="ctl00_ContentPlaceHolder1_ctl00_lblNHHKOffline" class="Label" style="color:Blue;font-size: large"></span>
+            <br>
+
+
+
+        </div>
+
+
+
+        <br>
 
 
 
 
 
-</td>
+        <br>
 
 
 
+
+        <br>
+
+        <br>
+
+        <div id="ctl00_ContentPlaceHolder1_ctl00_pnlTongKetHocPhiCacHocKy" style="border-style:Solid;">
+
+        </div>
+
+        <div id="ctl00_ContentPlaceHolder1_ctl00_pnlhp" style="text-align:center;">
+
+            <script>
+                function help() {
+                    window.open('upload/huongdanthanhtoan.pdf', '_Blank');
+                    return false;
+                }
+            </script>
+
+
+
+
+        </div>
+
+
+
+        <br>
+        <span id="ctl00_ContentPlaceHolder1_ctl00_lblNote" class="Label" style="color:Blue;font-weight:bold;font-style:italic;text-align: right;">( Dữ liệu được cập nhật vào lúc: 16:52 Ngày: 23/12/2020)</span>
+        <br>
+
+
+
+
+
+    </td>
+
+
+
+</div>
