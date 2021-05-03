@@ -1,0 +1,64 @@
+﻿@model SoLienLacDienTu.Models.gmail
+@{
+    ViewBag.Title = "SendEMail";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+@using (Html.BeginForm("SendEMail", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="padding-top:10%">
+        <h4>GiangVien</h4>
+        @ViewBag.mess
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+              
+                @using (Html.BeginForm("DuocDuyet", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+                {
+
+                    <input type="submit" value="Xét duyệt" class="btn btn-primary" />
+                }
+               @* @using (Html.BeginForm("KhongDuocDuyet", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+
+                    <input type="submit" value="ko" class="btn btn-primary" />
+                }*@
+            </div>
+        </div>
+    </div>
+}
+<div class="form-group  " style="height:5%">
+    <div class=" col-lg-1" style="float:left">
+       
+
+    </div>
+    <div class=" col-lg-1" style="float:left">
+       
+    </div>
+</div>

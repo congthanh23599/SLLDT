@@ -12,6 +12,7 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public LopMon()
         {
+            GV_LM = new HashSet<GV_LM>();
             SinhVien_LopMon = new HashSet<SinhVien_LopMon>();
             ThongBaos = new HashSet<ThongBao>();
         }
@@ -26,6 +27,9 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
         [Required]
         [StringLength(10)]
         public string MaMon { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GV_LM> GV_LM { get; set; }
 
         public virtual MonHoc MonHoc { get; set; }
 

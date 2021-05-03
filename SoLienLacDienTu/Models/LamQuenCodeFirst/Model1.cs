@@ -8,7 +8,7 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
     public partial class Model1 : DbContext
     {
         public Model1()
-            : base("name=Model1")
+            : base("name=datacode")
         {
         }
 
@@ -16,8 +16,10 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
         public virtual DbSet<ChiTietHocPhi> ChiTietHocPhis { get; set; }
         public virtual DbSet<Diem> Diems { get; set; }
         public virtual DbSet<DiemCT> DiemCTs { get; set; }
+        public virtual DbSet<Don> Dons { get; set; }
         public virtual DbSet<GiangVien> GiangViens { get; set; }
         public virtual DbSet<GiangVien_Nganh> GiangVien_Nganh { get; set; }
+        public virtual DbSet<GV_LM> GV_LM { get; set; }
         public virtual DbSet<LichThi> LichThis { get; set; }
         public virtual DbSet<Lop> Lops { get; set; }
         public virtual DbSet<LopMon> LopMons { get; set; }
@@ -26,6 +28,7 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
         public virtual DbSet<PH> PHs { get; set; }
         public virtual DbSet<SinhVien> SinhViens { get; set; }
         public virtual DbSet<SinhVien_LopMon> SinhVien_LopMon { get; set; }
+        public virtual DbSet<SV_LOP> SV_LOP { get; set; }
         public virtual DbSet<SV_MON> SV_MON { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ThoiKhoaBieu> ThoiKhoaBieux { get; set; }
@@ -62,6 +65,10 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
                 .Property(e => e.NamHoc)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Don>()
+                .Property(e => e.FileDon)
+                .IsUnicode(false);
+
             modelBuilder.Entity<GiangVien>()
                 .Property(e => e.MaGV)
                 .IsUnicode(false);
@@ -90,6 +97,14 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
 
             modelBuilder.Entity<GiangVien_Nganh>()
                 .Property(e => e.MaNganh)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GV_LM>()
+                .Property(e => e.MaLM)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<GV_LM>()
+                .Property(e => e.MaGV)
                 .IsUnicode(false);
 
             modelBuilder.Entity<LichThi>()
@@ -239,6 +254,14 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
 
             modelBuilder.Entity<SinhVien_LopMon>()
                 .Property(e => e.MaLM)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<SV_LOP>()
+                .Property(e => e.Malop)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<SV_LOP>()
+                .Property(e => e.MaSV)
                 .IsUnicode(false);
 
             modelBuilder.Entity<SV_MON>()

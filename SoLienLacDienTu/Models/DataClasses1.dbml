@@ -6,6 +6,8 @@
       <Column Name="TaiKhoan" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="TenAdmin" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PasswordEmail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.ThongBaoChung" Member="ThongBaoChungs">
@@ -55,6 +57,17 @@
       <Association Name="MonHoc_DiemCT" Member="MonHoc" ThisKey="MaMon" OtherKey="MaMon" Type="MonHoc" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Don" Member="Dons">
+    <Type Name="Don">
+      <Column Name="STT" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MaSV" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="TenSV" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="LiDo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FileDon" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="NgayDang" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TrangThai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.GiangVien" Member="GiangViens">
     <Type Name="GiangVien">
       <Column Name="MaGV" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -78,6 +91,7 @@
   </Table>
   <Table Name="dbo.GV_LM" Member="GV_LMs">
     <Type Name="GV_LM">
+      <Column Name="STT" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="MaLM" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="MaGV" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="GiangVien_GV_LM" Member="GiangVien" ThisKey="MaGV" OtherKey="MaGV" Type="GiangVien" IsForeignKey="true" />
@@ -216,6 +230,7 @@
   </Table>
   <Table Name="dbo.SV_LOP" Member="SV_LOPs">
     <Type Name="SV_LOP">
+      <Column Name="STT" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Malop" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="MaSV" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="Lop_SV_LOP" Member="Lop" ThisKey="Malop" OtherKey="Malop" Type="Lop" IsForeignKey="true" />

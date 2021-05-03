@@ -45,12 +45,18 @@ namespace SoLienLacDienTu.Models
     partial void InsertDiemCT(DiemCT instance);
     partial void UpdateDiemCT(DiemCT instance);
     partial void DeleteDiemCT(DiemCT instance);
+    partial void InsertDon(Don instance);
+    partial void UpdateDon(Don instance);
+    partial void DeleteDon(Don instance);
     partial void InsertGiangVien(GiangVien instance);
     partial void UpdateGiangVien(GiangVien instance);
     partial void DeleteGiangVien(GiangVien instance);
     partial void InsertGiangVien_Nganh(GiangVien_Nganh instance);
     partial void UpdateGiangVien_Nganh(GiangVien_Nganh instance);
     partial void DeleteGiangVien_Nganh(GiangVien_Nganh instance);
+    partial void InsertGV_LM(GV_LM instance);
+    partial void UpdateGV_LM(GV_LM instance);
+    partial void DeleteGV_LM(GV_LM instance);
     partial void InsertLichThi(LichThi instance);
     partial void UpdateLichThi(LichThi instance);
     partial void DeleteLichThi(LichThi instance);
@@ -78,6 +84,9 @@ namespace SoLienLacDienTu.Models
     partial void InsertSinhVien_LopMon(SinhVien_LopMon instance);
     partial void UpdateSinhVien_LopMon(SinhVien_LopMon instance);
     partial void DeleteSinhVien_LopMon(SinhVien_LopMon instance);
+    partial void InsertSV_LOP(SV_LOP instance);
+    partial void UpdateSV_LOP(SV_LOP instance);
+    partial void DeleteSV_LOP(SV_LOP instance);
     partial void InsertSV_MON(SV_MON instance);
     partial void UpdateSV_MON(SV_MON instance);
     partial void DeleteSV_MON(SV_MON instance);
@@ -156,6 +165,14 @@ namespace SoLienLacDienTu.Models
 			get
 			{
 				return this.GetTable<DiemCT>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Don> Dons
+		{
+			get
+			{
+				return this.GetTable<Don>();
 			}
 		}
 		
@@ -326,6 +343,10 @@ namespace SoLienLacDienTu.Models
 		
 		private string _TenAdmin;
 		
+		private string _Email;
+		
+		private string _PasswordEmail;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -338,6 +359,10 @@ namespace SoLienLacDienTu.Models
     partial void OnPasswordChanged();
     partial void OnTenAdminChanging(string value);
     partial void OnTenAdminChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnPasswordEmailChanging(string value);
+    partial void OnPasswordEmailChanged();
     #endregion
 		
 		public Admin()
@@ -421,6 +446,46 @@ namespace SoLienLacDienTu.Models
 					this._TenAdmin = value;
 					this.SendPropertyChanged("TenAdmin");
 					this.OnTenAdminChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordEmail", DbType="VarChar(50)")]
+		public string PasswordEmail
+		{
+			get
+			{
+				return this._PasswordEmail;
+			}
+			set
+			{
+				if ((this._PasswordEmail != value))
+				{
+					this.OnPasswordEmailChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordEmail = value;
+					this.SendPropertyChanged("PasswordEmail");
+					this.OnPasswordEmailChanged();
 				}
 			}
 		}
@@ -1414,6 +1479,212 @@ namespace SoLienLacDienTu.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Don")]
+	public partial class Don : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _STT;
+		
+		private string _MaSV;
+		
+		private string _TenSV;
+		
+		private string _LiDo;
+		
+		private string _FileDon;
+		
+		private System.Nullable<System.DateTime> _NgayDang;
+		
+		private System.Nullable<int> _TrangThai;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSTTChanging(int value);
+    partial void OnSTTChanged();
+    partial void OnMaSVChanging(string value);
+    partial void OnMaSVChanged();
+    partial void OnTenSVChanging(string value);
+    partial void OnTenSVChanged();
+    partial void OnLiDoChanging(string value);
+    partial void OnLiDoChanged();
+    partial void OnFileDonChanging(string value);
+    partial void OnFileDonChanged();
+    partial void OnNgayDangChanging(System.Nullable<System.DateTime> value);
+    partial void OnNgayDangChanged();
+    partial void OnTrangThaiChanging(System.Nullable<int> value);
+    partial void OnTrangThaiChanged();
+    #endregion
+		
+		public Don()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STT", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int STT
+		{
+			get
+			{
+				return this._STT;
+			}
+			set
+			{
+				if ((this._STT != value))
+				{
+					this.OnSTTChanging(value);
+					this.SendPropertyChanging();
+					this._STT = value;
+					this.SendPropertyChanged("STT");
+					this.OnSTTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaSV", DbType="NVarChar(20)")]
+		public string MaSV
+		{
+			get
+			{
+				return this._MaSV;
+			}
+			set
+			{
+				if ((this._MaSV != value))
+				{
+					this.OnMaSVChanging(value);
+					this.SendPropertyChanging();
+					this._MaSV = value;
+					this.SendPropertyChanged("MaSV");
+					this.OnMaSVChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenSV", DbType="NVarChar(50)")]
+		public string TenSV
+		{
+			get
+			{
+				return this._TenSV;
+			}
+			set
+			{
+				if ((this._TenSV != value))
+				{
+					this.OnTenSVChanging(value);
+					this.SendPropertyChanging();
+					this._TenSV = value;
+					this.SendPropertyChanged("TenSV");
+					this.OnTenSVChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LiDo", DbType="NVarChar(50)")]
+		public string LiDo
+		{
+			get
+			{
+				return this._LiDo;
+			}
+			set
+			{
+				if ((this._LiDo != value))
+				{
+					this.OnLiDoChanging(value);
+					this.SendPropertyChanging();
+					this._LiDo = value;
+					this.SendPropertyChanged("LiDo");
+					this.OnLiDoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileDon", DbType="VarChar(100)")]
+		public string FileDon
+		{
+			get
+			{
+				return this._FileDon;
+			}
+			set
+			{
+				if ((this._FileDon != value))
+				{
+					this.OnFileDonChanging(value);
+					this.SendPropertyChanging();
+					this._FileDon = value;
+					this.SendPropertyChanged("FileDon");
+					this.OnFileDonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NgayDang", DbType="DateTime")]
+		public System.Nullable<System.DateTime> NgayDang
+		{
+			get
+			{
+				return this._NgayDang;
+			}
+			set
+			{
+				if ((this._NgayDang != value))
+				{
+					this.OnNgayDangChanging(value);
+					this.SendPropertyChanging();
+					this._NgayDang = value;
+					this.SendPropertyChanged("NgayDang");
+					this.OnNgayDangChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrangThai", DbType="Int")]
+		public System.Nullable<int> TrangThai
+		{
+			get
+			{
+				return this._TrangThai;
+			}
+			set
+			{
+				if ((this._TrangThai != value))
+				{
+					this.OnTrangThaiChanging(value);
+					this.SendPropertyChanging();
+					this._TrangThai = value;
+					this.SendPropertyChanged("TrangThai");
+					this.OnTrangThaiChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GiangVien")]
 	public partial class GiangVien : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1427,6 +1698,8 @@ namespace SoLienLacDienTu.Models
 		private string _Password;
 		
 		private EntitySet<GiangVien_Nganh> _GiangVien_Nganhs;
+		
+		private EntitySet<GV_LM> _GV_LMs;
 		
 		private EntitySet<Lop> _Lops;
 		
@@ -1447,6 +1720,7 @@ namespace SoLienLacDienTu.Models
 		public GiangVien()
 		{
 			this._GiangVien_Nganhs = new EntitySet<GiangVien_Nganh>(new Action<GiangVien_Nganh>(this.attach_GiangVien_Nganhs), new Action<GiangVien_Nganh>(this.detach_GiangVien_Nganhs));
+			this._GV_LMs = new EntitySet<GV_LM>(new Action<GV_LM>(this.attach_GV_LMs), new Action<GV_LM>(this.detach_GV_LMs));
 			this._Lops = new EntitySet<Lop>(new Action<Lop>(this.attach_Lops), new Action<Lop>(this.detach_Lops));
 			this._ThongBaos = new EntitySet<ThongBao>(new Action<ThongBao>(this.attach_ThongBaos), new Action<ThongBao>(this.detach_ThongBaos));
 			OnCreated();
@@ -1525,6 +1799,19 @@ namespace SoLienLacDienTu.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GiangVien_GV_LM", Storage="_GV_LMs", ThisKey="MaGV", OtherKey="MaGV")]
+		public EntitySet<GV_LM> GV_LMs
+		{
+			get
+			{
+				return this._GV_LMs;
+			}
+			set
+			{
+				this._GV_LMs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GiangVien_Lop", Storage="_Lops", ThisKey="MaGV", OtherKey="MaGV")]
 		public EntitySet<Lop> Lops
 		{
@@ -1578,6 +1865,18 @@ namespace SoLienLacDienTu.Models
 		}
 		
 		private void detach_GiangVien_Nganhs(GiangVien_Nganh entity)
+		{
+			this.SendPropertyChanging();
+			entity.GiangVien = null;
+		}
+		
+		private void attach_GV_LMs(GV_LM entity)
+		{
+			this.SendPropertyChanging();
+			entity.GiangVien = this;
+		}
+		
+		private void detach_GV_LMs(GV_LM entity)
 		{
 			this.SendPropertyChanging();
 			entity.GiangVien = null;
@@ -1801,15 +2100,58 @@ namespace SoLienLacDienTu.Models
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GV_LM")]
-	public partial class GV_LM
+	public partial class GV_LM : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _STT;
 		
 		private string _MaLM;
 		
 		private string _MaGV;
 		
+		private EntityRef<GiangVien> _GiangVien;
+		
+		private EntityRef<LopMon> _LopMon;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSTTChanging(int value);
+    partial void OnSTTChanged();
+    partial void OnMaLMChanging(string value);
+    partial void OnMaLMChanged();
+    partial void OnMaGVChanging(string value);
+    partial void OnMaGVChanged();
+    #endregion
+		
 		public GV_LM()
 		{
+			this._GiangVien = default(EntityRef<GiangVien>);
+			this._LopMon = default(EntityRef<LopMon>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STT", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int STT
+		{
+			get
+			{
+				return this._STT;
+			}
+			set
+			{
+				if ((this._STT != value))
+				{
+					this.OnSTTChanging(value);
+					this.SendPropertyChanging();
+					this._STT = value;
+					this.SendPropertyChanged("STT");
+					this.OnSTTChanged();
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaLM", DbType="VarChar(10)")]
@@ -1823,7 +2165,15 @@ namespace SoLienLacDienTu.Models
 			{
 				if ((this._MaLM != value))
 				{
+					if (this._LopMon.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMaLMChanging(value);
+					this.SendPropertyChanging();
 					this._MaLM = value;
+					this.SendPropertyChanged("MaLM");
+					this.OnMaLMChanged();
 				}
 			}
 		}
@@ -1839,8 +2189,104 @@ namespace SoLienLacDienTu.Models
 			{
 				if ((this._MaGV != value))
 				{
+					if (this._GiangVien.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMaGVChanging(value);
+					this.SendPropertyChanging();
 					this._MaGV = value;
+					this.SendPropertyChanged("MaGV");
+					this.OnMaGVChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GiangVien_GV_LM", Storage="_GiangVien", ThisKey="MaGV", OtherKey="MaGV", IsForeignKey=true)]
+		public GiangVien GiangVien
+		{
+			get
+			{
+				return this._GiangVien.Entity;
+			}
+			set
+			{
+				GiangVien previousValue = this._GiangVien.Entity;
+				if (((previousValue != value) 
+							|| (this._GiangVien.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._GiangVien.Entity = null;
+						previousValue.GV_LMs.Remove(this);
+					}
+					this._GiangVien.Entity = value;
+					if ((value != null))
+					{
+						value.GV_LMs.Add(this);
+						this._MaGV = value.MaGV;
+					}
+					else
+					{
+						this._MaGV = default(string);
+					}
+					this.SendPropertyChanged("GiangVien");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LopMon_GV_LM", Storage="_LopMon", ThisKey="MaLM", OtherKey="MaLM", IsForeignKey=true)]
+		public LopMon LopMon
+		{
+			get
+			{
+				return this._LopMon.Entity;
+			}
+			set
+			{
+				LopMon previousValue = this._LopMon.Entity;
+				if (((previousValue != value) 
+							|| (this._LopMon.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._LopMon.Entity = null;
+						previousValue.GV_LMs.Remove(this);
+					}
+					this._LopMon.Entity = value;
+					if ((value != null))
+					{
+						value.GV_LMs.Add(this);
+						this._MaLM = value.MaLM;
+					}
+					else
+					{
+						this._MaLM = default(string);
+					}
+					this.SendPropertyChanged("LopMon");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -2394,6 +2840,8 @@ namespace SoLienLacDienTu.Models
 		
 		private string _MaGV;
 		
+		private EntitySet<SV_LOP> _SV_LOPs;
+		
 		private EntityRef<GiangVien> _GiangVien;
 		
     #region Extensibility Method Definitions
@@ -2408,6 +2856,7 @@ namespace SoLienLacDienTu.Models
 		
 		public Lop()
 		{
+			this._SV_LOPs = new EntitySet<SV_LOP>(new Action<SV_LOP>(this.attach_SV_LOPs), new Action<SV_LOP>(this.detach_SV_LOPs));
 			this._GiangVien = default(EntityRef<GiangVien>);
 			OnCreated();
 		}
@@ -2453,6 +2902,19 @@ namespace SoLienLacDienTu.Models
 					this.SendPropertyChanged("MaGV");
 					this.OnMaGVChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lop_SV_LOP", Storage="_SV_LOPs", ThisKey="Malop", OtherKey="Malop")]
+		public EntitySet<SV_LOP> SV_LOPs
+		{
+			get
+			{
+				return this._SV_LOPs;
+			}
+			set
+			{
+				this._SV_LOPs.Assign(value);
 			}
 		}
 		
@@ -2509,6 +2971,18 @@ namespace SoLienLacDienTu.Models
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_SV_LOPs(SV_LOP entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lop = this;
+		}
+		
+		private void detach_SV_LOPs(SV_LOP entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lop = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LopMon")]
@@ -2522,6 +2996,8 @@ namespace SoLienLacDienTu.Models
 		private string _Lop;
 		
 		private string _MaMon;
+		
+		private EntitySet<GV_LM> _GV_LMs;
 		
 		private EntitySet<SinhVien_LopMon> _SinhVien_LopMons;
 		
@@ -2543,6 +3019,7 @@ namespace SoLienLacDienTu.Models
 		
 		public LopMon()
 		{
+			this._GV_LMs = new EntitySet<GV_LM>(new Action<GV_LM>(this.attach_GV_LMs), new Action<GV_LM>(this.detach_GV_LMs));
 			this._SinhVien_LopMons = new EntitySet<SinhVien_LopMon>(new Action<SinhVien_LopMon>(this.attach_SinhVien_LopMons), new Action<SinhVien_LopMon>(this.detach_SinhVien_LopMons));
 			this._ThongBaos = new EntitySet<ThongBao>(new Action<ThongBao>(this.attach_ThongBaos), new Action<ThongBao>(this.detach_ThongBaos));
 			this._MonHoc = default(EntityRef<MonHoc>);
@@ -2610,6 +3087,19 @@ namespace SoLienLacDienTu.Models
 					this.SendPropertyChanged("MaMon");
 					this.OnMaMonChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LopMon_GV_LM", Storage="_GV_LMs", ThisKey="MaLM", OtherKey="MaLM")]
+		public EntitySet<GV_LM> GV_LMs
+		{
+			get
+			{
+				return this._GV_LMs;
+			}
+			set
+			{
+				this._GV_LMs.Assign(value);
 			}
 		}
 		
@@ -2691,6 +3181,18 @@ namespace SoLienLacDienTu.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_GV_LMs(GV_LM entity)
+		{
+			this.SendPropertyChanging();
+			entity.LopMon = this;
+		}
+		
+		private void detach_GV_LMs(GV_LM entity)
+		{
+			this.SendPropertyChanging();
+			entity.LopMon = null;
 		}
 		
 		private void attach_SinhVien_LopMons(SinhVien_LopMon entity)
@@ -3375,6 +3877,8 @@ namespace SoLienLacDienTu.Models
 		
 		private EntitySet<SinhVien_LopMon> _SinhVien_LopMons;
 		
+		private EntitySet<SV_LOP> _SV_LOPs;
+		
 		private EntitySet<SV_MON> _SV_MONs;
 		
 		private EntityRef<PH> _PH;
@@ -3408,6 +3912,7 @@ namespace SoLienLacDienTu.Models
 			this._Diems = new EntitySet<Diem>(new Action<Diem>(this.attach_Diems), new Action<Diem>(this.detach_Diems));
 			this._LichThis = new EntitySet<LichThi>(new Action<LichThi>(this.attach_LichThis), new Action<LichThi>(this.detach_LichThis));
 			this._SinhVien_LopMons = new EntitySet<SinhVien_LopMon>(new Action<SinhVien_LopMon>(this.attach_SinhVien_LopMons), new Action<SinhVien_LopMon>(this.detach_SinhVien_LopMons));
+			this._SV_LOPs = new EntitySet<SV_LOP>(new Action<SV_LOP>(this.attach_SV_LOPs), new Action<SV_LOP>(this.detach_SV_LOPs));
 			this._SV_MONs = new EntitySet<SV_MON>(new Action<SV_MON>(this.attach_SV_MONs), new Action<SV_MON>(this.detach_SV_MONs));
 			this._PH = default(EntityRef<PH>);
 			OnCreated();
@@ -3636,6 +4141,19 @@ namespace SoLienLacDienTu.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SinhVien_SV_LOP", Storage="_SV_LOPs", ThisKey="MaSV", OtherKey="MaSV")]
+		public EntitySet<SV_LOP> SV_LOPs
+		{
+			get
+			{
+				return this._SV_LOPs;
+			}
+			set
+			{
+				this._SV_LOPs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SinhVien_SV_MON", Storage="_SV_MONs", ThisKey="MaSV", OtherKey="MaSV")]
 		public EntitySet<SV_MON> SV_MONs
 		{
@@ -3734,6 +4252,18 @@ namespace SoLienLacDienTu.Models
 		}
 		
 		private void detach_SinhVien_LopMons(SinhVien_LopMon entity)
+		{
+			this.SendPropertyChanging();
+			entity.SinhVien = null;
+		}
+		
+		private void attach_SV_LOPs(SV_LOP entity)
+		{
+			this.SendPropertyChanging();
+			entity.SinhVien = this;
+		}
+		
+		private void detach_SV_LOPs(SV_LOP entity)
 		{
 			this.SendPropertyChanging();
 			entity.SinhVien = null;
@@ -3990,15 +4520,58 @@ namespace SoLienLacDienTu.Models
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SV_LOP")]
-	public partial class SV_LOP
+	public partial class SV_LOP : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _STT;
 		
 		private string _Malop;
 		
 		private string _MaSV;
 		
+		private EntityRef<Lop> _Lop;
+		
+		private EntityRef<SinhVien> _SinhVien;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSTTChanging(int value);
+    partial void OnSTTChanged();
+    partial void OnMalopChanging(string value);
+    partial void OnMalopChanged();
+    partial void OnMaSVChanging(string value);
+    partial void OnMaSVChanged();
+    #endregion
+		
 		public SV_LOP()
 		{
+			this._Lop = default(EntityRef<Lop>);
+			this._SinhVien = default(EntityRef<SinhVien>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STT", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int STT
+		{
+			get
+			{
+				return this._STT;
+			}
+			set
+			{
+				if ((this._STT != value))
+				{
+					this.OnSTTChanging(value);
+					this.SendPropertyChanging();
+					this._STT = value;
+					this.SendPropertyChanged("STT");
+					this.OnSTTChanged();
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Malop", DbType="VarChar(10)")]
@@ -4012,7 +4585,15 @@ namespace SoLienLacDienTu.Models
 			{
 				if ((this._Malop != value))
 				{
+					if (this._Lop.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMalopChanging(value);
+					this.SendPropertyChanging();
 					this._Malop = value;
+					this.SendPropertyChanged("Malop");
+					this.OnMalopChanged();
 				}
 			}
 		}
@@ -4028,8 +4609,104 @@ namespace SoLienLacDienTu.Models
 			{
 				if ((this._MaSV != value))
 				{
+					if (this._SinhVien.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMaSVChanging(value);
+					this.SendPropertyChanging();
 					this._MaSV = value;
+					this.SendPropertyChanged("MaSV");
+					this.OnMaSVChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lop_SV_LOP", Storage="_Lop", ThisKey="Malop", OtherKey="Malop", IsForeignKey=true)]
+		public Lop Lop
+		{
+			get
+			{
+				return this._Lop.Entity;
+			}
+			set
+			{
+				Lop previousValue = this._Lop.Entity;
+				if (((previousValue != value) 
+							|| (this._Lop.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Lop.Entity = null;
+						previousValue.SV_LOPs.Remove(this);
+					}
+					this._Lop.Entity = value;
+					if ((value != null))
+					{
+						value.SV_LOPs.Add(this);
+						this._Malop = value.Malop;
+					}
+					else
+					{
+						this._Malop = default(string);
+					}
+					this.SendPropertyChanged("Lop");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SinhVien_SV_LOP", Storage="_SinhVien", ThisKey="MaSV", OtherKey="MaSV", IsForeignKey=true)]
+		public SinhVien SinhVien
+		{
+			get
+			{
+				return this._SinhVien.Entity;
+			}
+			set
+			{
+				SinhVien previousValue = this._SinhVien.Entity;
+				if (((previousValue != value) 
+							|| (this._SinhVien.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SinhVien.Entity = null;
+						previousValue.SV_LOPs.Remove(this);
+					}
+					this._SinhVien.Entity = value;
+					if ((value != null))
+					{
+						value.SV_LOPs.Add(this);
+						this._MaSV = value.MaSV;
+					}
+					else
+					{
+						this._MaSV = default(string);
+					}
+					this.SendPropertyChanged("SinhVien");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

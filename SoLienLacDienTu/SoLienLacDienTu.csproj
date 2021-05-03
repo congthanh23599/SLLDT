@@ -204,13 +204,19 @@
     </Compile>
     <Compile Include="Models\DiemCTViews.cs" />
     <Compile Include="Models\DkMon.cs" />
+<<<<<<< HEAD
+    <Compile Include="Models\gmail.cs" />
+=======
     <Compile Include="Models\getldk.cs" />
+>>>>>>> 1e0e7216e03a906cfd6f33a0018b25b177523350
     <Compile Include="Models\LamQuenCodeFirst\Admin.cs" />
     <Compile Include="Models\LamQuenCodeFirst\ChiTietHocPhi.cs" />
     <Compile Include="Models\LamQuenCodeFirst\Diem.cs" />
     <Compile Include="Models\LamQuenCodeFirst\DiemCT.cs" />
+    <Compile Include="Models\LamQuenCodeFirst\Don.cs" />
     <Compile Include="Models\LamQuenCodeFirst\GiangVien.cs" />
     <Compile Include="Models\LamQuenCodeFirst\GiangVien_Nganh.cs" />
+    <Compile Include="Models\LamQuenCodeFirst\GV_LM.cs" />
     <Compile Include="Models\LamQuenCodeFirst\LichThi.cs" />
     <Compile Include="Models\LamQuenCodeFirst\Lop.cs" />
     <Compile Include="Models\LamQuenCodeFirst\LopMon.cs" />
@@ -220,6 +226,7 @@
     <Compile Include="Models\LamQuenCodeFirst\PH.cs" />
     <Compile Include="Models\LamQuenCodeFirst\SinhVien.cs" />
     <Compile Include="Models\LamQuenCodeFirst\SinhVien_LopMon.cs" />
+    <Compile Include="Models\LamQuenCodeFirst\SV_LOP.cs" />
     <Compile Include="Models\LamQuenCodeFirst\SV_MON.cs" />
     <Compile Include="Models\LamQuenCodeFirst\sysdiagram.cs" />
     <Compile Include="Models\LamQuenCodeFirst\ThoiKhoaBieu.cs" />
@@ -700,9 +707,17 @@
     <Content Include="Views\SV\Hotro.cshtml" />
     <Content Include="Views\SV\DangkyLop.cshtml" />
     <Content Include="Views\SV\DangKyXBD.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Views\SV\Uploadfile.cshtml" />
+    <Content Include="Views\HomeAdmin\DSDONDK.cshtml" />
+    <Content Include="Views\HomeAdmin\DangGiaDonDK.cshtml" />
+    <Content Include="Views\HomeAdmin\SendEMail.cshtml" />
+=======
+>>>>>>> 1e0e7216e03a906cfd6f33a0018b25b177523350
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedFiles\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

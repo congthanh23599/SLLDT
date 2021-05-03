@@ -15,6 +15,7 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
             Diems = new HashSet<Diem>();
             LichThis = new HashSet<LichThi>();
             SinhVien_LopMon = new HashSet<SinhVien_LopMon>();
+            SV_LOP = new HashSet<SV_LOP>();
             SV_MON = new HashSet<SV_MON>();
             Nganhs = new HashSet<Nganh>();
         }
@@ -60,6 +61,9 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SinhVien_LopMon> SinhVien_LopMon { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SV_LOP> SV_LOP { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SV_MON> SV_MON { get; set; }

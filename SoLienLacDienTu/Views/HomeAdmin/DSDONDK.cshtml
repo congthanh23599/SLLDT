@@ -1,0 +1,92 @@
+﻿@model IEnumerable<SoLienLacDienTu.Models.Don>
+
+@{
+    ViewBag.Title = "DSDONDK";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+
+<h2>DanhSachGV</h2>
+<div id="layoutSidenav" style="margin-left:0">
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable</div>
+                    <div class="card-body">
+                        <div class="col-12">
+                           
+                            
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Mã SV</th>
+                                        <th>Tên SV</th>
+
+                                        <th>Lí do</th>
+
+                                        <th>File đơn</th>
+
+                                        <th>Ngày đăng</th>
+
+                                        <th>Trạng thái</th>
+                                        <th>Đánh giá</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @item.STT
+                                        </td>
+                                        <td>@item.MaSV</td>
+                                        <td>@item.TenSV</td>
+
+                                        <td>@item.LiDo</td>
+                                        
+                                        <td>
+                                            @*@item.FileDon*@
+                                            <a href="~/UploadedFiles/@item.FileDon" download="@item.FileDon">
+                                                <button type="button">Download</button>
+                                            </a>
+
+                                            
+                                        </td>
+
+                                        <td>@item.NgayDang</td>
+
+                                        <td>@{
+
+                                            if (item.TrangThai == 0)
+                                            { 
+                                                <p class="text-warning">Chưa duyệt</p>
+                                            }
+                                            else if(item.TrangThai == 1) 
+                                            {
+                                                <p class="text-info">Đã duyệt</p> 
+                                            }
+                                            else 
+                                            { 
+                                                <p class="text-danger">Trả về</p>
+                                            }
+                                           }</td>
+                                        
+                                        <td>@Html.ActionLink("Edit", "DangGiaDonDK", new { id = item.STT })</td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            @Html.ActionLink("Create New", "TaoTTGV")
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+

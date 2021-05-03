@@ -7,9 +7,13 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using SoLienLacDienTu.Models;
+<<<<<<< HEAD
+using System.IO;
+=======
 using System.Data.OleDb;
 using System.IO;
 using System.Linq;
+>>>>>>> 1e0e7216e03a906cfd6f33a0018b25b177523350
 
 namespace test.Controllers
 {
@@ -103,7 +107,7 @@ namespace test.Controllers
             }
 
         }
-      
+
         public ActionResult dangnhap()
         {
             return View();
@@ -116,7 +120,7 @@ namespace test.Controllers
             var matkhau = collection["pass"];
             if (string.IsNullOrEmpty(tendn))
             {
-               ViewData["Loi1"] = "Vui Lòng Nhập Tên Đăng Nhập !";
+                ViewData["Loi1"] = "Vui Lòng Nhập Tên Đăng Nhập !";
             }
             else
             if (string.IsNullOrEmpty(matkhau))
@@ -136,54 +140,54 @@ namespace test.Controllers
             }
             return View();
         }
-       /* public ActionResult Login(SoLienLacDienTu.Models.SinhVien SinhVienModel, SoLienLacDienTu.Models.SVXemDiem msssv)
-        {
-          *//*  var tendn = collection["username"];
-            var matkhau = collection["pass"];
-            if (string.IsNullOrEmpty(tendn))
-            {
-                ViewData["Loi1"] = "Vui Lòng Nhập Tên Đăng Nhập !";
-            }
-            else
-                if (string.IsNullOrEmpty(matkhau))
-            {
-                ViewData["Loi2"] = "Vui Lòng Nhập Mật Khẩu !";
-            }
-            else
-            {
-                Admin ad = db.Admins.SingleOrDefault(n => n.TaiKhoan == tendn && n.Password == matkhau);
-                if (ad != null)
-                {
-                    Session["TKadmin"] = ad.TenAdmin;
-                    return RedirectToAction("Index", "Homeadmin");
-                }
-                else
-                    ViewBag.ThongBao = "Tên Đăng Nhập Hoặc Mật Khẩu Không Đúng !";
-            }
-            return View();*//*
+        /* public ActionResult Login(SoLienLacDienTu.Models.SinhVien SinhVienModel, SoLienLacDienTu.Models.SVXemDiem msssv)
+         {
+           *//*  var tendn = collection["username"];
+             var matkhau = collection["pass"];
+             if (string.IsNullOrEmpty(tendn))
+             {
+                 ViewData["Loi1"] = "Vui Lòng Nhập Tên Đăng Nhập !";
+             }
+             else
+                 if (string.IsNullOrEmpty(matkhau))
+             {
+                 ViewData["Loi2"] = "Vui Lòng Nhập Mật Khẩu !";
+             }
+             else
+             {
+                 Admin ad = db.Admins.SingleOrDefault(n => n.TaiKhoan == tendn && n.Password == matkhau);
+                 if (ad != null)
+                 {
+                     Session["TKadmin"] = ad.TenAdmin;
+                     return RedirectToAction("Index", "Homeadmin");
+                 }
+                 else
+                     ViewBag.ThongBao = "Tên Đăng Nhập Hoặc Mật Khẩu Không Đúng !";
+             }
+             return View();*//*
 
-            var SinhvienDetail = db.SinhViens.Where(x => x.MaSV == SinhVienModel.MaSV && x.Password == SinhVienModel.Password).FirstOrDefault();
-            if (SinhvienDetail == null)
-            {
-                ViewBag.mess = "không đăng nhập dc";
+             var SinhvienDetail = db.SinhViens.Where(x => x.MaSV == SinhVienModel.MaSV && x.Password == SinhVienModel.Password).FirstOrDefault();
+             if (SinhvienDetail == null)
+             {
+                 ViewBag.mess = "không đăng nhập dc";
 
-                return View("IndexSV", SinhVienModel);
+                 return View("IndexSV", SinhVienModel);
 
-            }
-            else
-            {
-                ViewBag.name = SinhvienDetail.TenSV;
-                Session["MaSV"] = SinhVienModel.MaSV;
-                Session["idsv"] = SinhvienDetail.MaSV;
-                return RedirectToAction("XemTKB", "SV");
-            }*//*
-        }*/
-       /* public ActionResult LogOut()
-        {
+             }
+             else
+             {
+                 ViewBag.name = SinhvienDetail.TenSV;
+                 Session["MaSV"] = SinhVienModel.MaSV;
+                 Session["idsv"] = SinhvienDetail.MaSV;
+                 return RedirectToAction("XemTKB", "SV");
+             }*//*
+         }*/
+        /* public ActionResult LogOut()
+         {
 
-            Session.Abandon();
-            return RedirectToAction("IndexSV", "SV");
-        }*/
+             Session.Abandon();
+             return RedirectToAction("IndexSV", "SV");
+         }*/
         // xử lý sự kiện bấm vào học kỳ
         //[HttpPost]
         //public ActionResult HocKyTKBTuanSV(int idhk)
@@ -433,28 +437,28 @@ namespace test.Controllers
 
             //             }).ToList();
             var XemTB = (from s in SinhViennames
-                             where s.MaSV == Convert.ToString(idsv)
+                         where s.MaSV == Convert.ToString(idsv)
 
-                             join m in SV_lopnames on s.MaSV equals m.MaSV
-                             join x in Lopnames on m.Malop equals x.Malop
-                             join n in SV_LopMonnames on s.MaSV equals n.MaSV
-                             join y in LopMonnames on n.MaLM equals y.MaLM
-                             join h in TBnames on m.Malop equals h.MaLop
-                             join t in GVnames on h.MaGV equals t.MaGV
-                             where h.MaLop == x.Malop || h.MaLM == y.MaLM 
-                             select new SVXemDiem
-                             {
-                                 SinhVienDetail = s,
-                                 SV_lopDetail = m,
-                                 LopDetail = x,
-                                 SV_LopMonDetail = n,
-                                 LopMonDetail = y,
-                                 TBdetail = h,
-                                 GVDetail = t,
+                         join m in SV_lopnames on s.MaSV equals m.MaSV
+                         join x in Lopnames on m.Malop equals x.Malop
+                         join n in SV_LopMonnames on s.MaSV equals n.MaSV
+                         join y in LopMonnames on n.MaLM equals y.MaLM
+                         join h in TBnames on m.Malop equals h.MaLop
+                         join t in GVnames on h.MaGV equals t.MaGV
+                         where h.MaLop == x.Malop || h.MaLM == y.MaLM
+                         select new SVXemDiem
+                         {
+                             SinhVienDetail = s,
+                             SV_lopDetail = m,
+                             LopDetail = x,
+                             SV_LopMonDetail = n,
+                             LopMonDetail = y,
+                             TBdetail = h,
+                             GVDetail = t,
 
 
 
-                             }).ToList();
+                         }).ToList();
             return View(XemTB);
 
         }
@@ -513,8 +517,8 @@ namespace test.Controllers
             List<SinhVien_LopMon> SV_Lopmonnames = db.SinhVien_LopMons.ToList();
             List<SV_MON> SV_Monnames = db.SV_MONs.ToList();
             List<ThoiKhoaBieu> TKNnames = db.ThoiKhoaBieus.ToList();
-           
-          
+
+
             var idsv = Session["idsv"];
             int demm = 0;
             int demm1 = 0; int demm2 = 0;
@@ -523,14 +527,14 @@ namespace test.Controllers
             {
                 ViewBag.Message = " ban co id sinh vien la:" + string.Join(",", ids);
                 var masv = collection["ids"];
-               
+
                 for (; demm1 < montq.Count(); demm1++)
                 {
 
                 }
 
                 Session["Mamon"] = ids;
-            
+
                 a = demm;
                 Session["a"] = a;
 
@@ -542,29 +546,29 @@ namespace test.Controllers
                 Session["b"] = p;
                 foreach (var e in LopMonnames)
                 {
-                    
-                        if (e.MaLM != Convert.ToString(ids))
+
+                    if (e.MaLM != Convert.ToString(ids))
+                    {
+
+                        foreach (var y in SV_Monnames)
                         {
-
-                            foreach (var y in SV_Monnames)
+                            if (e.MaMon != y.MaMon)
                             {
-                                if (e.MaMon != y.MaMon)
-                                {
-                                    Session["q"] = y.MaMonTienquyet;
+                                Session["q"] = y.MaMonTienquyet;
 
 
-                                }
-                                else
-                                {
-                                    Session["q"] = "Erro1";
-                                }
+                            }
+                            else
+                            {
+                                Session["q"] = "Erro1";
                             }
                         }
-                        else
-                        {
-                            Session["q"] = "Erro";
-                        }
-                    
+                    }
+                    else
+                    {
+                        Session["q"] = "Erro";
+                    }
+
                 }
                 return RedirectToAction("tableview");
             }
@@ -619,8 +623,8 @@ namespace test.Controllers
                              Montienquyet = svm.MaMonTienquyet
                          }).ToList();
 
-           
-            
+
+
             foreach (var i in SV_Monnames)
             {
 
@@ -727,6 +731,92 @@ namespace test.Controllers
                 return View("IndexSV");
             }
         }
+<<<<<<< HEAD
+        public ActionResult Hotro()
+        {
+
+            return View();
+        }
+
+        public ActionResult DangkyLop()
+        {
+            return View();
+        }
+        public ActionResult DangKyXBD()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult DangKyXBD(HttpPostedFileBase file)
+        {
+
+
+            try
+            {
+                if (file.ContentLength > 0)
+                {
+                    string _FileName = Path.GetFileName(file.FileName);
+                    string _path = Path.Combine(Server.MapPath("~/UploadedFiles"), _FileName);
+                    file.SaveAs(_path);
+                }
+                ViewBag.Message = "File Uploaded Successfully!!";
+                return View();
+            }
+            catch
+            {
+                ViewBag.Message = "File upload failed!!";
+                return View();
+            }
+        }
+
+        
+        public ActionResult Uploadfile()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult Uploadfile([Bind(Include = "MaSV, TenSV, LiDo, FileDon")] Don dk, HttpPostedFileBase file)
+        {
+
+            var path = "";
+            var filename = "";
+            var idsv = Convert.ToString(Session["idsv"]);
+            List<SinhVien> SinhViennames = db.SinhViens.ToList();
+            var getTenSV = (from s in SinhViennames
+                              where s.MaSV == Convert.ToString(idsv)
+                              select s.TenSV).FirstOrDefault();
+         
+            dk.MaSV = idsv;
+            dk.TenSV = getTenSV;
+            dk.NgayDang = DateTime.Now;
+            dk.TrangThai = 0;
+
+            if (ModelState.IsValid)
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    filename = file.FileName;
+                     path = Path.Combine(Server.MapPath("~/UploadedFiles"), filename);
+                    file.SaveAs(path);
+                    dk.FileDon = filename;
+                }
+                else
+                {
+                    dk.FileDon = null;
+                }
+                db.Dons.InsertOnSubmit(dk); 
+                db.SubmitChanges();
+                ViewBag.Message = "File upload failed!!";
+                return RedirectToAction("Hotro");
+
+            }
+            ViewBag.Message = "File upload succ!!";
+            return View(dk);
+=======
 
         public ActionResult Hotro()
         {
@@ -756,6 +846,7 @@ namespace test.Controllers
         public ActionResult DangKyXBD()
         {
             return View();
+>>>>>>> 1e0e7216e03a906cfd6f33a0018b25b177523350
         }
     }
 }

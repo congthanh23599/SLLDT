@@ -155,7 +155,7 @@ namespace DO_AN_Thu_nghiem.Controllers
             }
           
         }
-            public ActionResult CreateLNT()
+        public ActionResult CreateLNT()
         {
             return View();
         }

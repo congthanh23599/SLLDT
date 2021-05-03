@@ -13,6 +13,7 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
         public GiangVien()
         {
             GiangVien_Nganh = new HashSet<GiangVien_Nganh>();
+            GV_LM = new HashSet<GV_LM>();
             Lops = new HashSet<Lop>();
             ThongBaos = new HashSet<ThongBao>();
             MonHocs = new HashSet<MonHoc>();
@@ -32,6 +33,9 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GiangVien_Nganh> GiangVien_Nganh { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GV_LM> GV_LM { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lop> Lops { get; set; }

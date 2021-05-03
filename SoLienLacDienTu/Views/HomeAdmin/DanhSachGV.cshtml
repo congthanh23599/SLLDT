@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SoLienLacDienTu.Models.GiangVien>
+﻿@model IEnumerable<SoLienLacDienTu.Models.LamQuenCodeFirst.GiangVien>
 
 @{
     ViewBag.Title = "DanhSachGV";
@@ -14,6 +14,19 @@
                 <div class="card mb-4">
                     <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable</div>
                     <div class="card-body">
+                        <div class="col-12">
+                            <div class="col-2" style="float:left">
+                                @using (Html.BeginForm("DanhSachGV", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    <input type="file" name="file" />
+                                    <br />
+                                    <input type="submit" value="Import to database" class="btn btn-primary" />
+                                }
+                            </div>
+                            <div class="col-2" style="float:left;padding-top:2.3%">
+                                <a class="btn btn-primary" href="@Url.Action("ExcelToGiangVien","HomeAdmin")">Export Excel</a>
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
@@ -22,7 +35,7 @@
                                         <th>Tên GV</th>
                                         <th>Password</th>
                                         <th> </th>
-                                     
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -35,7 +48,7 @@
                                             <td>@item.TenGV</td>
                                             <td>@item.Password</td>
                                             @*<td width="150px"><img style="width:150px; height:150px" src="@Url.Content("~/Content/ImagesProduct/"+item.IMGPath)" /></td>*@
-                                            
+
 
                                             <td>@Html.ActionLink("Edit", "EditTTGV", new { id = item.MaGV })</td>
 

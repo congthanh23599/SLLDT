@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+﻿
+=======
 ﻿@model SoLienLacDienTu.Models.LoaiDK
+>>>>>>> 1e0e7216e03a906cfd6f33a0018b25b177523350
 @{
     ViewBag.Title = "Hotro";
     Layout = "~/Views/Shared/_GDSinhVien.cshtml";
@@ -6,11 +10,29 @@
 
 <h2>Hotro</h2>
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 1e0e7216e03a906cfd6f33a0018b25b177523350
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
+<<<<<<< HEAD
+
+        <hr />
+
+        <div class="form-group">
+         
+            <div class="col-md-10">
+                @Html.DropDownList("Sortby", new SelectListItem[] { new SelectListItem() { Text = "Đăng Ký Lớp", Value = "DangkyLop" }, new SelectListItem() { Text = "Đăng Ký Xin Bảng Điểm", Value = "DangKyXBD" } },
+                new
+                     {
+                    @onchange = "CallChangefunc(this.value)"
+                })
+                
+=======
       
         <hr />
 
@@ -22,10 +44,24 @@
                     @onchange = "CallChangefunc(this.value)"
                 })
                 @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+>>>>>>> 1e0e7216e03a906cfd6f33a0018b25b177523350
             </div>
         </div>
 
     </div>
+<<<<<<< HEAD
+
+
+
+}
+
+
+    <script>
+        function CallChangefunc(val) {
+            window.location.href = "/SV/" + val;
+        }
+    </script>
+=======
    
 
     
@@ -37,3 +73,4 @@
         window.location.href = "/SV/" + val;
     }
 </script>
+>>>>>>> 1e0e7216e03a906cfd6f33a0018b25b177523350
