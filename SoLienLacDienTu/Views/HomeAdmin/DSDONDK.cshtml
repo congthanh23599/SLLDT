@@ -6,7 +6,10 @@
 }
 
 
-<h2>DanhSachGV</h2>
+<h2>Danh sách đơn đăng ký</h2>
+<h3>
+    @ViewBag.mess
+</h3>
 <div id="layoutSidenav" style="margin-left:0">
     <div id="layoutSidenav_content">
         <main>
@@ -15,8 +18,8 @@
                     <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable</div>
                     <div class="card-body">
                         <div class="col-12">
-                           
-                            
+
+
                         </div>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -39,54 +42,104 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                    <tr>
-                                        <td>
-                                            @item.STT
+                                        <tr>
+                                            <td>
+                                                @item.STT
+                                            </td>
+                                            <td>@item.MaSV</td>
+                                            <td>@item.TenSV</td>
+
+                                            <td>@item.LiDo</td>
+
+                                            <td>
+                                                @*@item.FileDon*@
+                                                <a href="~/UploadedFiles/@item.FileDon" download="@item.FileDon">
+                                                    <button type="button">Download</button>
+                                                </a>
+
+
+                                            </td>
+
+                                            <td>@item.NgayDang</td>
+
+                                            <td>
+                                                @{
+
+                                                    if (item.TrangThai == 0)
+                                                    {
+                                                        <p class="text-warning">Chưa duyệt</p>
+                                                    }
+                                                    else if (item.TrangThai == 1)
+                                                    {
+                                                        <p class="text-info">Đã duyệt</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="text-danger">Trả về</p>
+                                                    }
+                                                }
                                         </td>
-                                        <td>@item.MaSV</td>
-                                        <td>@item.TenSV</td>
 
-                                        <td>@item.LiDo</td>
-                                        
-                                        <td>
-                                            @*@item.FileDon*@
-                                            <a href="~/UploadedFiles/@item.FileDon" download="@item.FileDon">
-                                                <button type="button">Download</button>
-                                            </a>
+                                            <td style="width:200px">
+                                                <div style="float:left">
 
-                                            
-                                        </td>
 
-                                        <td>@item.NgayDang</td>
+                                                    @using (Html.BeginForm("DuocDuyet", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                    {
+                                                        @*@Html.ActionLink("Duyệt", "DSDONDK", new { id = item.STT })*@
+                                                        <input type="hidden" name="idduyet" id="idduyet" value="@item.STT" />
+                                                        <input type="hidden" name="tksv" id="tksv" value="@item.MaSV" />
+                                                        <input type="submit" value="Duyệt" class="btn btn-success" />
+                                                    }
 
-                                        <td>@{
+                                                    @using (Html.BeginForm("KhongDuocDuyet", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                    {
+                                                        <input type="hidden" name="idkoduyet" id="idkoduyet" value="@item.STT" />
+                                                        <input type="hidden" name="tksvkdd" id="tksvkdd" value="@item.MaSV" />
 
-                                            if (item.TrangThai == 0)
-                                            { 
-                                                <p class="text-warning">Chưa duyệt</p>
-                                            }
-                                            else if(item.TrangThai == 1) 
-                                            {
-                                                <p class="text-info">Đã duyệt</p> 
-                                            }
-                                            else 
-                                            { 
-                                                <p class="text-danger">Trả về</p>
-                                            }
-                                           }</td>
-                                        
-                                        <td>@Html.ActionLink("Edit", "DangGiaDonDK", new { id = item.STT })</td>
-                                    </tr>
-                                    }
+                                                        <div class="col-md-auto">
+                                                            <!-- Trigger the modal with a button -->
+                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Không duyệt</button>
+
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" data-backdrop="false" id="myModal" role="dialog">
+                                                                <div class="modal-dialog">
+
+                                                                    <!-- Modal content-->
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h4 class="modal-title">Nêu lí do không duyệt đơn</h4>
+                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+
+                                                                            <input type="text" name="LiDoKD" id="LiDoKD" value="Nhập lí do không duyệt" />
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <input type="submit" value="gửi" class="btn btn-danger" />
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    }
+                                                </div>
+                                            </td>
+                                </tr>
+                            }
                                 </tbody>
                             </table>
                             @Html.ActionLink("Create New", "TaoTTGV")
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
         </main>
     </div>
 </div>
+
 

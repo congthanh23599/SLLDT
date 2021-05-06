@@ -7,13 +7,7 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using SoLienLacDienTu.Models;
-<<<<<<< HEAD
 using System.IO;
-=======
-using System.Data.OleDb;
-using System.IO;
-using System.Linq;
->>>>>>> 1e0e7216e03a906cfd6f33a0018b25b177523350
 
 namespace test.Controllers
 {
@@ -731,7 +725,6 @@ namespace test.Controllers
                 return View("IndexSV");
             }
         }
-<<<<<<< HEAD
         public ActionResult Hotro()
         {
 
@@ -816,37 +809,6 @@ namespace test.Controllers
             }
             ViewBag.Message = "File upload succ!!";
             return View(dk);
-=======
-
-        public ActionResult Hotro()
-        {
-            Setviewbag();
-            return View();
-        }
-        [HttpPost] 
-        public ActionResult Hotro(LoaiDK ldk)
-        {
-            if(ModelState.IsValid)
-            {
-
-            }
-            Setviewbag();
-            return View();
-        }
-
-        public void Setviewbag (int? selectedId =null)
-        {
-            var dao = new getldk();
-            ViewBag.ID = new SelectList(dao.ListAll(), "ID", "TenLoaiDK", selectedId);
-        }
-        public ActionResult DangkyLop()
-        {
-            return View();
-        }
-        public ActionResult DangKyXBD()
-        {
-            return View();
->>>>>>> 1e0e7216e03a906cfd6f33a0018b25b177523350
         }
     }
 }

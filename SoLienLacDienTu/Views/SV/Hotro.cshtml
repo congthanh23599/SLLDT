@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 ﻿
-=======
-﻿@model SoLienLacDienTu.Models.LoaiDK
->>>>>>> 1e0e7216e03a906cfd6f33a0018b25b177523350
 @{
     ViewBag.Title = "Hotro";
     Layout = "~/Views/Shared/_GDSinhVien.cshtml";
@@ -10,46 +6,28 @@
 
 <h2>Hotro</h2>
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 1e0e7216e03a906cfd6f33a0018b25b177523350
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-<<<<<<< HEAD
 
         <hr />
 
         <div class="form-group">
          
             <div class="col-md-10">
-                @Html.DropDownList("Sortby", new SelectListItem[] { new SelectListItem() { Text = "Đăng Ký Lớp", Value = "DangkyLop" }, new SelectListItem() { Text = "Đăng Ký Xin Bảng Điểm", Value = "DangKyXBD" } },
+                @Html.DropDownList("Sortby", new SelectListItem[] { new SelectListItem() { Text = "Đăng Ký Lớp", Value = "Uploadfile" }, new SelectListItem() { Text = "Đăng Ký Xin Bảng Điểm", Value = "DangKyXBD" } },
                 new
                      {
                     @onchange = "CallChangefunc(this.value)"
                 })
                 
-=======
-      
-        <hr />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Sortby", new SelectListItem[]{new SelectListItem() { Text = "Đăng Ký Lớp", Value = "DangkyLop" },new SelectListItem() { Text = "Đăng Ký Xin Bảng Điểm", Value = "DangKyXBD" } },
-                new{
-                    @onchange = "CallChangefunc(this.value)"
-                })
-                @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
->>>>>>> 1e0e7216e03a906cfd6f33a0018b25b177523350
             </div>
         </div>
 
     </div>
-<<<<<<< HEAD
 
 
 
@@ -61,16 +39,3 @@
             window.location.href = "/SV/" + val;
         }
     </script>
-=======
-   
-
-    
-}
-
-
-<script>
-    function CallChangefunc(val) {
-        window.location.href = "/SV/" + val;
-    }
-</script>
->>>>>>> 1e0e7216e03a906cfd6f33a0018b25b177523350

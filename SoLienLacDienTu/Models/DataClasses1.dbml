@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SoLienLacDT" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=SoLienLacDT;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SoLienLacDTConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=LAPTOP-TUUBPQO5\SQLEXPRESS;Initial Catalog=SoLienLacDT;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SoLienLacDTConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Admin" Member="Admins">
     <Type Name="Admin">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -122,12 +122,6 @@
       <Column Name="HocKy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="MonHoc_LichThi" Member="MonHoc" ThisKey="MaMon" OtherKey="MaMon" Type="MonHoc" IsForeignKey="true" />
       <Association Name="SinhVien_LichThi" Member="SinhVien" ThisKey="MaSV" OtherKey="MaSV" Type="SinhVien" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.LoaiDK" Member="LoaiDKs">
-    <Type Name="LoaiDK">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TenLoaiDK" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Lop" Member="Lops">

@@ -4,13 +4,9 @@
     "\\SoLienLacDienTu",
     "\\SoLienLacDienTu\\Controllers",
     "\\SoLienLacDienTu\\Controllers\\MVC",
-    "\\SoLienLacDienTu\\Models",
-    "\\SoLienLacDienTu\\Models\\LamQuenCodeFirst",
     "\\SoLienLacDienTu\\Views",
-    "\\SoLienLacDienTu\\Views\\DangNhap",
-    "\\SoLienLacDienTu\\Views\\Home",
-    "\\SoLienLacDienTu\\Views\\SV"
+    "\\SoLienLacDienTu\\Views\\DangNhap"
   ],
-  "SelectedNode": "\\SoLienLacDienTu\\Views\\Home\\About.cshtml",
+  "SelectedNode": "\\SoLienLacDienTu\\Controllers\\MVC\\DangNhapController.cs",
   "PreviewInSolutionExplorer": false
 }

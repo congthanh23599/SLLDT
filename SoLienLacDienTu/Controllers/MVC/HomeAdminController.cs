@@ -1286,39 +1286,69 @@ namespace DO_AN_Thu_nghiem.Controllers
         {
             var ddk = from p in db.Dons
                           select p;
+            
             return View(ddk);
         }
+       /* [HttpPost]
+        public ActionResult DSDONDK(int id, gmail model, SoLienLacDienTu.Models.Admin ad)
+        {
+            
+            *//*Session["idDon"] = id;*//*
+            var idad = Session["TKadmin"];
+            List<Don> donname = db.Dons.ToList();
+            List<Admin> Adminnames = db.Admins.ToList();
+            foreach (var e in Adminnames)
+            {
+                if (e.TenAdmin == Convert.ToString(idad))
+                {
+                    MailMessage mm = new MailMessage(e.Email, model.To); *//*"wolf230599@gmail.com"*//*
+                    mm.Subject = model.Subject;
+                    mm.Body = model.Body;
+                    mm.IsBodyHtml = false;
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+
+                    NetworkCredential nc = new NetworkCredential(e.Email, e.PasswordEmail);// tai khoan va mat khau email "wolf230599@gmail.com"
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = nc;
+                    smtp.Send(mm);
+
+
+
+                    ViewBag.mess = "Gửi mail thành công!";
+                   
+                }
+                else
+                {
+                    ViewBag.mess = "Gửi mail khong thành công!";
+                    
+                }
+
+            }
+
+            foreach (var e in donname)
+            {
+                if (e.STT == id)
+                {
+                    e.TrangThai = 1;
+                    db.SubmitChanges();
+                   
+                }
+            }
+            var ddk = from p in db.Dons
+                      select p;
+            return View(ddk);
+        }*/
         public ActionResult DangGiaDonDK(int id)
         {
             var DangGiaDonDK = db.Dons.First(m => m.STT == id);
-            Session["idDon"] = id;
+           
             return View(DangGiaDonDK);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
-        public ActionResult DangGiaDonDK([Bind(Include = "MaSV, TenSV, GioiTinh , Diachi, Email , SDT, NgaySinh, Password ")] SinhVien lSV)
-        {
-            //var path = "";
-            //var filename = "";
-            SinhVien temp = getMaSV(lSV.MaSV);
-            if (ModelState.IsValid)
-            {
-
-                temp.TenSV = lSV.TenSV;
-                temp.GioiTinh = lSV.GioiTinh;
-                temp.Diachi = lSV.Diachi;
-                temp.Email = lSV.Email;
-                temp.SDT = lSV.SDT;
-                temp.NgaySinh = lSV.NgaySinh;
-                temp.Password = lSV.Password;
-                //temp.IMGPath = lnt.IMGPath;
-                UpdateModel(lSV);
-                db.SubmitChanges();
-                return RedirectToAction("DanhSachSV");
-            }
-            return View(lSV);
-        }
+        
         public ActionResult SendEMail()
         {
             return View();
@@ -1331,9 +1361,6 @@ namespace DO_AN_Thu_nghiem.Controllers
 
             List<Don> donname = db.Dons.ToList();
             List<Admin> Adminnames = db.Admins.ToList();
-           
-           
-
             foreach ( var e in Adminnames)
             {
                 if( e.TenAdmin == Convert.ToString(idad))
@@ -1389,74 +1416,95 @@ namespace DO_AN_Thu_nghiem.Controllers
 
             return View();
         }
-        public ActionResult DuocDuyet(gmail model, SoLienLacDienTu.Models.Admin ad)
+       
+        [HttpPost]
+     /*   [ValidateAntiForgeryToken]*/
+        [ValidateInput(false)]
+        public ActionResult DuocDuyet(gmail model, SoLienLacDienTu.Models.Admin ad, int idduyet, string tksv)
         {
-            int id = (int)Session["idDon"];
+           /* int id = (int)Session["idDon"];*/
+
             var idad = Session["TKadmin"];
             List<Don> donname = db.Dons.ToList();
             List<Admin> Adminnames = db.Admins.ToList();
-
-            foreach (var e in Adminnames)
-            {
-                if (e.TenAdmin == Convert.ToString(idad))
-                {
-
-
-                    MailMessage mm = new MailMessage(e.Email, model.To); /*"wolf230599@gmail.com"*/
-                    mm.Subject = model.Subject;
-                    mm.Body = model.Body;
-                    mm.IsBodyHtml = false;
-
-                    SmtpClient smtp = new SmtpClient();
-                    smtp.Host = "smtp.gmail.com";
-                    smtp.Port = 587;
-                    smtp.EnableSsl = true;
-
-                    NetworkCredential nc = new NetworkCredential(e.Email, e.PasswordEmail);// tai khoan va mat khau email "wolf230599@gmail.com"
-                    smtp.UseDefaultCredentials = true;
-                    smtp.Credentials = nc;
-                    smtp.Send(mm);
-
-
-
-                    ViewBag.mess = "Gửi mail thành công!";
-                    return View();
-                }
-                else
-                {
-                    ViewBag.mess = "Gửi mail khong thành công!";
-                    return View();
-                }
-
-            }
-
+            List<SinhVien> svnames = db.SinhViens.ToList();
             foreach (var e in donname)
             {
-                if (e.STT == id)
+                if (e.STT == idduyet)
                 {
                     e.TrangThai = 1;
                     db.SubmitChanges();
-                    return RedirectToAction("DSDONDK");
+                  
                 }
             }
+            foreach( var sv in svnames)
+            {
+                if (sv.MaSV == tksv)
+                {
+                    model.To = sv.Email;
+                }
+            }    
+            foreach (var e in Adminnames)
+            {
+                if (e.TenAdmin == Convert.ToString(idad))
+                {
+                    
+                    
+                    MailMessage mm = new MailMessage(e.Email, model.To);/*"wolf230599@gmail.com"*/
+                    mm.Subject = "Email phản hồi về đơn đăng ký";
+                    mm.Body = "Đơn của sinh viên đã được nhà trường duyệt sinh viên đợi nhà trường xếp lịch sẽ thông báo cho sinh viên qua email này";
+                    mm.IsBodyHtml = false;
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+
+                    NetworkCredential nc = new NetworkCredential(e.Email, e.PasswordEmail);// tai khoan va mat khau email "wolf230599@gmail.com"
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = nc;
+                    smtp.Send(mm);
+                }
+                else
+                {
+                }
+            }
+            ViewBag.mess = "Đã duyệt thành công!";
             return RedirectToAction("DSDONDK");
         }
-        public ActionResult KhongDuocDuyet(gmail model, SoLienLacDienTu.Models.Admin ad)
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult KhongDuocDuyet(gmail model, SoLienLacDienTu.Models.Admin ad, int idkoduyet, string tksvkdd, string LiDoKD)
         {
-            int id = (int)Session["idDon"];
+            /*int id = (int)Session["idDon"];*/
             var idad = Session["TKadmin"];
             List<Don> donname = db.Dons.ToList();
             List<Admin> Adminnames = db.Admins.ToList();
-
+            List<SinhVien> svnames = db.SinhViens.ToList();
+            foreach (var e in donname)
+            {
+                if (e.STT == idkoduyet)
+                {
+                    e.TrangThai = 2;
+                    db.SubmitChanges();
+                }
+            }
+            foreach (var sv in svnames)
+            {
+                if (sv.MaSV == tksvkdd)
+                {
+                    model.To = sv.Email;
+                }
+            }
             foreach (var e in Adminnames)
             {
                 if (e.TenAdmin == Convert.ToString(idad))
                 {
 
-
+                    //model.To = Convert.ToString(Session["emailsv"]);
                     MailMessage mm = new MailMessage(e.Email, model.To); /*"wolf230599@gmail.com"*/
-                    mm.Subject = model.Subject;
-                    mm.Body = model.Body;
+                    mm.Subject = "Email phản hồi về đơn đăng ký";
+                    mm.Body = LiDoKD;
                     mm.IsBodyHtml = false;
 
                     SmtpClient smtp = new SmtpClient();
@@ -1469,28 +1517,15 @@ namespace DO_AN_Thu_nghiem.Controllers
                     smtp.Credentials = nc;
                     smtp.Send(mm);
 
-
-
                     ViewBag.mess = "Gửi mail thành công!";
-                    return View();
                 }
                 else
                 {
                     ViewBag.mess = "Gửi mail khong thành công!";
-                    return View();
                 }
 
             }
-
-            foreach (var e in donname)
-            {
-                if (e.STT == id)
-                {
-                    e.TrangThai = 2;
-                    db.SubmitChanges();
-                    return RedirectToAction("DSDONDK");
-                }
-            }
+            ViewBag.mess = "không duyệt thành công!";
             return RedirectToAction("DSDONDK");
         }
     }
