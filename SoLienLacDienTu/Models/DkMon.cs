@@ -25,7 +25,8 @@ namespace SoLienLacDienTu.Models
         public DateTime? ThoiGianKT { get; set; }
         public int? HocKy { get; set; }
         public string Montienquyet { get; set; }
-        
+        public int? Nam { get; set; }
+
         public IEnumerable<SV_MON> sV_MONs { get; set; }
         public IEnumerable<LopMon> LopMons { get; set; }
 

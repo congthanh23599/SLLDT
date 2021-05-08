@@ -213,7 +213,9 @@
                     </tr>
                     @foreach (var item in Model)
                     {
-                        if (item.TKBDetail.HocKy == Convert.ToInt32(Session["hkid"]))
+                        if( item.TKBDetail.Nam == @DateTime.Now.Year)
+                        {
+                        if (item.TKBDetail.HocKy == Convert.ToInt32(Session["hkid"]) )
                         {
                             <tr align="center" style="background:white;height:25px">
                                 <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
@@ -238,6 +240,7 @@
                                 <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
                                     @item.TKBDetail.Phong
                                 </td>
+                                
                                 <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
                                     @item.TKBDetail.MaGV
                                 </td>
@@ -248,13 +251,13 @@
 
 
                             </tr>
+                            }
+                            else
+                            {
+
+
+                            }
                         }
-                        else
-                        {
-
-
-                        }
-
 
                     }
                 </tbody>

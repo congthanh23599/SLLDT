@@ -127,16 +127,20 @@
 
                                 @foreach (var m in Model)
                                 {
-                                    if (Convert.ToDateTime(m.TKBDetail.ThoiGianBD) < tghocbd)
+                                    if (m.TKBDetail.Nam == @DateTime.Now.Year)
                                     {
-                                        tghocbd = Convert.ToDateTime(m.TKBDetail.ThoiGianBD);
+                                        if (Convert.ToDateTime(m.TKBDetail.ThoiGianBD) < tghocbd)
+                                        {
+                                            tghocbd = Convert.ToDateTime(m.TKBDetail.ThoiGianBD);
+                                        }
+                                        if (Convert.ToDateTime(m.TKBDetail.ThoiGianKT) > tghockt)
+                                        {
+                                            tghockt = Convert.ToDateTime(m.TKBDetail.ThoiGianKT);
+                                        }
+                                        Session["hk"] = m.TKBDetail.HocKy;
                                     }
-                                    if (Convert.ToDateTime(m.TKBDetail.ThoiGianKT) > tghockt)
-                                    {
-                                        tghockt = Convert.ToDateTime(m.TKBDetail.ThoiGianKT);
-                                    }
-                                    Session["hk"] = m.TKBDetail.HocKy;
                                 }
+                               
                                 @{
                                     TimeSpan time1 = tghockt - tghocbd;
                                     int ngayktt = time1.Days;

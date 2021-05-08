@@ -4864,6 +4864,8 @@ namespace SoLienLacDienTu.Models
 		
 		private string _MaMon;
 		
+		private string _MaLM;
+		
 		private string _TenMon;
 		
 		private string _MaGV;
@@ -4880,11 +4882,11 @@ namespace SoLienLacDienTu.Models
 		
 		private System.Nullable<System.DateTime> _ThoiGianBD;
 		
-		private int _HocKy;
-		
-		private string _MaLM;
-		
 		private System.Nullable<System.DateTime> _ThoiGianKT;
+		
+		private System.Nullable<int> _Nam;
+		
+		private int _HocKy;
 		
 		private System.Nullable<int> _TongNgayHoc;
 		
@@ -4898,6 +4900,8 @@ namespace SoLienLacDienTu.Models
     partial void OnIDTKBChanged();
     partial void OnMaMonChanging(string value);
     partial void OnMaMonChanged();
+    partial void OnMaLMChanging(string value);
+    partial void OnMaLMChanged();
     partial void OnTenMonChanging(string value);
     partial void OnTenMonChanged();
     partial void OnMaGVChanging(string value);
@@ -4914,12 +4918,12 @@ namespace SoLienLacDienTu.Models
     partial void OnSTChanged();
     partial void OnThoiGianBDChanging(System.Nullable<System.DateTime> value);
     partial void OnThoiGianBDChanged();
-    partial void OnHocKyChanging(int value);
-    partial void OnHocKyChanged();
-    partial void OnMaLMChanging(string value);
-    partial void OnMaLMChanged();
     partial void OnThoiGianKTChanging(System.Nullable<System.DateTime> value);
     partial void OnThoiGianKTChanged();
+    partial void OnNamChanging(System.Nullable<int> value);
+    partial void OnNamChanged();
+    partial void OnHocKyChanging(int value);
+    partial void OnHocKyChanged();
     partial void OnTongNgayHocChanging(System.Nullable<int> value);
     partial void OnTongNgayHocChanged();
     #endregion
@@ -4970,6 +4974,26 @@ namespace SoLienLacDienTu.Models
 					this._MaMon = value;
 					this.SendPropertyChanged("MaMon");
 					this.OnMaMonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaLM", DbType="VarChar(10)")]
+		public string MaLM
+		{
+			get
+			{
+				return this._MaLM;
+			}
+			set
+			{
+				if ((this._MaLM != value))
+				{
+					this.OnMaLMChanging(value);
+					this.SendPropertyChanging();
+					this._MaLM = value;
+					this.SendPropertyChanged("MaLM");
+					this.OnMaLMChanged();
 				}
 			}
 		}
@@ -5134,46 +5158,6 @@ namespace SoLienLacDienTu.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HocKy", DbType="Int NOT NULL")]
-		public int HocKy
-		{
-			get
-			{
-				return this._HocKy;
-			}
-			set
-			{
-				if ((this._HocKy != value))
-				{
-					this.OnHocKyChanging(value);
-					this.SendPropertyChanging();
-					this._HocKy = value;
-					this.SendPropertyChanged("HocKy");
-					this.OnHocKyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaLM", DbType="VarChar(10)")]
-		public string MaLM
-		{
-			get
-			{
-				return this._MaLM;
-			}
-			set
-			{
-				if ((this._MaLM != value))
-				{
-					this.OnMaLMChanging(value);
-					this.SendPropertyChanging();
-					this._MaLM = value;
-					this.SendPropertyChanged("MaLM");
-					this.OnMaLMChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ThoiGianKT", DbType="Date")]
 		public System.Nullable<System.DateTime> ThoiGianKT
 		{
@@ -5190,6 +5174,46 @@ namespace SoLienLacDienTu.Models
 					this._ThoiGianKT = value;
 					this.SendPropertyChanged("ThoiGianKT");
 					this.OnThoiGianKTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nam", DbType="Int")]
+		public System.Nullable<int> Nam
+		{
+			get
+			{
+				return this._Nam;
+			}
+			set
+			{
+				if ((this._Nam != value))
+				{
+					this.OnNamChanging(value);
+					this.SendPropertyChanging();
+					this._Nam = value;
+					this.SendPropertyChanged("Nam");
+					this.OnNamChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HocKy", DbType="Int NOT NULL")]
+		public int HocKy
+		{
+			get
+			{
+				return this._HocKy;
+			}
+			set
+			{
+				if ((this._HocKy != value))
+				{
+					this.OnHocKyChanging(value);
+					this.SendPropertyChanging();
+					this._HocKy = value;
+					this.SendPropertyChanged("HocKy");
+					this.OnHocKyChanged();
 				}
 			}
 		}

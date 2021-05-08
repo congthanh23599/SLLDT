@@ -503,7 +503,9 @@ namespace DO_AN_Thu_nghiem.Controllers
                 ThoiGianBD = x.ThoiGianBD,
                 ThoiGianKT = x.ThoiGianKT,
                 HocKy = x.HocKy,
+                Nam = x.Nam,
                 MaLop = x.MaLM,
+                
             }).ToList();
 
             return View(emplist);
@@ -580,6 +582,7 @@ namespace DO_AN_Thu_nghiem.Controllers
                         // Map the Excel columns with that of the database table, this is optional but good if you do
                         // 
                         sqlBulkCopy.ColumnMappings.Add("MaMon", "MaMon");
+                        sqlBulkCopy.ColumnMappings.Add("MaLM", "MaLM");
                         sqlBulkCopy.ColumnMappings.Add("TenMon", "TenMon");
                         sqlBulkCopy.ColumnMappings.Add("MaGV", "MaGV");
                         sqlBulkCopy.ColumnMappings.Add("Phong", "Phong");
@@ -589,8 +592,8 @@ namespace DO_AN_Thu_nghiem.Controllers
                         sqlBulkCopy.ColumnMappings.Add("ST", "ST");
                         sqlBulkCopy.ColumnMappings.Add("ThoiGianBD", "ThoiGianBD");
                         sqlBulkCopy.ColumnMappings.Add("ThoiGianKT", "ThoiGianKT");
+                        sqlBulkCopy.ColumnMappings.Add("Nam", "Nam");
                         sqlBulkCopy.ColumnMappings.Add("HocKy", "HocKy");
-                        sqlBulkCopy.ColumnMappings.Add("MaLM", "MaLM");
 
                         con.Open();
                         sqlBulkCopy.WriteToServer(dt);
@@ -612,6 +615,7 @@ namespace DO_AN_Thu_nghiem.Controllers
                 SoTiet = x.ST,
                 ThoiGianBD = x.ThoiGianBD,
                 ThoiGianKT = x.ThoiGianKT,
+                Nam = x.Nam,
                 HocKy = x.HocKy,
                 MaLop = x.MaLM,
             }).ToList();
@@ -633,6 +637,7 @@ namespace DO_AN_Thu_nghiem.Controllers
                 SoTiet = x.ST,
                 ThoiGianBD = x.ThoiGianBD,
                 ThoiGianKT = x.ThoiGianKT,
+                Nam = x.Nam,
                 HocKy = x.HocKy,
                 MaLop = x.MaLM,
             }).ToList();
@@ -650,18 +655,18 @@ namespace DO_AN_Thu_nghiem.Controllers
             ws.Cells["B3"].Value = string.Format("{0:dd MMMM yyyy} at {0:H: mm tt}", DateTimeOffset.Now);
 
             ws.Cells["A6"].Value = "MaMon";
-            ws.Cells["B6"].Value = "TenMon";
-            ws.Cells["C6"].Value = "MaGV";
-            ws.Cells["D6"].Value = "Phong";
-            ws.Cells["E6"].Value = "TietBD";
-            ws.Cells["F6"].Value = "Thu";
-            ws.Cells["G6"].Value = "TH";
-            ws.Cells["H6"].Value = "ST";
-            ws.Cells["I6"].Value = "ThoiGianBD";
-            ws.Cells["J6"].Value = "ThoiGianKT";
-            ws.Cells["K6"].Value = "HocKy";
-            ws.Cells["L6"].Value = "MaLM";
-
+            ws.Cells["B6"].Value = "MaLM"; 
+            ws.Cells["C6"].Value = "TenMon";
+            ws.Cells["D6"].Value = "MaGV"; 
+            ws.Cells["E6"].Value = "Phong"; 
+            ws.Cells["F6"].Value = "TietBD"; 
+            ws.Cells["G6"].Value = "Thu"; 
+            ws.Cells["H6"].Value = "TH"; 
+            ws.Cells["I6"].Value = "ST"; 
+            ws.Cells["J6"].Value = "ThoiGianBD"; 
+            ws.Cells["K6"].Value = "ThoiGianKT"; 
+            ws.Cells["L6"].Value = "Nam";
+            ws.Cells["M6"].Value = "HocKy"; 
             int rowStart = 7;
             foreach (var item in emplist)
             {   /*
@@ -1289,59 +1294,7 @@ namespace DO_AN_Thu_nghiem.Controllers
             
             return View(ddk);
         }
-       /* [HttpPost]
-        public ActionResult DSDONDK(int id, gmail model, SoLienLacDienTu.Models.Admin ad)
-        {
-            
-            *//*Session["idDon"] = id;*//*
-            var idad = Session["TKadmin"];
-            List<Don> donname = db.Dons.ToList();
-            List<Admin> Adminnames = db.Admins.ToList();
-            foreach (var e in Adminnames)
-            {
-                if (e.TenAdmin == Convert.ToString(idad))
-                {
-                    MailMessage mm = new MailMessage(e.Email, model.To); *//*"wolf230599@gmail.com"*//*
-                    mm.Subject = model.Subject;
-                    mm.Body = model.Body;
-                    mm.IsBodyHtml = false;
-
-                    SmtpClient smtp = new SmtpClient();
-                    smtp.Host = "smtp.gmail.com";
-                    smtp.Port = 587;
-                    smtp.EnableSsl = true;
-
-                    NetworkCredential nc = new NetworkCredential(e.Email, e.PasswordEmail);// tai khoan va mat khau email "wolf230599@gmail.com"
-                    smtp.UseDefaultCredentials = true;
-                    smtp.Credentials = nc;
-                    smtp.Send(mm);
-
-
-
-                    ViewBag.mess = "Gửi mail thành công!";
-                   
-                }
-                else
-                {
-                    ViewBag.mess = "Gửi mail khong thành công!";
-                    
-                }
-
-            }
-
-            foreach (var e in donname)
-            {
-                if (e.STT == id)
-                {
-                    e.TrangThai = 1;
-                    db.SubmitChanges();
-                   
-                }
-            }
-            var ddk = from p in db.Dons
-                      select p;
-            return View(ddk);
-        }*/
+     
         public ActionResult DangGiaDonDK(int id)
         {
             var DangGiaDonDK = db.Dons.First(m => m.STT == id);
@@ -1472,6 +1425,7 @@ namespace DO_AN_Thu_nghiem.Controllers
             ViewBag.mess = "Đã duyệt thành công!";
             return RedirectToAction("DSDONDK");
         }
+        //còn chưa thay đổi được trang thái chỉ gửi email về phía sinh viên được thôi
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult KhongDuocDuyet(gmail model, SoLienLacDienTu.Models.Admin ad, int idkoduyet, string tksvkdd, string LiDoKD)
@@ -1481,14 +1435,7 @@ namespace DO_AN_Thu_nghiem.Controllers
             List<Don> donname = db.Dons.ToList();
             List<Admin> Adminnames = db.Admins.ToList();
             List<SinhVien> svnames = db.SinhViens.ToList();
-            foreach (var e in donname)
-            {
-                if (e.STT == idkoduyet)
-                {
-                    e.TrangThai = 2;
-                    db.SubmitChanges();
-                }
-            }
+         
             foreach (var sv in svnames)
             {
                 if (sv.MaSV == tksvkdd)
@@ -1524,6 +1471,14 @@ namespace DO_AN_Thu_nghiem.Controllers
                     ViewBag.mess = "Gửi mail khong thành công!";
                 }
 
+            }
+            foreach (var e in donname)
+            {
+                if (e.STT == idkoduyet)
+                {
+                    e.TrangThai = 2;
+                    db.SubmitChanges();
+                }
             }
             ViewBag.mess = "không duyệt thành công!";
             return RedirectToAction("DSDONDK");

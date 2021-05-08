@@ -246,6 +246,7 @@
     <Type Name="ThoiKhoaBieu">
       <Column Name="IDTKB" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="MaMon" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="MaLM" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="TenMon" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="MaGV" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Phong" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
@@ -254,9 +255,9 @@
       <Column Name="TH" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ST" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ThoiGianBD" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="HocKy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="MaLM" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="ThoiGianKT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Nam" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HocKy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="TongNgayHoc" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="MonHoc_ThoiKhoaBieu" Member="MonHoc" ThisKey="MaMon" OtherKey="MaMon" Type="MonHoc" IsForeignKey="true" />
     </Type>
