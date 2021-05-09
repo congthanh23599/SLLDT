@@ -503,7 +503,7 @@ namespace test.Controllers
         public List<SV_MON> GetSV_MONs() { List<SV_MON> sv_mon = new List<SV_MON>(); return sv_mon; }
         public List<LopMon> GetLopMons() { List<LopMon> lopmon = new List<LopMon>(); return lopmon; }
         [HttpPost]
-        public ActionResult DKMonHoc(string ids, string[] montq, string mondachon, FormCollection collection)
+        public ActionResult DKMonHoc(string ids, string montq, string mondachon, FormCollection collection)
         {
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
             List<LopMon> LopMonnames = db.LopMons.ToList();
@@ -516,23 +516,22 @@ namespace test.Controllers
             var idsv = Session["idsv"];
             int demm = 0;
             int demm1 = 0; int demm2 = 0;
-            var mmtq = Session["montq"];
+          /*  var mmtq = Session["montq"];*/
             if (ids != null)
             {
                 ViewBag.Message = " ban co id sinh vien la:" + string.Join(",", ids);
-                var masv = collection["ids"];
+                /*var masv = collection["ids"];*/
 
-                for (; demm1 < montq.Count(); demm1++)
+               /* for (; demm1 < montq.Count(); demm1++)
                 {
 
-                }
+                }*/
 
                 Session["Mamon"] = ids;
-
                 a = demm;
                 Session["a"] = a;
 
-                m = montq[demm1 - 1];
+                m = montq;
                 mdc = mondachon;
                 p = ids;
                 Session["mondachon"] = mdc;
@@ -575,9 +574,10 @@ namespace test.Controllers
         [HttpGet]
         public ActionResult tableview()//ids la masv cua webgrid
         {
+
             var idlm = Session["b"];
-            var idsv = Session["Masv"];
-            var mmtq = Session["montq"];
+            var idsv = Session["idsv"];
+            string mmtq = Convert.ToString( Session["montq"]);
             var mdchon = Session["mondachon"];
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
             List<LopMon> LopMonnames = db.LopMons.ToList();
@@ -619,40 +619,117 @@ namespace test.Controllers
 
 
 
-            foreach (var i in SV_Monnames)
+            /* foreach (var i in SV_Monnames)
+             {
+                 if (i.MaSV == Convert.ToString(ids))
+                 {
+                     if (i.MaMonTienquyet == Convert.ToString(mmtq))
+                     {
+
+                         if (i.DaHoc == false)
+                         {
+                             ViewBag.mess = "chua hoc";
+                             TempData["AlertMessage"] = "chua hoc";
+                             TempData["AlertType"] = "alert-warning";
+
+                         }
+                         else
+                         {
+
+                             ViewBag.mess = "da hoc";
+                             TempData["AlertMessage"] = "da hoc";
+
+                             TempData["AlertType"] = "alert-success";
+
+
+
+                         }
+                     }
+                     else
+                     {
+                         ViewBag.mess = "khong co mon hoc";
+                         TempData["AlertMessage"] = "khong co mon hoc";
+                         TempData["AlertType"] = "alert-info";
+
+                     }
+                 }
+
+             }*/
+
+            /*foreach (var i in SV_Monnames)
             {
-
-                if (i.MaMonTienquyet == Convert.ToString(mmtq))
+                if (i.MaSV == Convert.ToString(idsv))
                 {
-
-                    if (i.DaHoc == false)
+                    if (i.MaMon == mmtq)
                     {
-                        ViewBag.mess = "chua hoc";
-                        TempData["AlertMessage"] = "chua hoc";
-                        TempData["AlertType"] = "alert-warning";
+                        if (i.DaHoc == true)
+                        {
+                            for(int j=0;j<SV_Monnames.Count();j++)
+                            { 
+                            }
+                            if (i.MaMon == Convert.ToString(mdchon))
+                            {
+                                if (i.DaHoc == false)
+                                {
+                                    i.DaHoc = true;
+                                    ViewBag.chuahoc = "dang ky thanh cong";
+                                }
+                            }
+                            else
+                            {
+                                ViewBag.chuahoc = "chua dat du dieu kien 4";
+                                return View(DKmon);
+                            }
 
+                        }
+                        else
+                        {
+                            ViewBag.chuahoc = "chua dat du dieu kien 3";
+                            return View(DKmon);
+                        }
                     }
                     else
                     {
-
-                        ViewBag.mess = "da hoc";
-                        TempData["AlertMessage"] = "da hoc";
-
-                        TempData["AlertType"] = "alert-success";
-
-
-
+                        ViewBag.chuahoc = "chua dat du dieu kien 2";
+                        return View(DKmon);
                     }
                 }
                 else
                 {
-                    ViewBag.mess = "khong co mon hoc";
-                    TempData["AlertMessage"] = "khong co mon hoc";
-                    TempData["AlertType"] = "alert-info";
-
+                    ViewBag.chuahoc = "chua dat du dieu kien 1";
+                    return View(DKmon);
                 }
-            }
+            }*/
+            var xetDK = (
 
+                        from svm in SV_Monnames
+                        where svm.MaSV == Convert.ToString(idsv) && svm.MaMon == Convert.ToString(montq)
+
+                        select new xettq
+                        {
+                            
+                            MaSV = svm.MaSV,
+                            MaMon = svm.MaMon,
+                            DaHoc = svm.DaHoc,
+                            MaMonTienquyet = svm.MaMonTienquyet,
+                      
+                        }).ToList();
+            foreach( var i in xetDK)
+            {
+                
+                    if (i.DaHoc == true)
+                    {
+                        i.DaHoc = true;
+                        ViewBag.chuahoc = "dang ky thanh cong";
+                    }
+                else
+                {
+                    ViewBag.chuahoc = "chua dat du dieu kien 1";
+                    return View(xetDK);
+                }
+                
+            }
+            
             return View(DKmon);
         }
         [HttpPost]
@@ -697,25 +774,7 @@ namespace test.Controllers
 
                 sp.MaLM = Convert.ToString(o);// malm
                 sp.MaSV = Convert.ToString(idsv);// ma sinh vien
-                foreach (var i in SV_Monnames)
-                {
-                    if (i.MaSV == Convert.ToString(idsv) && i.MaMon == Convert.ToString(mmtq) && i.DaHoc == false)
-                    {
-                        ViewBag.chuahoc = "chua dat du dieu kien";
-                        return View(DKmon);
-                    }
-                    else
-                    {
-                        if (i.MaSV == Convert.ToString(idsv) && i.MaMon == Convert.ToString(mdchon))
-                        {
-                            if (i.DaHoc == false)
-                            {
-                                i.DaHoc = true;
-                                ViewBag.chuahoc = "dang ky thanh cong";
-                            }
-                        }
-                    }
-                }
+               
                 db.SinhVien_LopMons.InsertOnSubmit(sp);
                 db.SubmitChanges();
                 return RedirectToAction("XemTKB");
