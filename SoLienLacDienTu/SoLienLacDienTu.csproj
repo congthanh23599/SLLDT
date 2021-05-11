@@ -203,6 +203,7 @@
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\DiemCTViews.cs" />
+    <Compile Include="Models\mondc.cs" />
     <Compile Include="Models\xettq.cs" />
     <Compile Include="Models\DkMon.cs" />
     <Compile Include="Models\gmail.cs" />
