@@ -745,7 +745,7 @@ namespace test.Controllers
             {
 
                 sp.MaLM = Convert.ToString(o);// malm
-                sp.MaSV = Convert.ToString(idsv);// ma sinh vien
+                sp.MaSV = Convert.ToString(idsv);// ma sinh vien 
                 var mondc = (
 
                         from q in SV_Monnames
