@@ -10,6 +10,7 @@
 <h3>
     @Html.ViewBag.mess
 </h3>
+
 <div id="layoutSidenav" style="margin-left:0">
     <div id="layoutSidenav_content">
         <main>
@@ -17,9 +18,16 @@
                 <div class="card mb-4">
                     <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable</div>
                     <div class="card-body">
-                        <div class="col-12">
+                        <div class="col-lg-12" style="float:left">
+                            @using (Html.BeginForm("DSDONDK", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <select @*name="dropdown" id="myID"*@ id="ddlselect" onChange="ddlselect();" class="DropDown" name="idLD" @*multiple*@ style="width:300px;">
+                                    <option onchange="validateSelectBox(this)" value="DKL">Xin đăng ký lớp </option>
+                                    <option onchange="validateSelectBox(this)" value="XBD">Xin bảng điểm </option>
 
-
+                                </select>
+                                <input type="submit" name="submit" value="Xem học kỳ" />
+                            }
                         </div>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -42,92 +50,96 @@
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td>
-                                                @item.STT
-                                            </td>
-                                            <td>@item.MaSV</td>
-                                            <td>@item.TenSV</td>
+                                        if (item.IDLD == Convert.ToString(Session["idLD"]))
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @item.STT
+                                                </td>
+                                                <td>@item.MaSV</td>
+                                                <td>@item.TenSV</td>
 
-                                            <td>@item.LiDo</td>
+                                                <td>@item.LiDo</td>
 
-                                            <td>
-                                                @*@item.FileDon*@
-                                                <a href="~/UploadedFiles/@item.FileDon" download="@item.FileDon">
-                                                    <button type="button">Download</button>
-                                                </a>
+                                                <td>
+                                                    @*@item.FileDon*@
+                                                    <a href="~/UploadedFiles/@item.FileDon" download="@item.FileDon">
+                                                        <button type="button">Download</button>
+                                                    </a>
 
 
-                                            </td>
+                                                </td>
 
-                                            <td>@item.NgayDang</td>
+                                                <td>@item.NgayDang</td>
 
-                                            <td>
-                                                @{
+                                                <td>
+                                                    @{
 
-                                                    if (item.TrangThai == 0)
-                                                    {
-                                                        <p class="text-warning">Chưa duyệt</p>
+                                                        if (item.TrangThai == 0)
+                                                        {
+                                                            <p class="text-warning">Chưa duyệt</p>
+                                                        }
+                                                        else if (item.TrangThai == 1)
+                                                        {
+                                                            <p class="text-info">Đã duyệt</p>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p class="text-danger">Trả về</p>
+                                                        }
                                                     }
-                                                    else if (item.TrangThai == 1)
-                                                    {
-                                                        <p class="text-info">Đã duyệt</p>
-                                                    }
-                                                    else
-                                                    {
-                                                        <p class="text-danger">Trả về</p>
-                                                    }
-                                                }
-                                        </td>
+                                                </td>
 
-                                            <td style="width:200px">
-                                                <div style="float:left">
+                                                <td style="width:200px">
+                                                    <div style="float:left">
 
 
-                                                    @using (Html.BeginForm("DuocDuyet", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                                    {
-                                                        @*@Html.ActionLink("Duyệt", "DSDONDK", new { id = item.STT })*@
-                                                        <input type="hidden" name="idduyet" id="idduyet" value="@item.STT" />
-                                                        <input type="hidden" name="tksv" id="tksv" value="@item.MaSV" />
-                                                        <input type="submit" value="Duyệt" class="btn btn-success" />
-                                                    }
+                                                        @using (Html.BeginForm("DuocDuyet", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                        {
+                                                            @*@Html.ActionLink("Duyệt", "DSDONDK", new { id = item.STT })*@
+                                                            <input type="hidden" name="idduyet" id="idduyet" value="@item.STT" />
+                                                            <input type="hidden" name="tksv" id="tksv" value="@item.MaSV" />
+                                                            <input type="submit" value="Duyệt" class="btn btn-success" />
+                                                        }
 
-                                                    @using (Html.BeginForm("KhongDuocDuyet", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                                    {
-                                                        <input type="hidden" name="idkoduyet" id="idkoduyet" value="@item.STT" />
-                                                        <input type="hidden" name="tksvkdd" id="tksvkdd" value="@item.MaSV" />
-                                                        <input class="btn btn-danger" type="submit" data-toggle="modal" data-target="#myModal" value="Không duyệt"/>
-                                                        <div class="col-md-auto">
-                                                            <!-- Trigger the modal with a button -->
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" data-backdrop="false" id="myModal" role="dialog">
-                                                                <div class="modal-dialog">
+                                                        @using (Html.BeginForm("KhongDuocDuyet", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                        {
+                                                            <input type="hidden" name="idkoduyet" id="idkoduyet" value="@item.STT" />
+                                                            <input type="hidden" name="tksvkdd" id="tksvkdd" value="@item.MaSV" />
+                                                            <input class="btn btn-danger" type="submit" data-toggle="modal" data-target="#myModal" value="Không duyệt" />
+                                                            <div class="col-md-auto">
+                                                                <!-- Trigger the modal with a button -->
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" data-backdrop="false" id="myModal" role="dialog">
+                                                                    <div class="modal-dialog">
 
-                                                                    <!-- Modal content-->
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h4 class="modal-title">Nêu lí do không duyệt đơn</h4>
-                                                                            <button type="button" class="close" data-dismiss="modal">@*&times;*@</button>
-                                                                        </div>
-                                                                        <div class="modal-body">
+                                                                        <!-- Modal content-->
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title">Nêu lí do không duyệt đơn</h4>
+                                                                                <button type="button" class="close" data-dismiss="modal">@*&times;*@</button>
+                                                                            </div>
+                                                                            <div class="modal-body">
 
-                                                                            <input type="text" name="LiDoKD" id="LiDoKD" value="Đơn không hợp lệ" />
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <input type="submit" value="gửi" class="btn btn-danger" />
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                <input type="text" name="LiDoKD" id="LiDoKD" value="Đơn không hợp lệ" />
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <input type="submit" value="gửi" class="btn btn-danger" />
+                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
 
 
-                                                    }
-                                                </div>
-                                            </td>
-                                </tr>
-                            }
+                                                        }
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
                                 </tbody>
                             </table>
                             @Html.ActionLink("Create New", "TaoTTGV")
@@ -140,4 +152,54 @@
     </div>
 </div>
 
+<script type="text/javascript">
+
+        $(document).ready(function () {
+            var dropDownVal = $("#dropdown").val();
+            $("#myID").change(function (evt) {
+                alert($("#myID").val());   //Display Selected ID
+
+                alert($("#myID option:selected").text()) //Display Selected Text
+                  @ViewData["d"] = ($("#myID"));
+                $.ajax({
+                    url: SVController / TKBTuanSV,
+                    type: "POST",
+                    data: {
+                        dropdown: dropDownVal
+                    }
+                });
+            });
+
+        });
+</script>
+<script language="javascript">
+    function validateSelectBox(obj) {
+        var options = obj.children;
+        var html = '';
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].selected) {
+                html += '<li>' + options[i].value + '</li>';
+                k = options[i].value;
+
+            }
+        }
+
+        document.getElementById('result').innerHTML = html;
+    }
+    window.onload = function () {
+        var selectBox = document.getElementById("selectBox");
+        selectBox.addEventListener('change', changeFunc);
+        function changeFunc() {
+            alert(this.value);
+        }
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#ddlselect").on('change', function () {
+            $(".data").hide();
+            $("#" + $(this).val()).fadeIn(700);
+        }).change();
+    })
+</script>
 

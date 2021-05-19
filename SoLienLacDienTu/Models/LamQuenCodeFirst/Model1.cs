@@ -8,7 +8,7 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
     public partial class Model1 : DbContext
     {
         public Model1()
-            : base("name=datacode")
+            : base("name=Model13")
         {
         }
 
@@ -21,6 +21,7 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
         public virtual DbSet<GiangVien_Nganh> GiangVien_Nganh { get; set; }
         public virtual DbSet<GV_LM> GV_LM { get; set; }
         public virtual DbSet<LichThi> LichThis { get; set; }
+        public virtual DbSet<LoaiDon> LoaiDons { get; set; }
         public virtual DbSet<Lop> Lops { get; set; }
         public virtual DbSet<LopMon> LopMons { get; set; }
         public virtual DbSet<MonHoc> MonHocs { get; set; }
@@ -45,6 +46,14 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
                 .Property(e => e.Password)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Admin>()
+                .Property(e => e.Email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Admin>()
+                .Property(e => e.PasswordEmail)
+                .IsUnicode(false);
+
             modelBuilder.Entity<ChiTietHocPhi>()
                 .Property(e => e.MaMon)
                 .IsUnicode(false);
@@ -66,7 +75,16 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
                 .IsUnicode(false);
 
             modelBuilder.Entity<Don>()
+                .Property(e => e.MaSV)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Don>()
                 .Property(e => e.FileDon)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Don>()
+                .Property(e => e.IDLD)
+                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<GiangVien>()
@@ -129,6 +147,11 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
 
             modelBuilder.Entity<LichThi>()
                 .Property(e => e.NamHoc)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LoaiDon>()
+                .Property(e => e.IDLD)
+                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<Lop>()
@@ -281,15 +304,15 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
                 .IsUnicode(false);
 
             modelBuilder.Entity<ThoiKhoaBieu>()
+                .Property(e => e.MaLM)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ThoiKhoaBieu>()
                 .Property(e => e.MaGV)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ThoiKhoaBieu>()
                 .Property(e => e.Phong)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<ThoiKhoaBieu>()
-                .Property(e => e.MaLM)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ThongBao>()

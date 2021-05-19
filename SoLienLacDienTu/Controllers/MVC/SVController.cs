@@ -815,8 +815,13 @@ namespace test.Controllers
         }
         public ActionResult Hotro()
         {
-
-            return View();
+            List<SoLienLacDienTu.Models.LamQuenCodeFirst.LoaiDon> emplist = db.LoaiDons.Select(x => new SoLienLacDienTu.Models.LamQuenCodeFirst.LoaiDon
+            {
+                IDLD = x.IDLD,
+                TenLoai = x.TenLoai,
+              
+            }).ToList();
+            return View(emplist);
         }
 
         public ActionResult DangkyLop()
@@ -860,13 +865,15 @@ namespace test.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Uploadfile([Bind(Include = "MaSV, TenSV, LiDo, FileDon")] Don dk, HttpPostedFileBase file)
+        public ActionResult Uploadfile([Bind(Include = "MaSV, TenSV, LiDo, FileDon,IDLD")] Don dk, HttpPostedFileBase file,string idLD)
         {
-
+            
             var path = "";
             var filename = "";
             var idsv = Convert.ToString(Session["idsv"]);
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
+            List<LoaiDon> loaidons = db.LoaiDons.ToList();
+
             var getTenSV = (from s in SinhViennames
                             where s.MaSV == Convert.ToString(idsv)
                             select s.TenSV).FirstOrDefault();
@@ -874,6 +881,7 @@ namespace test.Controllers
             dk.MaSV = idsv;
             dk.TenSV = getTenSV;
             dk.NgayDang = DateTime.Now;
+         
             dk.TrangThai = 0;
 
             if (ModelState.IsValid)
@@ -884,6 +892,7 @@ namespace test.Controllers
                     path = Path.Combine(Server.MapPath("~/UploadedFiles"), filename);
                     file.SaveAs(path);
                     dk.FileDon = filename;
+                    dk.IDLD = idLD;
                 }
                 else
                 {

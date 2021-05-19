@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SoLienLacDT" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=LAPTOP-TUUBPQO5\SQLEXPRESS;Initial Catalog=SoLienLacDT;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SoLienLacDTConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=SoLienLacDT;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SoLienLacDTConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Admin" Member="Admins">
     <Type Name="Admin">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -60,12 +60,15 @@
   <Table Name="dbo.Don" Member="Dons">
     <Type Name="Don">
       <Column Name="STT" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="MaSV" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="MaSV" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="TenSV" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="LiDo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="FileDon" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="NgayDang" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="TrangThai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDLD" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Association Name="LoaiDon_Don" Member="LoaiDon" ThisKey="IDLD" OtherKey="IDLD" Type="LoaiDon" IsForeignKey="true" />
+      <Association Name="SinhVien_Don" Member="SinhVien" ThisKey="MaSV" OtherKey="MaSV" Type="SinhVien" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.GiangVien" Member="GiangViens">
@@ -124,6 +127,14 @@
       <Association Name="SinhVien_LichThi" Member="SinhVien" ThisKey="MaSV" OtherKey="MaSV" Type="SinhVien" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.LoaiDon" Member="LoaiDons">
+    <Type Name="LoaiDon">
+      <Column Name="STT" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDLD" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenLoai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="LoaiDon_Don" Member="Dons" ThisKey="IDLD" OtherKey="IDLD" Type="Don" />
+    </Type>
+  </Table>
   <Table Name="dbo.Lop" Member="Lops">
     <Type Name="Lop">
       <Column Name="Malop" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -137,6 +148,7 @@
       <Column Name="MaLM" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Lop" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="MaMon" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="SLSV" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="LopMon_GV_LM" Member="GV_LMs" ThisKey="MaLM" OtherKey="MaLM" Type="GV_LM" />
       <Association Name="LopMon_SinhVien_LopMon" Member="SinhVien_LopMons" ThisKey="MaLM" OtherKey="MaLM" Type="SinhVien_LopMon" />
       <Association Name="LopMon_ThongBao" Member="ThongBaos" ThisKey="MaLM" OtherKey="MaLM" Type="ThongBao" />
@@ -197,6 +209,7 @@
       <Column Name="Password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="MaPH" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="SinhVien_Diem" Member="Diems" ThisKey="MaSV" OtherKey="MaSV" Type="Diem" />
+      <Association Name="SinhVien_Don" Member="Dons" ThisKey="MaSV" OtherKey="MaSV" Type="Don" />
       <Association Name="SinhVien_LichThi" Member="LichThis" ThisKey="MaSV" OtherKey="MaSV" Type="LichThi" />
       <Association Name="SinhVien_SinhVien_LopMon" Member="SinhVien_LopMons" ThisKey="MaSV" OtherKey="MaSV" Type="SinhVien_LopMon" />
       <Association Name="SinhVien_SinhVien_Nganh" Member="SinhVien_Nganhs" ThisKey="MaSV" OtherKey="MaSV" Type="SinhVien_Nganh" />

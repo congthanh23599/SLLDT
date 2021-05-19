@@ -1290,11 +1290,19 @@ namespace DO_AN_Thu_nghiem.Controllers
         public ActionResult DSDONDK()
         {
             var ddk = from p in db.Dons
-                          select p;
-            
+                      select p;
+
             return View(ddk);
         }
-     
+        [HttpPost]
+        public ActionResult DSDONDK(string idLD)
+        {
+            var ddk = from p in db.Dons
+                      select p;
+            Session["idLD"] = idLD;
+            return View(ddk);
+        }
+
         public ActionResult DangGiaDonDK(int id)
         {
             var DangGiaDonDK = db.Dons.First(m => m.STT == id);
