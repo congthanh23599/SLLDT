@@ -484,14 +484,14 @@ namespace test.Controllers
                              MaMon = l.MaMon,
                              TenMon = l.TenMon,
                              SoTinChi = l.Sotinchi,
-                             SoTiet = t.ST,
+                             ST = t.ST,
                              HocKy = t.HocKy,
                              TH = t.TH,
                              ThoiGianBD = t.ThoiGianBD,
                              ThoiGianKT = t.ThoiGianKT,
                              TietBD = t.TietBD,
                              MaGV = t.MaGV,
-                             MaLop = m.MaLM,
+                             MaLM = m.MaLM,
                              Phong = t.Phong,
                              Montienquyet = l.MaMonTienQuyet
                          }).ToList();
@@ -604,14 +604,14 @@ namespace test.Controllers
                              MaMon = lm.MaMon,
                              TenMon = tkb.TenMon,
                              SoTinChi = mh.Sotinchi,
-                             SoTiet = tkb.ST,
+                             ST = tkb.ST,
                              HocKy = tkb.HocKy,
                              TH = tkb.TH,
                              ThoiGianBD = tkb.ThoiGianBD,
                              ThoiGianKT = tkb.ThoiGianKT,
                              TietBD = tkb.TietBD,
                              MaGV = tkb.MaGV,
-                             MaLop = tkb.MaLM,
+                             MaLM = tkb.MaLM,
                              Phong = tkb.Phong,
                              Montienquyet = svm.MaMonTienquyet
                          }).ToList();
@@ -730,14 +730,14 @@ namespace test.Controllers
                          MaMon = l.MaMon,
                          TenMon = l.TenMon,
                          SoTinChi = l.Sotinchi,
-                         SoTiet = t.ST,
+                         ST = t.ST,
                          HocKy = t.HocKy,
                          TH = t.TH,
                          ThoiGianBD = t.ThoiGianBD,
                          ThoiGianKT = t.ThoiGianKT,
                          TietBD = t.TietBD,
                          MaGV = t.MaGV,
-                         MaLop = m.MaLM,
+                         MaLM = m.MaLM,
                          Phong = t.Phong,
                          Montienquyet = l.MaMonTienQuyet
                      }).ToList();
@@ -860,7 +860,7 @@ namespace test.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Uploadfile([Bind(Include = "MaSV, TenSV, LiDo, FileDon")] Don dk, HttpPostedFileBase file)
+        public ActionResult Uploadfile([Bind(Include = "MaSV, TenSV, LiDo, FileDon,IDLD")] Don dk, HttpPostedFileBase file, string idLD)
         {
 
             var path = "";
@@ -884,6 +884,7 @@ namespace test.Controllers
                     path = Path.Combine(Server.MapPath("~/UploadedFiles"), filename);
                     file.SaveAs(path);
                     dk.FileDon = filename;
+                    dk.IDLD = idLD;
                 }
                 else
                 {

@@ -5,11 +5,8 @@
     Layout = "~/Views/Shared/Admin.cshtml";
 }
 
-
 <h2>Danh sách đơn đăng ký</h2>
-<h3>
-    @Html.ViewBag.mess
-</h3>
+
 <div id="layoutSidenav" style="margin-left:0">
     <div id="layoutSidenav_content">
         <main>
@@ -78,7 +75,7 @@
                                                         <p class="text-danger">Trả về</p>
                                                     }
                                                 }
-                                        </td>
+                                            </td>
 
                                             <td style="width:200px">
                                                 <div style="float:left">
@@ -92,42 +89,38 @@
                                                         <input type="submit" value="Duyệt" class="btn btn-success" />
                                                     }
 
+
                                                     @using (Html.BeginForm("KhongDuocDuyet", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                     {
+
                                                         <input type="hidden" name="idkoduyet" id="idkoduyet" value="@item.STT" />
                                                         <input type="hidden" name="tksvkdd" id="tksvkdd" value="@item.MaSV" />
-                                                        <input class="btn btn-danger" type="submit" data-toggle="modal" data-target="#myModal" value="Không duyệt"/>
-                                                        <div class="col-md-auto">
-                                                            <!-- Trigger the modal with a button -->
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" data-backdrop="false" id="myModal" role="dialog">
-                                                                <div class="modal-dialog">
-
-                                                                    <!-- Modal content-->
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h4 class="modal-title">Nêu lí do không duyệt đơn</h4>
-                                                                            <button type="button" class="close" data-dismiss="modal">@*&times;*@</button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-
-                                                                            <input type="text" name="LiDoKD" id="LiDoKD" value="Đơn không hợp lệ" />
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <input type="submit" value="gửi" class="btn btn-danger" />
-                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
 
 
+                                                        <input  onclick="myFunction()" id="btn" class="btn btn-danger" value="Không duyệt" type="submit"  />
+
+                                                        <script>
+                                                            function myFunction() {
+                                                                let person = prompt("Nhập nội dung không duyệt");
+                                                                if (person) {
+                                                                    document.getElementById("LiDoKD").value = person;
+                                                                    return <input type="hidden" name="LiDoKD" id="LiDoKD" value="không thể được" />;
+                                                                }
+                                                                else {
+                                                                    document.getElementById("LiDoKD").value = person;
+
+                                                                }
+
+                                                            }
+
+                                                        </script>
+                                                      
                                                     }
+
                                                 </div>
                                             </td>
-                                </tr>
-                            }
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                             @Html.ActionLink("Create New", "TaoTTGV")
@@ -139,5 +132,12 @@
         </main>
     </div>
 </div>
+<script>
+    function ghi() {
+
+        KhongDuocDuyet(),
+    }
+
+</script>
 
 

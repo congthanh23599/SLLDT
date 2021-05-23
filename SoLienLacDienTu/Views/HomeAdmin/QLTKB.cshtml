@@ -15,12 +15,19 @@
                     <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable</div>
 
                     <div class="card-body">
-                        
+
                         @using (Html.BeginForm("QLTKB", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
+                            @*<input type="file" name="file" />
+                                <br />
+                                <input type="submit" value="Import to database" class="btn btn-primary" />*@
+
+                            <input type="hidden" name="de" id="de" />
                             <input type="file" name="file" />
                             <br />
-                            <input type="submit" value="Import to database" class="btn btn-primary" />
+                            <input type="submit" value="Import to database" class="btn btn-primary" onclick="myFunction()" />
+
+
                         }
                         <a class="btn btn-primary" href="@Url.Action("ExportToExcel","HomeAdmin")">Export Excel</a>
                         <div class="table-responsive">
@@ -49,18 +56,20 @@
                                         {
                                             <tr>
                                                 <td>@item.MaMon</td>
+                                                <td>@item.MaLM</td>
                                                 <td>@item.TenMon</td>
                                                 <td>@item.MaGV</td>
                                                 <td>@item.Phong</td>
                                                 <td>@item.TietBD</td>
                                                 <td>@item.Thu</td>
                                                 <td>@item.TH</td>
-                                                <td>@item.SoTiet</td>
+                                                <td>@item.ST</td>
                                                 <td>@item.ThoiGianBD</td>
                                                 <td>@item.ThoiGianKT</td>
-                                                <td>@item.HocKy</td>
                                                 <td>@item.Nam</td>
-                                                <td>@item.MaLop</td>
+                                                <td>@item.HocKy</td>
+
+
                                             </tr>
 
                                         }
@@ -74,3 +83,23 @@
         </main>
     </div>
 </div>
+
+<style>
+    .active {
+    }
+</style>
+<script type="text/javascript">
+    function myFunction() {
+        var result = confirm("Bạn có muốn ghi đè lên file cũ không ? ");
+        if (result) {
+            document.getElementById("de").value = 1;
+            return true;
+        }
+        else {
+            document.getElementById("de").value = 0;
+
+        }
+
+
+    }
+</script>

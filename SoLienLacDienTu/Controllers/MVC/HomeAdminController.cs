@@ -129,15 +129,15 @@ namespace DO_AN_Thu_nghiem.Controllers
             ViewBag.Success = "File Imported and excel data saved into database";
             List<SoLienLacDienTu.Models.LamQuenCodeFirst.SinhVien> emplist = db.SinhViens.Select(x => new SoLienLacDienTu.Models.LamQuenCodeFirst.SinhVien
             {
-                MaSV     = x.MaSV,
-                TenSV    = x.TenSV,
+                MaSV = x.MaSV,
+                TenSV = x.TenSV,
                 GioiTinh = x.GioiTinh,
-                Diachi   = x.Diachi,
-                Email    = x.Email,
-                SDT      = x.SDT,
+                Diachi = x.Diachi,
+                Email = x.Email,
+                SDT = x.SDT,
                 NgaySinh = x.NgaySinh,
                 Password = x.Password,
-                MaPH     = x.MaPH,
+                MaPH = x.MaPH,
             }).ToList();
 
             return View(emplist);
@@ -408,7 +408,7 @@ namespace DO_AN_Thu_nghiem.Controllers
             ws.Cells["A6"].Value = "MaGV";
             ws.Cells["B6"].Value = "TenGV";
             ws.Cells["C6"].Value = "Password";
- 
+
 
             int rowStart = 7;
             foreach (var item in emplist)
@@ -499,130 +499,247 @@ namespace DO_AN_Thu_nghiem.Controllers
                 TietBD = x.TietBD,
                 Thu = x.Thu,
                 TH = x.TH,
-                SoTiet = x.ST,
+                ST = x.ST,
                 ThoiGianBD = x.ThoiGianBD,
                 ThoiGianKT = x.ThoiGianKT,
-                HocKy = x.HocKy,
                 Nam = x.Nam,
-                MaLop = x.MaLM,
-                
+                HocKy = x.HocKy,
+                MaLM = x.MaLM,
             }).ToList();
 
             return View(emplist);
 
         }
         [HttpPost]
-        public ActionResult QLTKB(HttpPostedFileBase file)
+        public ActionResult QLTKB(HttpPostedFileBase file, int? de)
         {
+
             string filePath = string.Empty;
-            if (file != null)
+            if (Convert.ToInt32(de) == 1)
             {
-                string path = Server.MapPath("~/Uploads/");
-                if (!Directory.Exists(path))
+                db.ThoiKhoaBieus.DeleteAllOnSubmit(db.ThoiKhoaBieus);
+                db.SubmitChanges();
+                if (file != null)
                 {
-                    Directory.CreateDirectory(path);
-                }
-
-                filePath = path + Path.GetFileName(file.FileName);
-                string extension = Path.GetExtension(file.FileName);
-                file.SaveAs(filePath);
-
-                string conString = string.Empty;
-
-                switch (extension)
-                {
-                    case ".xls": //Excel 97-03.
-                        conString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filePath + ";Extended Properties='Excel 8.0;HDR=YES'";
-                        break;
-                    case ".xlsx": //Excel 07 and above.
-                        conString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath + ";Extended Properties='Excel 8.0;HDR=YES'";
-                        break;
-                }
-
-                DataTable dt = new DataTable();
-                conString = string.Format(conString, filePath);
-
-                using (OleDbConnection connExcel = new OleDbConnection(conString))
-                {
-                    using (OleDbCommand cmdExcel = new OleDbCommand())
+                    string path = Server.MapPath("~/Uploads/");
+                    if (!Directory.Exists(path))
                     {
-                        using (OleDbDataAdapter odaExcel = new OleDbDataAdapter())
+                        Directory.CreateDirectory(path);
+                    }
+
+                    filePath = path + Path.GetFileName(file.FileName);
+                    string extension = Path.GetExtension(file.FileName);
+                    file.SaveAs(filePath);
+
+                    string conString = string.Empty;
+
+                    switch (extension)
+                    {
+                        case ".xls": //Excel 97-03.
+                            conString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filePath + ";Extended Properties='Excel 8.0;HDR=YES'";
+                            break;
+                        case ".xlsx": //Excel 07 and above.
+                            conString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath + ";Extended Properties='Excel 8.0;HDR=YES'";
+                            break;
+                    }
+
+                    DataTable dt = new DataTable();
+                    conString = string.Format(conString, filePath);
+
+                    using (OleDbConnection connExcel = new OleDbConnection(conString))
+                    {
+                        using (OleDbCommand cmdExcel = new OleDbCommand())
                         {
-                            cmdExcel.Connection = connExcel;
+                            using (OleDbDataAdapter odaExcel = new OleDbDataAdapter())
+                            {
+                                cmdExcel.Connection = connExcel;
 
-                            //Get the name of First Sheet.
-                            connExcel.Open();
-                            DataTable dtExcelSchema;
-                            dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-                            string sheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
-                          
-                            connExcel.Close();
+                                //Get the name of First Sheet.
+                                connExcel.Open();
+                                DataTable dtExcelSchema;
+                                dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                                string sheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
 
-                            //Read Data from First Sheet.
-                            connExcel.Open();
-                            cmdExcel.CommandText = "SELECT * From [" + sheetName + "]";
+                                connExcel.Close();
 
-                            //cmdExcel.CommandText = "UPDATE [" + sheetName + "] ";
+                                //Read Data from First Sheet.
+                                connExcel.Open();
+                                cmdExcel.CommandText = "SELECT * From [" + sheetName + "]";
 
-                            odaExcel.SelectCommand = cmdExcel;
-                            odaExcel.Fill(dt);
-                            connExcel.Close();
+                                //cmdExcel.CommandText = "UPDATE [" + sheetName + "] ";
+
+                                odaExcel.SelectCommand = cmdExcel;
+                                odaExcel.Fill(dt);
+                                connExcel.Close();
+                            }
+                        }
+                    }
+
+                    conString = @"Server=LAPTOP-TUUBPQO5\SQLEXPRESS;Database=SoLienLacDT;Trusted_Connection=True;";
+                    using (SqlConnection con = new SqlConnection(conString))
+                    {
+                        using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+                        {
+                            //Set the database table name.
+                            sqlBulkCopy.DestinationTableName = "dbo.ThoiKhoaBieu";
+
+                            // Map the Excel columns with that of the database table, this is optional but good if you do
+                            // 
+                            sqlBulkCopy.ColumnMappings.Add("MaMon", "MaMon");
+                            sqlBulkCopy.ColumnMappings.Add("MaLM", "MaLM");
+                            sqlBulkCopy.ColumnMappings.Add("TenMon", "TenMon");
+                            sqlBulkCopy.ColumnMappings.Add("MaGV", "MaGV");
+                            sqlBulkCopy.ColumnMappings.Add("Phong", "Phong");
+                            sqlBulkCopy.ColumnMappings.Add("TietBD", "TietBD");
+                            sqlBulkCopy.ColumnMappings.Add("Thu", "Thu");
+                            sqlBulkCopy.ColumnMappings.Add("TH", "TH");
+                            sqlBulkCopy.ColumnMappings.Add("ST", "ST");
+                            sqlBulkCopy.ColumnMappings.Add("ThoiGianBD", "ThoiGianBD");
+                            sqlBulkCopy.ColumnMappings.Add("ThoiGianKT", "ThoiGianKT");
+                            sqlBulkCopy.ColumnMappings.Add("Nam", "Nam");
+                            sqlBulkCopy.ColumnMappings.Add("HocKy", "HocKy");
+
+                            con.Open();
+                            sqlBulkCopy.WriteToServer(dt);
+                            con.Close();
                         }
                     }
                 }
-
-                conString = @"Server=LAPTOP-TUUBPQO5\SQLEXPRESS;Database=SoLienLacDT;Trusted_Connection=True;";
-                using (SqlConnection con = new SqlConnection(conString))
+                //if the code reach here means everthing goes fine and excel data is imported into database
+                ViewBag.Success = "File Imported and excel data saved into database";
+                List<DkMon> emplist = db.ThoiKhoaBieus.Select(x => new DkMon
                 {
-                    using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+                    MaMon = x.MaMon,
+                    TenMon = x.TenMon,
+                    MaGV = x.MaGV,
+                    Phong = x.Phong,
+                    TietBD = x.TietBD,
+                    Thu = x.Thu,
+                    TH = x.TH,
+                    ST = x.ST,
+                    ThoiGianBD = x.ThoiGianBD,
+                    ThoiGianKT = x.ThoiGianKT,
+                    Nam = x.Nam,
+                    HocKy = x.HocKy,
+                    MaLM = x.MaLM,
+                }).ToList();
+
+                return View(emplist);
+
+            }
+            else
+            {
+                if (file != null)
+                {
+                    string path = Server.MapPath("~/Uploads/");
+                    if (!Directory.Exists(path))
                     {
-                        //Set the database table name.
-                        sqlBulkCopy.DestinationTableName = "dbo.ThoiKhoaBieu";
+                        Directory.CreateDirectory(path);
+                    }
 
-                        // Map the Excel columns with that of the database table, this is optional but good if you do
-                        // 
-                        sqlBulkCopy.ColumnMappings.Add("MaMon", "MaMon");
-                        sqlBulkCopy.ColumnMappings.Add("MaLM", "MaLM");
-                        sqlBulkCopy.ColumnMappings.Add("TenMon", "TenMon");
-                        sqlBulkCopy.ColumnMappings.Add("MaGV", "MaGV");
-                        sqlBulkCopy.ColumnMappings.Add("Phong", "Phong");
-                        sqlBulkCopy.ColumnMappings.Add("TietBD", "TietBD");
-                        sqlBulkCopy.ColumnMappings.Add("Thu", "Thu");
-                        sqlBulkCopy.ColumnMappings.Add("TH", "TH");
-                        sqlBulkCopy.ColumnMappings.Add("ST", "ST");
-                        sqlBulkCopy.ColumnMappings.Add("ThoiGianBD", "ThoiGianBD");
-                        sqlBulkCopy.ColumnMappings.Add("ThoiGianKT", "ThoiGianKT");
-                        sqlBulkCopy.ColumnMappings.Add("Nam", "Nam");
-                        sqlBulkCopy.ColumnMappings.Add("HocKy", "HocKy");
+                    filePath = path + Path.GetFileName(file.FileName);
+                    string extension = Path.GetExtension(file.FileName);
+                    file.SaveAs(filePath);
 
-                        con.Open();
-                        sqlBulkCopy.WriteToServer(dt);
-                        con.Close();
+                    string conString = string.Empty;
+
+                    switch (extension)
+                    {
+                        case ".xls": //Excel 97-03.
+                            conString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filePath + ";Extended Properties='Excel 8.0;HDR=YES'";
+                            break;
+                        case ".xlsx": //Excel 07 and above.
+                            conString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath + ";Extended Properties='Excel 8.0;HDR=YES'";
+                            break;
+                    }
+
+                    DataTable dt = new DataTable();
+                    conString = string.Format(conString, filePath);
+
+                    using (OleDbConnection connExcel = new OleDbConnection(conString))
+                    {
+                        using (OleDbCommand cmdExcel = new OleDbCommand())
+                        {
+                            using (OleDbDataAdapter odaExcel = new OleDbDataAdapter())
+                            {
+                                cmdExcel.Connection = connExcel;
+
+                                //Get the name of First Sheet.
+                                connExcel.Open();
+                                DataTable dtExcelSchema;
+                                dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                                string sheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
+
+                                connExcel.Close();
+
+                                //Read Data from First Sheet.
+                                connExcel.Open();
+                                cmdExcel.CommandText = "SELECT * From [" + sheetName + "]";
+
+                                //cmdExcel.CommandText = "UPDATE [" + sheetName + "] ";
+
+                                odaExcel.SelectCommand = cmdExcel;
+                                odaExcel.Fill(dt);
+                                connExcel.Close();
+                            }
+                        }
+                    }
+
+                    conString = @"Server=LAPTOP-TUUBPQO5\SQLEXPRESS;Database=SoLienLacDT;Trusted_Connection=True;";
+                    using (SqlConnection con = new SqlConnection(conString))
+                    {
+                        using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+                        {
+                            //Set the database table name.
+                            sqlBulkCopy.DestinationTableName = "dbo.ThoiKhoaBieu";
+
+                            // Map the Excel columns with that of the database table, this is optional but good if you do
+                            // 
+                            sqlBulkCopy.ColumnMappings.Add("MaMon", "MaMon");
+                            sqlBulkCopy.ColumnMappings.Add("MaLM", "MaLM");
+                            sqlBulkCopy.ColumnMappings.Add("TenMon", "TenMon");
+                            sqlBulkCopy.ColumnMappings.Add("MaGV", "MaGV");
+                            sqlBulkCopy.ColumnMappings.Add("Phong", "Phong");
+                            sqlBulkCopy.ColumnMappings.Add("TietBD", "TietBD");
+                            sqlBulkCopy.ColumnMappings.Add("Thu", "Thu");
+                            sqlBulkCopy.ColumnMappings.Add("TH", "TH");
+                            sqlBulkCopy.ColumnMappings.Add("ST", "ST");
+                            sqlBulkCopy.ColumnMappings.Add("ThoiGianBD", "ThoiGianBD");
+                            sqlBulkCopy.ColumnMappings.Add("ThoiGianKT", "ThoiGianKT");
+                            sqlBulkCopy.ColumnMappings.Add("Nam", "Nam");
+                            sqlBulkCopy.ColumnMappings.Add("HocKy", "HocKy");
+
+                            con.Open();
+                            sqlBulkCopy.WriteToServer(dt);
+                            con.Close();
+                        }
                     }
                 }
-            }
-            //if the code reach here means everthing goes fine and excel data is imported into database
-            ViewBag.Success = "File Imported and excel data saved into database";
-            List<DkMon> emplist = db.ThoiKhoaBieus.Select(x => new DkMon
-            {
-                MaMon = x.MaMon,
-                TenMon = x.TenMon,
-                MaGV = x.MaGV,
-                Phong = x.Phong,
-                TietBD = x.TietBD,
-                Thu = x.Thu,
-                TH = x.TH,
-                SoTiet = x.ST,
-                ThoiGianBD = x.ThoiGianBD,
-                ThoiGianKT = x.ThoiGianKT,
-                Nam = x.Nam,
-                HocKy = x.HocKy,
-                MaLop = x.MaLM,
-            }).ToList();
+                //if the code reach here means everthing goes fine and excel data is imported into database
+                ViewBag.Success = "File Imported and excel data saved into database";
+                List<DkMon> emplist = db.ThoiKhoaBieus.Select(x => new DkMon
+                {
+                    MaMon = x.MaMon,
+                    TenMon = x.TenMon,
+                    MaGV = x.MaGV,
+                    Phong = x.Phong,
+                    TietBD = x.TietBD,
+                    Thu = x.Thu,
+                    TH = x.TH,
+                    ST = x.ST,
+                    ThoiGianBD = x.ThoiGianBD,
+                    ThoiGianKT = x.ThoiGianKT,
+                    Nam = x.Nam,
+                    HocKy = x.HocKy,
+                    MaLM = x.MaLM,
+                }).ToList();
 
-            return View(emplist);
+                return View(emplist);
+
+            }
 
         }
+        // check lại thứ tự col và dư liệu data còn sai chỗ
         public void ExportToExcel()
         {
             List<DkMon> emplist = db.ThoiKhoaBieus.Select(x => new DkMon
@@ -634,12 +751,12 @@ namespace DO_AN_Thu_nghiem.Controllers
                 TietBD = x.TietBD,
                 Thu = x.Thu,
                 TH = x.TH,
-                SoTiet = x.ST,
+                ST = x.ST,
                 ThoiGianBD = x.ThoiGianBD,
                 ThoiGianKT = x.ThoiGianKT,
                 Nam = x.Nam,
                 HocKy = x.HocKy,
-                MaLop = x.MaLM,
+                MaLM = x.MaLM,
             }).ToList();
 
             ExcelPackage pck = new ExcelPackage();
@@ -655,18 +772,18 @@ namespace DO_AN_Thu_nghiem.Controllers
             ws.Cells["B3"].Value = string.Format("{0:dd MMMM yyyy} at {0:H: mm tt}", DateTimeOffset.Now);
 
             ws.Cells["A6"].Value = "MaMon";
-            ws.Cells["B6"].Value = "MaLM"; 
+            ws.Cells["B6"].Value = "MaLM";
             ws.Cells["C6"].Value = "TenMon";
-            ws.Cells["D6"].Value = "MaGV"; 
-            ws.Cells["E6"].Value = "Phong"; 
-            ws.Cells["F6"].Value = "TietBD"; 
-            ws.Cells["G6"].Value = "Thu"; 
-            ws.Cells["H6"].Value = "TH"; 
-            ws.Cells["I6"].Value = "ST"; 
-            ws.Cells["J6"].Value = "ThoiGianBD"; 
-            ws.Cells["K6"].Value = "ThoiGianKT"; 
+            ws.Cells["D6"].Value = "MaGV";
+            ws.Cells["E6"].Value = "Phong";
+            ws.Cells["F6"].Value = "TietBD";
+            ws.Cells["G6"].Value = "Thu";
+            ws.Cells["H6"].Value = "TH";
+            ws.Cells["I6"].Value = "ST";
+            ws.Cells["J6"].Value = "ThoiGianBD";
+            ws.Cells["K6"].Value = "ThoiGianKT";
             ws.Cells["L6"].Value = "Nam";
-            ws.Cells["M6"].Value = "HocKy"; 
+            ws.Cells["M6"].Value = "HocKy";
             int rowStart = 7;
             foreach (var item in emplist)
             {   /*
@@ -684,11 +801,11 @@ namespace DO_AN_Thu_nghiem.Controllers
                 ws.Cells[string.Format("E{0}", rowStart)].Value = item.TietBD;
                 ws.Cells[string.Format("F{0}", rowStart)].Value = item.Thu;
                 ws.Cells[string.Format("G{0}", rowStart)].Value = item.TH;
-                ws.Cells[string.Format("H{0}", rowStart)].Value = item.SoTiet;
+                ws.Cells[string.Format("H{0}", rowStart)].Value = item.ST;
                 ws.Cells[string.Format("I{0}", rowStart)].Value = item.ThoiGianBD;
                 ws.Cells[string.Format("J{0}", rowStart)].Value = item.ThoiGianKT;
                 ws.Cells[string.Format("K{0}", rowStart)].Value = item.HocKy;
-                ws.Cells[string.Format("L{0}", rowStart)].Value = item.MaLop;
+                ws.Cells[string.Format("L{0}", rowStart)].Value = item.MaLM;
 
                 rowStart++;
             }
@@ -1202,7 +1319,7 @@ namespace DO_AN_Thu_nghiem.Controllers
                         sqlBulkCopy.ColumnMappings.Add("Malop", "Malop");
 
                         sqlBulkCopy.ColumnMappings.Add("MaGV", "MaGV");
-              
+
 
 
                         con.Open();
@@ -1217,7 +1334,7 @@ namespace DO_AN_Thu_nghiem.Controllers
             {
                 MaGV = x.MaGV,
                 Malop = x.Malop,
-             
+
             }).ToList();
 
             return View(emplist);
@@ -1258,7 +1375,7 @@ namespace DO_AN_Thu_nghiem.Controllers
 
             ws.Cells["A6"].Value = "MaLop";
             ws.Cells["B6"].Value = "MaGV";
-         
+
 
 
             int rowStart = 7;
@@ -1290,33 +1407,33 @@ namespace DO_AN_Thu_nghiem.Controllers
         public ActionResult DSDONDK()
         {
             var ddk = from p in db.Dons
-                          select p;
-            
+                      select p;
+
             return View(ddk);
         }
-     
+       
         public ActionResult DangGiaDonDK(int id)
         {
             var DangGiaDonDK = db.Dons.First(m => m.STT == id);
-           
+
             return View(DangGiaDonDK);
         }
-        
+
         public ActionResult SendEMail()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult SendEMail(gmail model,SoLienLacDienTu.Models.Admin ad)
+        public ActionResult SendEMail(gmail model, SoLienLacDienTu.Models.Admin ad)
         {
             int id = (int)Session["idDon"];
             var idad = Session["TKadmin"];
 
             List<Don> donname = db.Dons.ToList();
             List<Admin> Adminnames = db.Admins.ToList();
-            foreach ( var e in Adminnames)
+            foreach (var e in Adminnames)
             {
-                if( e.TenAdmin == Convert.ToString(idad))
+                if (e.TenAdmin == Convert.ToString(idad))
                 {
 
 
@@ -1335,14 +1452,14 @@ namespace DO_AN_Thu_nghiem.Controllers
                     smtp.Credentials = nc;
                     smtp.Send(mm);
 
-                    
+
 
                     ViewBag.mess = "Gửi mail thành công!";
                     foreach (var d in donname)
                     {
                         if (d.STT == id)
                         {
-                            if(d.TrangThai == 1)
+                            if (d.TrangThai == 1)
                             {
                                 d.TrangThai = 2;
                                 db.SubmitChanges();
@@ -1364,18 +1481,18 @@ namespace DO_AN_Thu_nghiem.Controllers
 
                     return View();
                 }
-                   
+
             }
 
             return View();
         }
-       
+
         [HttpPost]
-     /*   [ValidateAntiForgeryToken]*/
-        [ValidateInput(false)]
+        /*   [ValidateAntiForgeryToken]*/
+
         public ActionResult DuocDuyet(gmail model, SoLienLacDienTu.Models.Admin ad, int idduyet, string tksv)
         {
-           /* int id = (int)Session["idDon"];*/
+            /* int id = (int)Session["idDon"];*/
 
             var idad = Session["TKadmin"];
             List<Don> donname = db.Dons.ToList();
@@ -1387,22 +1504,22 @@ namespace DO_AN_Thu_nghiem.Controllers
                 {
                     e.TrangThai = 1;
                     db.SubmitChanges();
-                  
+
                 }
             }
-            foreach( var sv in svnames)
+            foreach (var sv in svnames)
             {
                 if (sv.MaSV == tksv)
                 {
                     model.To = sv.Email;
                 }
-            }    
+            }
             foreach (var e in Adminnames)
             {
                 if (e.TenAdmin == Convert.ToString(idad))
                 {
-                    
-                    
+
+
                     MailMessage mm = new MailMessage(e.Email, model.To);/*"wolf230599@gmail.com"*/
                     mm.Subject = "Email phản hồi về đơn đăng ký";
                     mm.Body = "Đơn của sinh viên đã được nhà trường duyệt sinh viên đợi nhà trường xếp lịch sẽ thông báo cho sinh viên qua email này";
@@ -1425,17 +1542,25 @@ namespace DO_AN_Thu_nghiem.Controllers
             ViewBag.mess = "Đã duyệt thành công!";
             return RedirectToAction("DSDONDK");
         }
+
         //còn chưa thay đổi được trang thái chỉ gửi email về phía sinh viên được thôi
         [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult KhongDuocDuyet(gmail model, SoLienLacDienTu.Models.Admin ad, int idkoduyet, string tksvkdd, string LiDoKD)
+
+        public ActionResult KhongDuocDuyet(gmail model, SoLienLacDienTu.Models.Admin ad, int? idkoduyet, string tksvkdd, string LiDoKD)
         {
-            /*int id = (int)Session["idDon"];*/
+            int id = (int)Session["idDon"];
             var idad = Session["TKadmin"];
             List<Don> donname = db.Dons.ToList();
             List<Admin> Adminnames = db.Admins.ToList();
             List<SinhVien> svnames = db.SinhViens.ToList();
-         
+            foreach (var e in donname)
+            {
+                if (e.STT == idkoduyet)
+                {
+                    e.TrangThai = 2;
+                    db.SubmitChanges();
+                }
+            }
             foreach (var sv in svnames)
             {
                 if (sv.MaSV == tksvkdd)
@@ -1449,7 +1574,7 @@ namespace DO_AN_Thu_nghiem.Controllers
                 {
 
                     //model.To = Convert.ToString(Session["emailsv"]);
-                    MailMessage mm = new MailMessage(e.Email, model.To); /*"wolf230599@gmail.com"*/
+                    MailMessage mm = new MailMessage(e.Email, model.To);/* "wolf230599@gmail.com"*/
                     mm.Subject = "Email phản hồi về đơn đăng ký";
                     mm.Body = LiDoKD;
                     mm.IsBodyHtml = false;
@@ -1472,14 +1597,7 @@ namespace DO_AN_Thu_nghiem.Controllers
                 }
 
             }
-            foreach (var e in donname)
-            {
-                if (e.STT == idkoduyet)
-                {
-                    e.TrangThai = 2;
-                    db.SubmitChanges();
-                }
-            }
+
             ViewBag.mess = "không duyệt thành công!";
             return RedirectToAction("DSDONDK");
         }

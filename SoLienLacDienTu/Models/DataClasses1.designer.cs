@@ -60,6 +60,9 @@ namespace SoLienLacDienTu.Models
     partial void InsertLichThi(LichThi instance);
     partial void UpdateLichThi(LichThi instance);
     partial void DeleteLichThi(LichThi instance);
+    partial void InsertLoaiDon(LoaiDon instance);
+    partial void UpdateLoaiDon(LoaiDon instance);
+    partial void DeleteLoaiDon(LoaiDon instance);
     partial void InsertLop(Lop instance);
     partial void UpdateLop(Lop instance);
     partial void DeleteLop(Lop instance);
@@ -210,6 +213,14 @@ namespace SoLienLacDienTu.Models
 			get
 			{
 				return this.GetTable<LichThi>();
+			}
+		}
+		
+		public System.Data.Linq.Table<LoaiDon> LoaiDons
+		{
+			get
+			{
+				return this.GetTable<LoaiDon>();
 			}
 		}
 		
@@ -1488,6 +1499,10 @@ namespace SoLienLacDienTu.Models
 		
 		private System.Nullable<int> _TrangThai;
 		
+		private string _IDLD;
+		
+		private EntityRef<LoaiDon> _LoaiDon;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1506,10 +1521,13 @@ namespace SoLienLacDienTu.Models
     partial void OnNgayDangChanged();
     partial void OnTrangThaiChanging(System.Nullable<int> value);
     partial void OnTrangThaiChanged();
+    partial void OnIDLDChanging(string value);
+    partial void OnIDLDChanged();
     #endregion
 		
 		public Don()
 		{
+			this._LoaiDon = default(EntityRef<LoaiDon>);
 			OnCreated();
 		}
 		
@@ -1533,7 +1551,7 @@ namespace SoLienLacDienTu.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaSV", DbType="NVarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaSV", DbType="VarChar(50)")]
 		public string MaSV
 		{
 			get
@@ -1649,6 +1667,64 @@ namespace SoLienLacDienTu.Models
 					this._TrangThai = value;
 					this.SendPropertyChanged("TrangThai");
 					this.OnTrangThaiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLD", DbType="VarChar(10)")]
+		public string IDLD
+		{
+			get
+			{
+				return this._IDLD;
+			}
+			set
+			{
+				if ((this._IDLD != value))
+				{
+					if (this._LoaiDon.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDLDChanging(value);
+					this.SendPropertyChanging();
+					this._IDLD = value;
+					this.SendPropertyChanged("IDLD");
+					this.OnIDLDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LoaiDon_Don", Storage="_LoaiDon", ThisKey="IDLD", OtherKey="IDLD", IsForeignKey=true)]
+		public LoaiDon LoaiDon
+		{
+			get
+			{
+				return this._LoaiDon.Entity;
+			}
+			set
+			{
+				LoaiDon previousValue = this._LoaiDon.Entity;
+				if (((previousValue != value) 
+							|| (this._LoaiDon.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._LoaiDon.Entity = null;
+						previousValue.Dons.Remove(this);
+					}
+					this._LoaiDon.Entity = value;
+					if ((value != null))
+					{
+						value.Dons.Add(this);
+						this._IDLD = value.IDLD;
+					}
+					else
+					{
+						this._IDLD = default(string);
+					}
+					this.SendPropertyChanged("LoaiDon");
 				}
 			}
 		}
@@ -2733,6 +2809,144 @@ namespace SoLienLacDienTu.Models
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LoaiDon")]
+	public partial class LoaiDon : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _STT;
+		
+		private string _IDLD;
+		
+		private string _TenLD;
+		
+		private EntitySet<Don> _Dons;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSTTChanging(int value);
+    partial void OnSTTChanged();
+    partial void OnIDLDChanging(string value);
+    partial void OnIDLDChanged();
+    partial void OnTenLDChanging(string value);
+    partial void OnTenLDChanged();
+    #endregion
+		
+		public LoaiDon()
+		{
+			this._Dons = new EntitySet<Don>(new Action<Don>(this.attach_Dons), new Action<Don>(this.detach_Dons));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STT", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int STT
+		{
+			get
+			{
+				return this._STT;
+			}
+			set
+			{
+				if ((this._STT != value))
+				{
+					this.OnSTTChanging(value);
+					this.SendPropertyChanging();
+					this._STT = value;
+					this.SendPropertyChanged("STT");
+					this.OnSTTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLD", DbType="VarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string IDLD
+		{
+			get
+			{
+				return this._IDLD;
+			}
+			set
+			{
+				if ((this._IDLD != value))
+				{
+					this.OnIDLDChanging(value);
+					this.SendPropertyChanging();
+					this._IDLD = value;
+					this.SendPropertyChanged("IDLD");
+					this.OnIDLDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenLD", DbType="NVarChar(50)")]
+		public string TenLD
+		{
+			get
+			{
+				return this._TenLD;
+			}
+			set
+			{
+				if ((this._TenLD != value))
+				{
+					this.OnTenLDChanging(value);
+					this.SendPropertyChanging();
+					this._TenLD = value;
+					this.SendPropertyChanged("TenLD");
+					this.OnTenLDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LoaiDon_Don", Storage="_Dons", ThisKey="IDLD", OtherKey="IDLD")]
+		public EntitySet<Don> Dons
+		{
+			get
+			{
+				return this._Dons;
+			}
+			set
+			{
+				this._Dons.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Dons(Don entity)
+		{
+			this.SendPropertyChanging();
+			entity.LoaiDon = this;
+		}
+		
+		private void detach_Dons(Don entity)
+		{
+			this.SendPropertyChanging();
+			entity.LoaiDon = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Lop")]
 	public partial class Lop : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2900,6 +3114,8 @@ namespace SoLienLacDienTu.Models
 		
 		private string _MaMon;
 		
+		private System.Nullable<int> _SLSV;
+		
 		private EntitySet<GV_LM> _GV_LMs;
 		
 		private EntitySet<SinhVien_LopMon> _SinhVien_LopMons;
@@ -2918,6 +3134,8 @@ namespace SoLienLacDienTu.Models
     partial void OnLopChanged();
     partial void OnMaMonChanging(string value);
     partial void OnMaMonChanged();
+    partial void OnSLSVChanging(System.Nullable<int> value);
+    partial void OnSLSVChanged();
     #endregion
 		
 		public LopMon()
@@ -2989,6 +3207,26 @@ namespace SoLienLacDienTu.Models
 					this._MaMon = value;
 					this.SendPropertyChanged("MaMon");
 					this.OnMaMonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SLSV", DbType="Int")]
+		public System.Nullable<int> SLSV
+		{
+			get
+			{
+				return this._SLSV;
+			}
+			set
+			{
+				if ((this._SLSV != value))
+				{
+					this.OnSLSVChanging(value);
+					this.SendPropertyChanging();
+					this._SLSV = value;
+					this.SendPropertyChanged("SLSV");
+					this.OnSLSVChanged();
 				}
 			}
 		}
