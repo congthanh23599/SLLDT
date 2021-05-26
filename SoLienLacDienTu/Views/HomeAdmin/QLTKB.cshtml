@@ -18,18 +18,39 @@
 
                         @using (Html.BeginForm("QLTKB", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
-                            @*<input type="file" name="file" />
-                                <br />
-                                <input type="submit" value="Import to database" class="btn btn-primary" />*@
-
-                            <input type="hidden" name="de" id="de" />
+                           
                             <input type="file" name="file" />
                             <br />
-                            <input type="submit" value="Import to database" class="btn btn-primary" onclick="myFunction()" />
+                          @*  <input type="submit" value="Import to database" class="btn btn-primary" onclick="myFunction()" />*@
+                            <input class="btn btn-primary" onclick="myFunction()" id="save_menu_button" type="button" data-toggle="modal" data-target="#myModal" value="Import to database" />
+                            <div class="col-md-auto">
+                                <!-- Trigger the modal with a button -->
+                                <!-- Modal -->
+                                <div class="modal fade" data-backdrop="false" id="myModal" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+
+                                                <h4 class="modal-title">Bạn có muốn ghi đè lên file cũ không ? </h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                            </div>
+                                            <div class="modal-footer">
+                                                 <input type="submit" name="de" id="de" value="Có" class="btn btn-danger" />
+                                                 <input type="submit" name="de" id="de" value="Không" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
                         }
                         <a class="btn btn-primary" href="@Url.Action("ExportToExcel","HomeAdmin")">Export Excel</a>
+
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
@@ -68,10 +89,7 @@
                                                 <td>@item.ThoiGianKT</td>
                                                 <td>@item.Nam</td>
                                                 <td>@item.HocKy</td>
-
-
                                             </tr>
-
                                         }
                                     }
                                 </tbody>
@@ -84,12 +102,15 @@
     </div>
 </div>
 
+
+
 <style>
     .active {
     }
 </style>
+
 <script type="text/javascript">
-    function myFunction() {
+   @* function myFunction() {
         var result = confirm("Bạn có muốn ghi đè lên file cũ không ? ");
         if (result) {
             document.getElementById("de").value = 1;
@@ -101,5 +122,5 @@
         }
 
 
-    }
+    }*@
 </script>

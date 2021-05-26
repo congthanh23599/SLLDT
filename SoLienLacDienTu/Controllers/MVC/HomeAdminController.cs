@@ -511,11 +511,11 @@ namespace DO_AN_Thu_nghiem.Controllers
 
         }
         [HttpPost]
-        public ActionResult QLTKB(HttpPostedFileBase file, int? de)
+        public ActionResult QLTKB(HttpPostedFileBase file, string de)
         {
 
             string filePath = string.Empty;
-            if (Convert.ToInt32(de) == 1)
+            if (de == "Có")
             {
                 db.ThoiKhoaBieus.DeleteAllOnSubmit(db.ThoiKhoaBieus);
                 db.SubmitChanges();
@@ -1548,7 +1548,7 @@ namespace DO_AN_Thu_nghiem.Controllers
 
         public ActionResult KhongDuocDuyet(gmail model, SoLienLacDienTu.Models.Admin ad, int? idkoduyet, string tksvkdd, string LiDoKD)
         {
-            int id = (int)Session["idDon"];
+            //int id = (int)Session["idDon"];
             var idad = Session["TKadmin"];
             List<Don> donname = db.Dons.ToList();
             List<Admin> Adminnames = db.Admins.ToList();
@@ -1600,6 +1600,10 @@ namespace DO_AN_Thu_nghiem.Controllers
 
             ViewBag.mess = "không duyệt thành công!";
             return RedirectToAction("DSDONDK");
+        }
+        public ActionResult test()
+        {
+            return View();
         }
     }
 }

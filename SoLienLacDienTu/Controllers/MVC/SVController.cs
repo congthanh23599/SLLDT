@@ -495,7 +495,13 @@ namespace test.Controllers
                              Phong = t.Phong,
                              Montienquyet = l.MaMonTienQuyet
                          }).ToList();
+            /*foreach (var e in DKmon)
+            {
+                var updatedHobby = e..ToList().Find(p => p.HobbyId == hobby.HobbyId);
+                updatedHobby.IsSelected = hobby.IsSelected;
+            }
 
+            entities.SaveChanges();*/
             var idmm = Session["mamon"];
             return View(DKmon);
         }

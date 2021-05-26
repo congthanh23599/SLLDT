@@ -15,8 +15,6 @@
                     <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable</div>
                     <div class="card-body">
                         <div class="col-12">
-
-
                         </div>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -25,13 +23,9 @@
                                         <th>STT</th>
                                         <th>Mã SV</th>
                                         <th>Tên SV</th>
-
                                         <th>Lí do</th>
-
                                         <th>File đơn</th>
-
                                         <th>Ngày đăng</th>
-
                                         <th>Trạng thái</th>
                                         <th>Đánh giá</th>
                                     </tr>
@@ -42,6 +36,8 @@
                                         <tr>
                                             <td>
                                                 @item.STT
+
+
                                             </td>
                                             <td>@item.MaSV</td>
                                             <td>@item.TenSV</td>
@@ -88,56 +84,75 @@
                                                         <input type="hidden" name="tksv" id="tksv" value="@item.MaSV" />
                                                         <input type="submit" value="Duyệt" class="btn btn-success" />
                                                     }
-
-
                                                     @using (Html.BeginForm("KhongDuocDuyet", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                     {
-
+                                                        @* <input onclick="myFunction()" class="btn btn-danger" value="Không duyệt" type="button" />*@
                                                         <input type="hidden" name="idkoduyet" id="idkoduyet" value="@item.STT" />
                                                         <input type="hidden" name="tksvkdd" id="tksvkdd" value="@item.MaSV" />
+                                                        <input class="btn btn-danger" id="save_menu_button" value="Không duyệt" type="submit" data-toggle="modal" data-target="#myModal" onclick="myFunction()" />
 
+                                                        <div class="col-md-auto">
+                                                            <!-- Trigger the modal with a button -->
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" data-backdrop="false" id="myModal" role="dialog">
+                                                                <div class="modal-dialog">
+                                                                    <!-- Modal content-->
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
 
-                                                        <input  onclick="myFunction()" id="btn" class="btn btn-danger" value="Không duyệt" type="submit"  />
+                                                                            <h4 class="modal-title">Nhập Thông tin không duyệt: </h4>
+                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                        </div>
+                                                                        <div class="modal-body">
 
-                                                        <script>
-                                                            function myFunction() {
-                                                                let person = prompt("Nhập nội dung không duyệt");
-                                                                if (person) {
-                                                                    document.getElementById("LiDoKD").value = person;
-                                                                    return <input type="hidden" name="LiDoKD" id="LiDoKD" value="không thể được" />;
-                                                                }
-                                                                else {
-                                                                    document.getElementById("LiDoKD").value = person;
-
-                                                                }
-
-                                                            }
-
-                                                        </script>
-                                                      
+                                                                            <textarea id="LiDoKD" name="LiDoKD" rows="4" cols="50">
+                                                   
+                                                                             </textarea>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <input type="submit" value="Gửi" class="btn btn-primary" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     }
-
                                                 </div>
                                             </td>
                                         </tr>
                                     }
-                                </tbody>
+                                     </tbody>
                             </table>
                             @Html.ActionLink("Create New", "TaoTTGV")
                         </div>
-
                     </div>
                 </div>
             </div>
         </main>
     </div>
 </div>
+
 <script>
-    function ghi() {
+    function myFunction() {
+@*
+        document.getElementById('idkoduyet').value = document.getElementById('koduyet').value;
+        document.getElementById('tksvkdd').value = document.getElementById('svkdd').value;*@
+        @*$('#idkoduyet').attr('value') = $('#koduyet').attr('value');
+        $('#tksvkdd').attr('value') = $('#svkdd').attr('value');*@
+      @*  $('#koduyet').attr('value');*@
+@*
+        if (typeof (Storage) !== 'undefined') {
+            // Khởi tạo sesionStorage
+            sessionStorage.setItem('idkoduyet', idkd);
+            // get sessionStorage
+            sessionStorage.getItem('idkoduyet');
+            // lấy ra số lượng session đã lưu trữ
+            sessionStorage.length;
+            alert(sessionStorage.getItem('idkoduyet'));
 
-        KhongDuocDuyet(),
+        } else {
+            alert('Trình duyệt của bạn không hỗ trợ!');
+        }*@
     }
-
 </script>
-
 
