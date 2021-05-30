@@ -197,6 +197,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\DuyetDonHomeAdmin.cs" />
+    <Compile Include="Helper\KhongDuyetDonHomeAdmin.cs" />
     <Compile Include="Models\DataClasses1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

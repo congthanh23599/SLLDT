@@ -32,6 +32,11 @@ namespace test.Controllers
         [HttpGet]
         public ActionResult XemTKB()
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
             List<LopMon> LopMonnames = db.LopMons.ToList();
             List<SinhVien_LopMon> SV_LopMonnames = db.SinhVien_LopMons.ToList();
@@ -63,6 +68,11 @@ namespace test.Controllers
         [HttpPost]
         public ActionResult XemTKB(int idhk)
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             if (idhk != null)
             {
                 Session["hkid"] = idhk;
@@ -195,9 +205,29 @@ namespace test.Controllers
         //        return View("TKBTuanSV");
         //    }
         //}
+        public ActionResult DangXuat()
+        {
+            var tkdangxuat = Convert.ToString(Session["idsv"]);
+            if(string.IsNullOrWhiteSpace(tkdangxuat))
+            {
+
+                return RedirectToAction("DangNhap");
+            }
+            else
+            {
+                Session["idsv"] = "";
+
+                return RedirectToAction("DangNhap");
+            }
+        }
         [HttpGet]
         public ActionResult TKBTuanSV(SoLienLacDienTu.Models.SVXemDiem msssv, SoLienLacDienTu.Models.SinhVien SinhVienModel)
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
             List<LopMon> LopMonnames = db.LopMons.ToList();
             List<MonHoc> MonHocnames = db.MonHocs.ToList();
@@ -285,6 +315,11 @@ namespace test.Controllers
 
         public ActionResult XemDiem(SoLienLacDienTu.Models.SVXemDiem msssv, SoLienLacDienTu.Models.SinhVien SinhVienModel)
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
             List<MonHoc> MonHocnames = db.MonHocs.ToList();
             List<Diem> Diemnames = db.Diems.ToList();
@@ -322,7 +357,11 @@ namespace test.Controllers
 
         public ActionResult XemLichThi(SoLienLacDienTu.Models.SVXemDiem msssv, SoLienLacDienTu.Models.SinhVien SinhVienModel)
         {
-
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
             List<MonHoc> MonHocnames = db.MonHocs.ToList();
             List<LichThi> LichThinames = db.LichThis.ToList();
@@ -348,6 +387,11 @@ namespace test.Controllers
         }
         public ActionResult XemHocPhi(SoLienLacDienTu.Models.SVXemDiem msssv, SoLienLacDienTu.Models.SinhVien SinhVienModel)
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             var idsv = Session["idsv"];
 
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
@@ -395,6 +439,11 @@ namespace test.Controllers
         }
         public ActionResult XemTB(SoLienLacDienTu.Models.SVXemDiem msssv, SoLienLacDienTu.Models.SinhVien SinhVienModel)
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
             List<Lop> Lopnames = db.Lops.ToList();
             List<SV_LOP> SV_lopnames = db.SV_LOPs.ToList();
@@ -461,6 +510,11 @@ namespace test.Controllers
         }
         public ActionResult DKMonHoc()
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
             List<LopMon> LopMonnames = db.LopMons.ToList();
             List<MonHoc> MonHocnames = db.MonHocs.ToList();
@@ -505,8 +559,9 @@ namespace test.Controllers
             var idmm = Session["mamon"];
             return View(DKmon);
         }
-        public List<SV_MON> GetSV_MONs() { List<SV_MON> sv_mon = new List<SV_MON>(); return sv_mon; }
+        /*public List<SV_MON> GetSV_MONs() { List<SV_MON> sv_mon = new List<SV_MON>(); return sv_mon; }
         public List<LopMon> GetLopMons() { List<LopMon> lopmon = new List<LopMon>(); return lopmon; }
+       */
         [HttpPost]
         public ActionResult DKMonHoc(string ids, string montq, string mondachon, FormCollection collection)
         {
@@ -579,7 +634,11 @@ namespace test.Controllers
         [HttpGet]
         public ActionResult tableview()//ids la masv cua webgrid
         {
-
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             var idlm = Session["b"];
             var idsv = Session["idsv"];
             string mmtq = Convert.ToString(Session["montq"]);
@@ -592,8 +651,8 @@ namespace test.Controllers
             List<SV_MON> SV_Monnames = db.SV_MONs.ToList();
             string lmid = (string)Session["b"];
             ViewBag.Message = "Welcome to my demo!";
-            ViewData["svmon"] = GetSV_MONs();
-            ViewData["lopmon"] = GetLopMons();
+            /* ViewData["svmon"] = GetSV_MONs();
+             ViewData["lopmon"] = GetLopMons();*/
             // load danh sách môn học đẫ chọn  bằng idlm
             var DKmon = (
 
@@ -804,8 +863,8 @@ namespace test.Controllers
                         }
                     }
                 }
-               
-               
+
+
 
                 return RedirectToAction("XemTKB");
 
@@ -821,16 +880,30 @@ namespace test.Controllers
         }
         public ActionResult Hotro()
         {
-
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             return View();
         }
 
         public ActionResult DangkyLop()
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             return View();
         }
         public ActionResult DangKyXBD()
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             return View();
         }
         [HttpPost]
@@ -839,7 +912,11 @@ namespace test.Controllers
         public ActionResult DangKyXBD(HttpPostedFileBase file)
         {
 
-
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             try
             {
                 if (file.ContentLength > 0)
@@ -861,6 +938,11 @@ namespace test.Controllers
 
         public ActionResult Uploadfile()
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             return View();
         }
         [HttpPost]
@@ -868,7 +950,11 @@ namespace test.Controllers
         [ValidateInput(false)]
         public ActionResult Uploadfile([Bind(Include = "MaSV, TenSV, LiDo, FileDon,IDLD")] Don dk, HttpPostedFileBase file, string idLD)
         {
-
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             var path = "";
             var filename = "";
             var idsv = Convert.ToString(Session["idsv"]);

@@ -11,7 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Net;
 using System.Net.Mail;
-
+using SoLienLacDienTu.Helper;
 
 namespace DO_AN_Thu_nghiem.Controllers
 {
@@ -22,10 +22,35 @@ namespace DO_AN_Thu_nghiem.Controllers
         // GET: ADMIN/HomeAdmin
         public ActionResult Index()
         {
+            var tkuser = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("Login", "DangNhap");
+            }
             return View();
+        }
+        public ActionResult DangXuat()
+        {
+            var tkdangxuat = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkdangxuat))
+            {
+
+                return RedirectToAction("Login","DangNhap");
+            }
+            else
+            {
+                Session["TKadmin"] = "";
+
+                return RedirectToAction("Login","DangNhap");
+            }
         }
         public ActionResult DanhSachSV()
         {
+            var tkuser = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("Login","DangNhap");
+            }
             //var Sinhvien = from p in db.SinhViens
             //               select p;
             List<SoLienLacDienTu.Models.LamQuenCodeFirst.SinhVien> emplist = db.SinhViens.Select(x => new SoLienLacDienTu.Models.LamQuenCodeFirst.SinhVien
@@ -45,6 +70,11 @@ namespace DO_AN_Thu_nghiem.Controllers
         [HttpPost]
         public ActionResult DanhSachSV(HttpPostedFileBase file)
         {
+            var tkuser = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("Login","DangNhap");
+            }
             string filePath = string.Empty;
             if (file != null)
             {
@@ -145,6 +175,7 @@ namespace DO_AN_Thu_nghiem.Controllers
         }
         public void ExcelToSinhVien()
         {
+           
             List<SoLienLacDienTu.Models.LamQuenCodeFirst.SinhVien> emplist = db.SinhViens.Select(x => new SoLienLacDienTu.Models.LamQuenCodeFirst.SinhVien
             {
                 MaSV = x.MaSV,
@@ -225,6 +256,11 @@ namespace DO_AN_Thu_nghiem.Controllers
         }
         public ActionResult TaoTTSV()
         {
+            var tkuser = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("Login", "DangNhap");
+            }
             return View();
         }
 
@@ -233,7 +269,7 @@ namespace DO_AN_Thu_nghiem.Controllers
         [ValidateInput(false)]
         public ActionResult TaoTTSV([Bind(Include = "MaSV, TenSV, GioiTinh , Diachi, Email , SDT, NgaySinh, Password ")] SinhVien sp)
         {
-
+           
             //var path = "";
             //var filename = "";
             if (ModelState.IsValid)
@@ -248,11 +284,17 @@ namespace DO_AN_Thu_nghiem.Controllers
 
         public SinhVien getMaSV(string id)
         {
+          
             return db.SinhViens.Where(m => m.MaSV == id).FirstOrDefault();
         }
         [HttpGet]
         public ActionResult EditTTSV(string id)
         {
+            var tkuser = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("Login", "DangNhap");
+            }
             var editLNT = db.SinhViens.First(m => m.MaSV == id);
             return View(editLNT);
         }
@@ -262,6 +304,7 @@ namespace DO_AN_Thu_nghiem.Controllers
         [ValidateInput(false)]
         public ActionResult EditTTSV([Bind(Include = "MaSV, TenSV, GioiTinh , Diachi, Email , SDT, NgaySinh, Password ")] SinhVien lSV)
         {
+          
             //var path = "";
             //var filename = "";
             SinhVien temp = getMaSV(lSV.MaSV);
@@ -284,6 +327,11 @@ namespace DO_AN_Thu_nghiem.Controllers
         }
         public ActionResult DanhSachGV()
         {
+            var tkuser = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("Login", "DangNhap");
+            }
             List<SoLienLacDienTu.Models.LamQuenCodeFirst.GiangVien> emplist = db.GiangViens.Select(x => new SoLienLacDienTu.Models.LamQuenCodeFirst.GiangVien
             {
                 MaGV = x.MaGV,
@@ -436,6 +484,11 @@ namespace DO_AN_Thu_nghiem.Controllers
         }
         public ActionResult TaoTTGV()
         {
+            var tkuser = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("Login", "DangNhap");
+            }
             return View();
         }
 
@@ -464,6 +517,11 @@ namespace DO_AN_Thu_nghiem.Controllers
         [HttpGet]
         public ActionResult EditTTGV(string id)
         {
+            var tkuser = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("Login", "DangNhap");
+            }
             var editLNT = db.GiangViens.First(m => m.MaGV == id);
             return View(editLNT);
         }
@@ -490,6 +548,11 @@ namespace DO_AN_Thu_nghiem.Controllers
         }
         public ActionResult QLTKB()
         {
+            var tkuser = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("Login", "DangNhap");
+            }
             List<DkMon> emplist = db.ThoiKhoaBieus.Select(x => new DkMon
             {
                 MaMon = x.MaMon,
@@ -821,6 +884,11 @@ namespace DO_AN_Thu_nghiem.Controllers
 
         public ActionResult QLD()
         {
+            var tkuser = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("Login", "DangNhap");
+            }
             //    List<DiemCTViews> emplist = db.DiemCTs.Select(x => new DiemCTViews
             //    {
             //        MaMon = x.MaMon,
@@ -1038,6 +1106,11 @@ namespace DO_AN_Thu_nghiem.Controllers
         }
         public ActionResult QLLM()
         {
+            var tkuser = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("Login", "DangNhap");
+            }
             List<QLLM> emplist = db.LopMons.Select(x => new QLLM
             {
                 MaLM = x.MaLM,
@@ -1225,6 +1298,11 @@ namespace DO_AN_Thu_nghiem.Controllers
         }
         public ActionResult QLLop()
         {
+            var tkuser = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("Login", "DangNhap");
+            }
             List<SoLienLacDienTu.Models.LamQuenCodeFirst.Lop> emplist = db.Lops.Select(x => new SoLienLacDienTu.Models.LamQuenCodeFirst.Lop
             {
                 Malop = x.Malop,
@@ -1406,6 +1484,11 @@ namespace DO_AN_Thu_nghiem.Controllers
 
         public ActionResult DSDONDK()
         {
+            var tkuser = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("Login", "DangNhap");
+            }
             var ddk = from p in db.Dons
                       select p;
 
@@ -1498,15 +1581,19 @@ namespace DO_AN_Thu_nghiem.Controllers
             List<Don> donname = db.Dons.ToList();
             List<Admin> Adminnames = db.Admins.ToList();
             List<SinhVien> svnames = db.SinhViens.ToList();
-            foreach (var e in donname)
-            {
-                if (e.STT == idduyet)
-                {
-                    e.TrangThai = 1;
-                    db.SubmitChanges();
-
-                }
-            }
+            var duyetdon = (from s in donname
+                            where s.STT == idduyet
+                          select new DuyetDonHomeAdmin
+                          {
+                              STT = s.STT,
+                              MaSV = s.MaSV,
+                              TenSV = s.TenSV,
+                              LiDo = s.LiDo,
+                              TrangThai = s.TrangThai,
+                          }).ToList();
+            donname[1].TrangThai = 1;
+            db.SubmitChanges();
+          
             foreach (var sv in svnames)
             {
                 if (sv.MaSV == tksv)
@@ -1546,20 +1633,33 @@ namespace DO_AN_Thu_nghiem.Controllers
         //còn chưa thay đổi được trang thái chỉ gửi email về phía sinh viên được thôi
         [HttpPost]
 
-        public ActionResult KhongDuocDuyet(gmail model, SoLienLacDienTu.Models.Admin ad, int? idkoduyet, string tksvkdd, string LiDoKD)
+        public ActionResult KhongDuocDuyet(gmail model, SoLienLacDienTu.Models.Admin ad, int? idkoduyet, string tksvkdd, string LiDoKD, int? duyet)
         {
             //int id = (int)Session["idDon"];
             var idad = Session["TKadmin"];
             List<Don> donname = db.Dons.ToList();
             List<Admin> Adminnames = db.Admins.ToList();
             List<SinhVien> svnames = db.SinhViens.ToList();
+            var khongduyetdon = (from s in donname
+                            where s.STT == duyet
+                            select new KhongDuyetDonHomeAdmin
+                            {
+                                STT = s.STT,
+                                MaSV = s.MaSV,
+                                TenSV = s.TenSV,
+                                LiDo = s.LiDo,
+                                TrangThai =2,
+                            }).ToList();
             foreach (var e in donname)
             {
-                if (e.STT == idkoduyet)
+                if(e.STT==idkoduyet)
                 {
                     e.TrangThai = 2;
                     db.SubmitChanges();
                 }
+             
+
+
             }
             foreach (var sv in svnames)
             {

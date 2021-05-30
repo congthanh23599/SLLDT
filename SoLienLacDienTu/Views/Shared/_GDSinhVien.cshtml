@@ -19,11 +19,14 @@
     <!-- Vendor CSS Files -->
     <link href="~/content/assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="~/content/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
     <link href="~/content/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="~/content/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="~/content/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="~/content/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Template Main CSS File -->
     <link href="~/content/assets/css/style.css" rel="stylesheet">
 
@@ -74,7 +77,36 @@
                         </ul>
                     </li>
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                    <li><a class="nav-link scrollto" href="/sv/dangnhap">Đăng xuất</a></li>
+                    @if (string.IsNullOrWhiteSpace(Convert.ToString(Session["idsv"])))
+                    {
+                        <li><a class="nav-link scrollto" href="/sv/DangXuat">Đang nhập</a></li>
+
+                    }
+                    else
+                    {
+                        <li class="dropdown">
+                            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                @Session["idsv"]
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" style="color:black">
+                                <a class="dropdown-item" href="#">Settings</a>
+                                <a class="dropdown-item" href="#">Activity Log</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("DangXuat", "SV")">Logout</a>
+                            </div>
+                            <style>
+                                .dropdown-menu{
+                                    background-color:#3c3b3b
+                                }
+                               
+                                .dropdown-item:hover {
+                                    opacity:0.9;
+                                    color: black;
+                                }
+                            </style>
+                        </li>
+                       
+                    }
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
@@ -138,16 +170,16 @@
                     </div> -->
 
                     <div class=" container col-11">
-                        
+
                         @RenderBody()
 
                         <!-- <div class="portfolio-description">
-        <h2>This is an example of portfolio detail</h2>
-        <p>
-            Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur
-            dignissimos. Sequi nulla at esse enim cum deserunt eius.
-        </p>
-    </div> -->
+                            <h2>This is an example of portfolio detail</h2>
+                            <p>
+                                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur
+                                dignissimos. Sequi nulla at esse enim cum deserunt eius.
+                            </p>
+                        </div> -->
                     </div>
 
                 </div>
