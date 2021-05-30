@@ -807,6 +807,8 @@
     <Content Include="Views\HomeAdmin\DangGiaDonDK.cshtml" />
     <Content Include="Views\HomeAdmin\SendEMail.cshtml" />
     <Content Include="Views\HomeAdmin\test.cshtml" />
+    <Content Include="Views\SV\DKm.cshtml" />
+    <Content Include="Views\SV\testView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

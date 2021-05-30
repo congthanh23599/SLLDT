@@ -5128,6 +5128,8 @@ namespace SoLienLacDienTu.Models
 		
 		private System.Nullable<int> _TongNgayHoc;
 		
+		private bool _IsSelected;
+		
 		private EntityRef<MonHoc> _MonHoc;
 		
     #region Extensibility Method Definitions
@@ -5164,6 +5166,8 @@ namespace SoLienLacDienTu.Models
     partial void OnHocKyChanged();
     partial void OnTongNgayHocChanging(System.Nullable<int> value);
     partial void OnTongNgayHocChanged();
+    partial void OnIsSelectedChanging(bool value);
+    partial void OnIsSelectedChanged();
     #endregion
 		
 		public ThoiKhoaBieu()
@@ -5472,6 +5476,26 @@ namespace SoLienLacDienTu.Models
 					this._TongNgayHoc = value;
 					this.SendPropertyChanged("TongNgayHoc");
 					this.OnTongNgayHocChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSelected", DbType="Bit NOT NULL")]
+		public bool IsSelected
+		{
+			get
+			{
+				return this._IsSelected;
+			}
+			set
+			{
+				if ((this._IsSelected != value))
+				{
+					this.OnIsSelectedChanging(value);
+					this.SendPropertyChanging();
+					this._IsSelected = value;
+					this.SendPropertyChanged("IsSelected");
+					this.OnIsSelectedChanged();
 				}
 			}
 		}

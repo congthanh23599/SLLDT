@@ -270,6 +270,7 @@
       <Column Name="Nam" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="HocKy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="TongNgayHoc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsSelected" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="MonHoc_ThoiKhoaBieu" Member="MonHoc" ThisKey="MaMon" OtherKey="MaMon" Type="MonHoc" IsForeignKey="true" />
     </Type>
   </Table>

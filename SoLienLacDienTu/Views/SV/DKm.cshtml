@@ -1,0 +1,243 @@
+﻿@model List<SoLienLacDienTu.Models.ThoiKhoaBieu>
+
+
+@{
+    ViewBag.Title = "DKm";
+    Layout = "~/Views/Shared/_GDSinhVien.cshtml";
+}
+
+
+<div class="portfolio-info">
+    <h3>Đăng ký môn học</h3>
+    <main>
+        <div class="container-fluid">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        @using (Html.BeginForm("Save", "SV", FormMethod.Post))
+                        {
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Chọn</th>
+                                        <th scope="col">MaMon</th>
+                                        <th scope="col">MaLM</th>
+                                        <th scope="col">Tên Môn</th>
+                                        <th scope="col">Mã GV</th>
+                                        <th scope="col">Phòng</th>
+                                        <th scope="col">Tiết Bắt đầu</th>
+                                        <th scope="col">Thứ</th>
+                                        <th scope="col">TH</th>
+                                        <th scope="col">ST</th>
+                                        <th scope="col">Thời gian bd</th>
+                                        <th scope="col">Thời gian kt</th>
+                                        <th scope="col">Năm </th>
+                                        <th scope="col">Học kỳ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.Count(); i++)
+                                    {
+                                        if (Model[i].IsSelected == true)
+                                        {
+                                            <tr class="table-active">
+                                                <td>
+                                                    @Html.CheckBoxFor(m => m[i].IsSelected)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].MaMon)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].MaLM)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].TenMon)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].MaGV)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].Phong)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].TietBD)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].Thu)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].TH)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].ST)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].ThoiGianBD)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].ThoiGianKT)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].Nam)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].HocKy)
+                                                </td>
+
+                                                <td>
+                                                    @Html.HiddenFor(m => m[i].IDTKB)
+                                                </td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.CheckBoxFor(m => m[i].IsSelected)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].MaMon)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].MaLM)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].TenMon)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].MaGV)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].Phong)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].TietBD)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].Thu)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].TH)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].ST)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].ThoiGianBD)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].ThoiGianKT)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].Nam)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].HocKy)
+                                                </td>
+
+                                                <td>
+                                                    @Html.HiddenFor(m => m[i].IDTKB)
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+                                </tbody>
+                            </table>
+                            <br />
+                            <input type="submit" value="Save" />
+                        }
+
+                        @using (Html.BeginForm("LuuData", "SV", FormMethod.Post))
+                        {
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Chọn</th>
+                                        <th scope="col">MaMon</th>
+                                        <th scope="col">MaLM</th>
+                                        <th scope="col">Tên Môn</th>
+                                        <th scope="col">Mã GV</th>
+                                        <th scope="col">Phòng</th>
+                                        <th scope="col">Tiết Bắt đầu</th>
+                                        <th scope="col">Thứ</th>
+                                        <th scope="col">TH</th>
+                                        <th scope="col">ST</th>
+                                        <th scope="col">Thời gian bd</th>
+                                        <th scope="col">Thời gian kt</th>
+                                        <th scope="col">Năm </th>
+                                        <th scope="col">Học kỳ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.Count(); i++)
+                                    {
+                                        if (Model[i].IsSelected == true)
+                                        {
+                                            <tr >
+                                                <td>
+                                                    @Html.CheckBoxFor(m => m[i].IsSelected)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].MaMon)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].MaLM)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].TenMon)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].MaGV)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].Phong)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].TietBD)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].Thu)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].TH)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].ST)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].ThoiGianBD)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].ThoiGianKT)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].Nam)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(m => m[i].HocKy)
+                                                </td>
+
+                                                <td>
+                                                    @Html.HiddenFor(m => m[i].IDTKB)
+                                                </td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                            <br />
+                            <input type="submit" value="Lưu Database" />
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</div>

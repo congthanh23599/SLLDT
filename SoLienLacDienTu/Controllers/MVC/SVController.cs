@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using SoLienLacDienTu.Models;
 using System.IO;
 
+
 namespace test.Controllers
 {
     public class SVController : Controller
@@ -208,7 +209,7 @@ namespace test.Controllers
         public ActionResult DangXuat()
         {
             var tkdangxuat = Convert.ToString(Session["idsv"]);
-            if(string.IsNullOrWhiteSpace(tkdangxuat))
+            if (string.IsNullOrWhiteSpace(tkdangxuat))
             {
 
                 return RedirectToAction("DangNhap");
@@ -990,6 +991,66 @@ namespace test.Controllers
             }
             ViewBag.Message = "File upload succ!!";
             return View(dk);
+        }
+
+        public ActionResult DKm()
+        {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
+            return View(db.ThoiKhoaBieus.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult save(List<ThoiKhoaBieu> hobbies)
+        {
+
+            foreach (ThoiKhoaBieu tkb in hobbies)
+            {
+                ThoiKhoaBieu updatetkb = db.ThoiKhoaBieus.ToList().Find(p => p.IDTKB == tkb.IDTKB);
+                updatetkb.IsSelected = tkb.IsSelected;
+            }
+            // vậy thằng này thì sao nó lấy đc cái lúc check á
+
+            /*  db.s();*/
+            db.SubmitChanges();
+
+            return RedirectToAction("DKm");
+        }
+        [HttpPost]
+        public ActionResult LuuData(List<ThoiKhoaBieu> tabletkb, SinhVien_LopMon sp,IEnumerable<SinhVien_LopMon> sp1)
+        {
+            var idsv = Session["idsv"]; // luu session idsv luc log in vao
+
+            if (ModelState.IsValid)
+            {
+                foreach (ThoiKhoaBieu tkb in tabletkb)
+                {
+                    //for (int i = 0; i < tabletkb.Count(); i++)
+                    //{
+                    //    SinhVien_LopMon i = new SinhVien_LopMon();
+                    //}
+                    ThoiKhoaBieu updatetkb = db.ThoiKhoaBieus.ToList().Find(p => p.IDTKB == tkb.IDTKB);// 
+                    updatetkb.IsSelected = tkb.IsSelected;
+
+                    sp.MaSV= Convert.ToString(Session["idsv"]);
+                    sp.MaLM = updatetkb.MaLM;
+              
+                    
+
+
+                }
+            }
+            db.SinhVien_LopMons.InsertAllOnSubmit(sp1); 
+            db.SubmitChanges(); //
+
+            ///khi vòng lặp kết thúc nó nhận th cuối cùng
+
+            /*  db.SaveChanges();*/
+
+            return RedirectToAction("DKm");
         }
     }
 }
