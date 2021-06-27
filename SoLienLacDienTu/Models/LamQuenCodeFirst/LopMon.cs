@@ -28,8 +28,6 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
         [StringLength(10)]
         public string MaMon { get; set; }
 
-        public int? SLSV { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GV_LM> GV_LM { get; set; }
 

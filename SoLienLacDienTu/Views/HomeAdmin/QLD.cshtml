@@ -16,7 +16,7 @@
 
                     <div class="card-body">
 
-                     
+
                         <div class="col-12">
                             <div class="col-2" style="float:left">
                                 @using (Html.BeginForm("QLD", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -27,12 +27,14 @@
                                 }
                             </div>
                             <div class="col-2" style="float:left;padding-top:2.3%">
-                                <a class="btn btn-primary" href="@Url.Action("ExcelToDiemCT","HomeAdmin")">Export Excel</a>
+                                @*   <a class="btn btn-primary" href="@Url.Action("ExcelToDiemCT","HomeAdmin")">Export Excel</a>*@
+                                @*<input class="btn btn-primary" type="button" id="btnExport" value="Export" onclick="Export()" />*@
 
+                                <input type="button" onclick="generate()" value="Export To PDF" />
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="simple_table" @* id="dataTable" *@="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>MaMon</th>
@@ -72,3 +74,97 @@
         </main>
     </div>
 </div>
+@*<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript">
+        function Export() {
+            html2canvas(document.getElementById('dataTable'), {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    doc.setFont("Time New Roman");
+                    doc.setFontType("italic");
+                    doc.text(20, 40, 'Cộng hòa xã hội việt nam.');
+
+                    pdfMake.createPdf(docDefinition).download("Table.pdf");
+                }
+            });
+        }
+    </script>*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+<script type="text/javascript">
+    function generate() {
+        var doc = new jsPDF(); //gọi tham chiếu kiểu xuất PDF
+
+        var tempVarToCheckPageHeight = 0;
+        var pageHeight = 0;
+        pageHeight = doc.internal.pageSize.height;
+
+        margins = {
+            top: 150,
+            bottom: 60,
+            left: 40,
+            right: 40,
+            width: 600
+        };
+
+        var y = 20;
+        doc.setLineWidth(2);
+
+@*
+         doc.text(20, 20, 'This is the default font.');
+
+         doc.setFont("courier");
+         doc.setFontType("normal");
+         doc.text(20, 30, 'This is courier normal.');
+
+         doc.setFont("Time New Roman");
+         doc.setFontType("italic");
+         doc.text(20, 40, 'Cộng hòa xã hội việt nam.');
+
+         doc.setFont("helvetica");
+         doc.setFontType("bold");
+         doc.text(20, 50, 'This is helvetica bold.');
+*@
+         doc.setFont("courier");
+         doc.setFontType("bolditalic");
+         doc.text(20, 60, 'This is courier bolditalic.');
+
+        doc.autoTable({
+            html: '#simple_table',
+            startY: 70,
+            theme: 'grid',
+            columnStyles: {
+                0: {
+                    cellWidth: 20,
+                },
+                1: {
+                    cellWidth: 20,
+                },
+                2: {
+                    cellWidth: 20,
+                },
+                  3: {
+                    cellWidth: 20,
+                },
+                    4: {
+                    cellWidth: 20,
+                },
+                      5: {
+                    cellWidth: 20,
+                },
+            },
+            styles: {
+                minCellHeight: 40
+            }
+        })
+        doc.save('BangDiem.pdf');
+    }
+</script>

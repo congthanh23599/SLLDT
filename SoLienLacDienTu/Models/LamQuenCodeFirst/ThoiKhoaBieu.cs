@@ -16,9 +16,6 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
         [StringLength(10)]
         public string MaMon { get; set; }
 
-        [StringLength(10)]
-        public string MaLM { get; set; }
-
         [Required]
         [StringLength(50)]
         public string TenMon { get; set; }
@@ -42,12 +39,13 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
         [Column(TypeName = "date")]
         public DateTime? ThoiGianBD { get; set; }
 
+        public int HocKy { get; set; }
+
+        [StringLength(10)]
+        public string MaLM { get; set; }
+
         [Column(TypeName = "date")]
         public DateTime? ThoiGianKT { get; set; }
-
-        public int? Nam { get; set; }
-
-        public int HocKy { get; set; }
 
         public int? TongNgayHoc { get; set; }
 

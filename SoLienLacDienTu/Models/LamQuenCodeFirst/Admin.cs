@@ -19,11 +19,5 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
 
         [StringLength(50)]
         public string TenAdmin { get; set; }
-
-        [StringLength(50)]
-        public string Email { get; set; }
-
-        [StringLength(50)]
-        public string PasswordEmail { get; set; }
     }
 }

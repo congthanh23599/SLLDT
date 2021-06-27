@@ -8,6 +8,8 @@ using System.Data;
 using System.Data.SqlClient;
 using SoLienLacDienTu.Models;
 using System.IO;
+using SoLienLacDienTu.Helper;
+
 
 namespace test.Controllers
 {
@@ -32,6 +34,11 @@ namespace test.Controllers
         [HttpGet]
         public ActionResult XemTKB()
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
             List<LopMon> LopMonnames = db.LopMons.ToList();
             List<SinhVien_LopMon> SV_LopMonnames = db.SinhVien_LopMons.ToList();
@@ -63,6 +70,11 @@ namespace test.Controllers
         [HttpPost]
         public ActionResult XemTKB(int idhk)
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             if (idhk != null)
             {
                 Session["hkid"] = idhk;
@@ -195,9 +207,29 @@ namespace test.Controllers
         //        return View("TKBTuanSV");
         //    }
         //}
+        public ActionResult DangXuat()
+        {
+            var tkdangxuat = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkdangxuat))
+            {
+
+                return RedirectToAction("DangNhap");
+            }
+            else
+            {
+                Session["idsv"] = "";
+
+                return RedirectToAction("DangNhap");
+            }
+        }
         [HttpGet]
         public ActionResult TKBTuanSV(SoLienLacDienTu.Models.SVXemDiem msssv, SoLienLacDienTu.Models.SinhVien SinhVienModel)
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
             List<LopMon> LopMonnames = db.LopMons.ToList();
             List<MonHoc> MonHocnames = db.MonHocs.ToList();
@@ -285,6 +317,11 @@ namespace test.Controllers
 
         public ActionResult XemDiem(SoLienLacDienTu.Models.SVXemDiem msssv, SoLienLacDienTu.Models.SinhVien SinhVienModel)
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
             List<MonHoc> MonHocnames = db.MonHocs.ToList();
             List<Diem> Diemnames = db.Diems.ToList();
@@ -322,7 +359,11 @@ namespace test.Controllers
 
         public ActionResult XemLichThi(SoLienLacDienTu.Models.SVXemDiem msssv, SoLienLacDienTu.Models.SinhVien SinhVienModel)
         {
-
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
             List<MonHoc> MonHocnames = db.MonHocs.ToList();
             List<LichThi> LichThinames = db.LichThis.ToList();
@@ -348,6 +389,11 @@ namespace test.Controllers
         }
         public ActionResult XemHocPhi(SoLienLacDienTu.Models.SVXemDiem msssv, SoLienLacDienTu.Models.SinhVien SinhVienModel)
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             var idsv = Session["idsv"];
 
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
@@ -365,6 +411,31 @@ namespace test.Controllers
             //cmd.Parameters.Add(new SqlParameter("@MaSV", msv)));
             //var thp = db.Tonghp(msv);
             //string tp = Convert.ToString(thp);
+            int hocky = 0;
+            foreach (var i in TKNnames)
+            {
+                foreach (var g in sv_lopmonnames)
+                    if (g.MaSV == Convert.ToString(idsv))
+                    {
+                        for (int j = 0; j < TKNnames.Count(); j++)
+                        {
+                            if (g.MaLM == i.MaLM)
+                            {
+                                if (i.Nam == DateTime.Now.Year)
+                                {
+                                    if (i.HocKy > hocky)
+                                    {
+                                        hocky = i.HocKy;
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+
+            }
+
             var XemHocPhi = (from s in SinhViennames
                              where s.MaSV == Convert.ToString(idsv)
                              join sv in sv_lopmonnames on s.MaSV equals sv.MaSV
@@ -374,7 +445,7 @@ namespace test.Controllers
                              join t in TKNnames on m.MaMon equals t.MaMon
                              //join svl in sv_lopnames on s.MaSV equals svl.MaSV //
                              join svn in sv_nganhnames on s.MaSV equals svn.MaSV
-                             where t.HocKy == 2 /*&& t.ThoiGianHoc == t.ThoiGianHoc *//*&& db.Tonghp(s.MaSV) == "1711061034"*/
+                             where t.HocKy == hocky  /*&& t.ThoiGianHoc == t.ThoiGianHoc *//*&& db.Tonghp(s.MaSV) == "1711061034"*/
                              select new SVXemDiem
                              {
 
@@ -395,9 +466,15 @@ namespace test.Controllers
         }
         public ActionResult XemTB(SoLienLacDienTu.Models.SVXemDiem msssv, SoLienLacDienTu.Models.SinhVien SinhVienModel)
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
             List<Lop> Lopnames = db.Lops.ToList();
             List<SV_LOP> SV_lopnames = db.SV_LOPs.ToList();
+            List<GV_Mon> gV_Mons = db.GV_Mons.ToList();
 
             List<LopMon> LopMonnames = db.LopMons.ToList();
             List<SinhVien_LopMon> SV_LopMonnames = db.SinhVien_LopMons.ToList();
@@ -406,54 +483,57 @@ namespace test.Controllers
 
             var idsv = Session["idsv"];
 
-            //var XemTB = (from s in SinhViennames
-            //             where s.MaSV == Convert.ToString(idsv)
+            // Danh sách các LM sinh viên thuộc
+            var DSSVLM = (from svlm in SV_LopMonnames
+                          where svlm.MaSV == Convert.ToString(idsv)
+                          select new SinhVien_LopMon { MaLM = svlm.MaLM, MaSV = svlm.MaSV }).ToList();
 
-            //             join m in SV_lopnames on s.MaSV equals m.MaSV
-            //             join x in Lopnames on m.Malop equals x.Malop
-            //             join n in SV_LopMonnames on s.MaSV equals n.MaSV
-            //             join y in LopMonnames on n.MaLM equals y.MaLM
-            //             join h in TBnames on m.Malop equals h.MaLop
-            //             join t in GVnames on h.MaGV equals t.MaGV
-            //             //where h.MaLop ==m.Malop && m.MaSV== s.MaSV
-            //             select new SVXemDiem
-            //             {
-            //                 SinhVienDetail = s,
-            //                 SV_lopDetail = m,
-            //                 LopDetail = x,
-            //                 SV_LopMonDetail = n,
-            //                 LopMonDetail = y,
-            //                 TBdetail = h,
-            //                 GVDetail = t,
+            // Danh sách các Lop sinh viên thuộc
+            var DSSVL = (from svl in SV_lopnames
+                          where svl.MaSV == Convert.ToString(idsv)
+                          select new SV_LOP {Malop = svl.Malop, MaSV = svl.MaSV,  }).ToList();
 
+            // thong bao
+            var xemdstb = (from svlm in DSSVLM
+                           from svl in DSSVL
+                           from ktlm in TBnames 
+                           where ktlm.MaLM == svlm.MaLM || ktlm.MaLop == svl.Malop || ktlm.MaSV == svlm.MaSV
+                           select new ThongBao {
+                            MaGV = ktlm.MaGV,
+                            MaLop = ktlm.MaLop,
+                            MaLM = ktlm.MaLM,
+                            NgayDang = ktlm.NgayDang,
+                            NoiDung = ktlm.NoiDung
+                           }
+                           ).ToList();
 
+            var XemTB = (from a in GVnames 
+                         where a.MaGV== "17896750"
+                         join m in TBnames on  a.MaGV equals m.MaGV  
+                         join n in SV_lopnames on m.MaSV equals n.MaSV
+                         join o in SV_LopMonnames on m.MaSV equals o.MaSV
+                         where m.MaSV ==Convert.ToString(idsv)  || m.MaLop ==n.Malop || m.MaLM== o.MaLM
 
-            //             }).ToList();
-            var XemTB = (from s in SinhViennames
-                         where s.MaSV == Convert.ToString(idsv)
-
-                         join m in SV_lopnames on s.MaSV equals m.MaSV
-                         join x in Lopnames on m.Malop equals x.Malop
-                         join n in SV_LopMonnames on s.MaSV equals n.MaSV
-                         join y in LopMonnames on n.MaLM equals y.MaLM
-                         join h in TBnames on m.Malop equals h.MaLop
-                         join t in GVnames on h.MaGV equals t.MaGV
-                         where h.MaLop == x.Malop || h.MaLM == y.MaLM
                          select new SVXemDiem
                          {
-                             SinhVienDetail = s,
-                             SV_lopDetail = m,
-                             LopDetail = x,
-                             SV_LopMonDetail = n,
-                             LopMonDetail = y,
-                             TBdetail = h,
-                             GVDetail = t,
+                             //SV_lopDetail = m,
+                             ////LopDetail = x,
+                             //SV_LopMonDetail = n,
+                             //LopMonDetail = y,
+                             TBdetail = m,
+                             GVDetail = a,
 
 
 
                          }).ToList();
-            return View(XemTB);
+            foreach (var i in XemTB)
+            {
+                int a = 0;
+            }
+            return View(xemdstb);
 
+
+          
         }
         public LopMon GetMon(string malm)
         {
@@ -461,6 +541,11 @@ namespace test.Controllers
         }
         public ActionResult DKMonHoc()
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
             List<LopMon> LopMonnames = db.LopMons.ToList();
             List<MonHoc> MonHocnames = db.MonHocs.ToList();
@@ -484,23 +569,30 @@ namespace test.Controllers
                              MaMon = l.MaMon,
                              TenMon = l.TenMon,
                              SoTinChi = l.Sotinchi,
-                             SoTiet = t.ST,
+                             ST = t.ST,
                              HocKy = t.HocKy,
                              TH = t.TH,
                              ThoiGianBD = t.ThoiGianBD,
                              ThoiGianKT = t.ThoiGianKT,
                              TietBD = t.TietBD,
                              MaGV = t.MaGV,
-                             MaLop = m.MaLM,
+                             MaLM = m.MaLM,
                              Phong = t.Phong,
                              Montienquyet = l.MaMonTienQuyet
                          }).ToList();
+            /*foreach (var e in DKmon)
+            {
+                var updatedHobby = e..ToList().Find(p => p.HobbyId == hobby.HobbyId);
+                updatedHobby.IsSelected = hobby.IsSelected;
+            }
 
+            entities.SaveChanges();*/
             var idmm = Session["mamon"];
             return View(DKmon);
         }
-        public List<SV_MON> GetSV_MONs() { List<SV_MON> sv_mon = new List<SV_MON>(); return sv_mon; }
+        /*public List<SV_MON> GetSV_MONs() { List<SV_MON> sv_mon = new List<SV_MON>(); return sv_mon; }
         public List<LopMon> GetLopMons() { List<LopMon> lopmon = new List<LopMon>(); return lopmon; }
+       */
         [HttpPost]
         public ActionResult DKMonHoc(string ids, string montq, string mondachon, FormCollection collection)
         {
@@ -573,7 +665,11 @@ namespace test.Controllers
         [HttpGet]
         public ActionResult tableview()//ids la masv cua webgrid
         {
-
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             var idlm = Session["b"];
             var idsv = Session["idsv"];
             string mmtq = Convert.ToString(Session["montq"]);
@@ -586,8 +682,8 @@ namespace test.Controllers
             List<SV_MON> SV_Monnames = db.SV_MONs.ToList();
             string lmid = (string)Session["b"];
             ViewBag.Message = "Welcome to my demo!";
-            ViewData["svmon"] = GetSV_MONs();
-            ViewData["lopmon"] = GetLopMons();
+            /* ViewData["svmon"] = GetSV_MONs();
+             ViewData["lopmon"] = GetLopMons();*/
             // load danh sách môn học đẫ chọn  bằng idlm
             var DKmon = (
 
@@ -604,14 +700,14 @@ namespace test.Controllers
                              MaMon = lm.MaMon,
                              TenMon = tkb.TenMon,
                              SoTinChi = mh.Sotinchi,
-                             SoTiet = tkb.ST,
+                             ST = tkb.ST,
                              HocKy = tkb.HocKy,
                              TH = tkb.TH,
                              ThoiGianBD = tkb.ThoiGianBD,
                              ThoiGianKT = tkb.ThoiGianKT,
                              TietBD = tkb.TietBD,
                              MaGV = tkb.MaGV,
-                             MaLop = tkb.MaLM,
+                             MaLM = tkb.MaLM,
                              Phong = tkb.Phong,
                              Montienquyet = svm.MaMonTienquyet
                          }).ToList();
@@ -730,14 +826,14 @@ namespace test.Controllers
                          MaMon = l.MaMon,
                          TenMon = l.TenMon,
                          SoTinChi = l.Sotinchi,
-                         SoTiet = t.ST,
+                         ST = t.ST,
                          HocKy = t.HocKy,
                          TH = t.TH,
                          ThoiGianBD = t.ThoiGianBD,
                          ThoiGianKT = t.ThoiGianKT,
                          TietBD = t.TietBD,
                          MaGV = t.MaGV,
-                         MaLop = m.MaLM,
+                         MaLM = m.MaLM,
                          Phong = t.Phong,
                          Montienquyet = l.MaMonTienQuyet
                      }).ToList();
@@ -798,8 +894,8 @@ namespace test.Controllers
                         }
                     }
                 }
-               
-               
+
+
 
                 return RedirectToAction("XemTKB");
 
@@ -815,21 +911,30 @@ namespace test.Controllers
         }
         public ActionResult Hotro()
         {
-            List<SoLienLacDienTu.Models.LamQuenCodeFirst.LoaiDon> emplist = db.LoaiDons.Select(x => new SoLienLacDienTu.Models.LamQuenCodeFirst.LoaiDon
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
             {
-                IDLD = x.IDLD,
-                TenLoai = x.TenLoai,
-              
-            }).ToList();
-            return View(emplist);
+                return RedirectToAction("DangNhap");
+            }
+            return View();
         }
 
         public ActionResult DangkyLop()
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             return View();
         }
         public ActionResult DangKyXBD()
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             return View();
         }
         [HttpPost]
@@ -838,7 +943,11 @@ namespace test.Controllers
         public ActionResult DangKyXBD(HttpPostedFileBase file)
         {
 
-
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             try
             {
                 if (file.ContentLength > 0)
@@ -860,20 +969,27 @@ namespace test.Controllers
 
         public ActionResult Uploadfile()
         {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Uploadfile([Bind(Include = "MaSV, TenSV, LiDo, FileDon,IDLD")] Don dk, HttpPostedFileBase file,string idLD)
+        public ActionResult Uploadfile([Bind(Include = "MaSV, TenSV, LiDo, FileDon,IDLD")] Don dk, HttpPostedFileBase file, string idLD)
         {
-            
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
             var path = "";
             var filename = "";
             var idsv = Convert.ToString(Session["idsv"]);
             List<SinhVien> SinhViennames = db.SinhViens.ToList();
-            List<LoaiDon> loaidons = db.LoaiDons.ToList();
-
             var getTenSV = (from s in SinhViennames
                             where s.MaSV == Convert.ToString(idsv)
                             select s.TenSV).FirstOrDefault();
@@ -881,7 +997,6 @@ namespace test.Controllers
             dk.MaSV = idsv;
             dk.TenSV = getTenSV;
             dk.NgayDang = DateTime.Now;
-         
             dk.TrangThai = 0;
 
             if (ModelState.IsValid)
@@ -906,6 +1021,237 @@ namespace test.Controllers
             }
             ViewBag.Message = "File upload succ!!";
             return View(dk);
+        }
+
+        public ActionResult DangKyMon()
+        {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
+            return View(db.ThoiKhoaBieus.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult save(List<ThoiKhoaBieu> hobbies)
+        {
+            var idsv = Session["idsv"]; // luu session idsv luc log in vao
+
+            List<SV_MON> svmnames = db.SV_MONs.ToList();
+            //DS cần thiết để kiểm tra SV DA HOC
+            List<SinhVien_LopMon> svlmnames = db.SinhVien_LopMons.ToList();
+            List<MonHoc> mhnames = db.MonHocs.ToList();
+
+            List<ThoiKhoaBieu> tkbnames = db.ThoiKhoaBieus.ToList();
+
+
+            var ktDahoc = (from svm in svmnames
+                           where svm.MaSV == Convert.ToString(idsv) && svm.DaHoc == true
+                           join tkb in tkbnames on svm.MaMon equals tkb.MaMon
+                           join mh in mhnames on tkb.MaMon equals mh.MaMon
+                           select new ThoiKhoaBieu
+                           {
+                               MaMon = mh.MaMonTienQuyet
+                           }).ToList();
+
+
+            foreach (ThoiKhoaBieu tkb in hobbies)
+            {
+                ThoiKhoaBieu updatetkb = db.ThoiKhoaBieus.ToList().Find(p => p.IDTKB == tkb.IDTKB);
+
+                updatetkb.IsSelected = tkb.IsSelected;
+                if (updatetkb.IsSelected != null)
+                {
+                    foreach (SV_MON svm in svmnames)
+                    {
+                        if (svm.MaSV == Convert.ToString(idsv) && svm.MaMon == updatetkb.MaMon && svm.DaHoc == false)
+                        {
+                            svm.DaHoc = true;// ông bấm save bên dkm phải ko thì nó nèvlin ^^
+                        }
+                        else
+                        {
+                            ViewBag.test = "dang ky that bai";
+                        }
+                    }
+                }
+                else
+                {
+                    ViewBag.test = "ko ton tai";
+                }
+                /*
+                Session["Luuchecked"] = updatetkb.MaLM;*/
+            }
+            // vậy thằng này thì sao nó lấy đc cái lúc check á
+
+            //code này để làm j z ông
+            // nó tìm thằng nào có idTKB á r nó lấy cái isselected gán á
+            //nó lưu vô đâu z ông lưu tkb á chỉ có lưu cái check thôi cái  isselected á
+            /*  db.s();*/
+            db.SubmitChanges();
+
+            return RedirectToAction("DangKyMon");
+        }
+        [HttpPost]
+        public ActionResult LuuData(List<ThoiKhoaBieu> hobbies, SinhVien_LopMon sp, IEnumerable<SinhVien_LopMon> sp1)
+        {
+            var idsv = Session["idsv"]; // luu session idsv luc log in vao
+            List<SV_MON> svmnames = db.SV_MONs.ToList();
+            List<MonHoc> mhnames = db.MonHocs.ToList();
+            List<ThoiKhoaBieu> tkbnames = db.ThoiKhoaBieus.ToList();
+            List<LopMon> lopMons = db.LopMons.ToList();
+
+            List<SinhVien_LopMon> svlmnames = db.SinhVien_LopMons.ToList();
+            List<MonHoc> monHocs = db.MonHocs.ToList();
+            var ktDahoc = (from svm in svmnames
+                           where svm.MaSV == Convert.ToString(idsv) && svm.DaHoc == true
+                           join tkb in tkbnames on svm.MaMon equals tkb.MaMon
+                           join mh in mhnames on tkb.MaMon equals mh.MaMon
+                           select new ThoiKhoaBieu
+                           {
+                               MaMon = mh.MaMon
+
+                           }).ToList();
+            var updatesvlm = db.SinhVien_LopMons.ToList();
+            int dem = 0;
+            int tinchi = 0;
+
+
+
+            updatesvlm = (from tkbdh in tkbnames
+                          where tkbdh.IsSelected == true// ra dc thằng đã chọn
+                          join svmdahoc in svmnames on tkbdh.MaMon equals svmdahoc.MaMon//đổ ra bảng svm với nhưng oj dc chọn
+                          where svmdahoc.MaSV == Convert.ToString(idsv)//lấy ra oj có masv là mã user
+                          join svmtq in svmnames on svmdahoc.MaMonTienquyet equals svmtq.MaMon//lấy ra môn tq với mamontq là mamon da chon
+                          where svmtq.DaHoc == true//lấy ra với đahoc=true
+                          select new SinhVien_LopMon
+                          {
+                              MaSV = Convert.ToString(idsv),
+                              MaLM = tkbdh.MaLM
+
+                          }).ToList();
+            foreach (var a in updatesvlm)//lấy ra các đối tượng đủ DK
+            {
+                foreach (var b in lopMons)
+                {
+                    if (a.MaLM == b.MaLM)//so sánh với lớp môn để giống qua lớp môn
+                    {
+
+                        for (int i = 0; i < monHocs.Count(); i++)
+                        {
+                            if (monHocs[i].MaMon == b.MaMon)
+                            {
+                                tinchi = tinchi + Convert.ToInt32(monHocs[i].Sotinchi);
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            foreach (var trung1 in updatesvlm)
+            {
+
+                ViewBag.trung1 = trung1.MaLM;
+
+            }
+
+            var test = (from tr in svlmnames
+                        select new trungmon
+                        {
+                            MaLM = tr.MaLM
+                        }).ToList();
+            foreach (var trung2 in test)
+            {
+
+                ViewBag.trung2 = trung2.MaLM;
+
+            }
+
+            foreach (var item in updatesvlm)
+            {
+                for (int i = 0; i < svlmnames.Count(); i++)
+                {
+                    if (svlmnames[i].MaLM == item.MaLM)
+                    {
+                        dem = dem + 1;
+                    }
+                }
+            }
+
+            Session["dem"] = dem;
+            if (dem > 64)
+            {
+                Session["loi"] = "123";
+            }
+            else if (tinchi > 3)
+            {
+                Session["tinchi"] = "vuotqua";
+            }
+            else if (ViewBag.trung1 == ViewBag.trung2)
+            {
+                Session["trung"] = "trung mon";
+            }
+            else
+            {
+                db.SinhVien_LopMons.InsertAllOnSubmit(updatesvlm);
+                db.SubmitChanges();
+                Session["success"] = "ok";
+            }
+
+            return RedirectToAction("testlist");
+        }
+
+
+        // Draft:code test ko dùng đến
+        public ActionResult testlist()
+        {
+            var tkuser = Convert.ToString(Session["idsv"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("DangNhap");
+            }
+
+            return View(db.ThoiKhoaBieus.ToList());
+        }
+        [HttpPost]
+        public ActionResult testsave(List<ThoiKhoaBieu> hobbies)
+        {
+            var idsv = Session["idsv"]; // luu session idsv luc log in vao
+
+            //DS cần thiết để kiểm tra SV DA HOC
+            List<SinhVien_LopMon> svlmnames = db.SinhVien_LopMons.ToList();
+
+            List<ThoiKhoaBieu> tkbnames = db.ThoiKhoaBieus.ToList();
+
+
+
+
+            foreach (ThoiKhoaBieu tkb in hobbies)
+            {
+                ThoiKhoaBieu updatetkb = db.ThoiKhoaBieus.ToList().Find(p => p.IDTKB == tkb.IDTKB);
+
+                updatetkb.IsSelected = tkb.IsSelected;
+                /*  if (updatetkb.IsSelected)
+                  {*/
+
+                /*   }
+                   else
+                   {
+                       Session["test"] = "ko ton tai";
+                   }*/
+                /*
+                Session["Luuchecked"] = updatetkb.MaLM;*/
+            }
+            // vậy thằng này thì sao nó lấy đc cái lúc check á
+
+            //code này để làm j z ông
+            // nó tìm thằng nào có idTKB á r nó lấy cái isselected gán á
+            //nó lưu vô đâu z ông lưu tkb á chỉ có lưu cái check thôi cái  isselected á
+            /*  db.s();*/
+            db.SubmitChanges();
+
+            return RedirectToAction("testlist");
         }
     }
 }

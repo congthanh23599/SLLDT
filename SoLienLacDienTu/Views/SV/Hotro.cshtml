@@ -1,23 +1,10 @@
-﻿@model IEnumerable<SoLienLacDienTu.Models.LamQuenCodeFirst.LoaiDon>
+﻿
 @{
     ViewBag.Title = "Hotro";
     Layout = "~/Views/Shared/_GDSinhVien.cshtml";
 }
 
 <h2>Hotro</h2>
-<div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-        Tutorials
-        <span class="caret"></span>
-    </button>
-    @foreach (var i in Model)
-    {
-        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">@i.TenLoai</a></li>
-        </ul>
-    }
-
-</div>
 
 
 @using (Html.BeginForm())
@@ -29,17 +16,16 @@
         <hr />
 
         <div class="form-group">
-
+         
             <div class="col-md-10">
                 @Html.DropDownList("Sortby", new SelectListItem[] { new SelectListItem() { Text = "Đăng Ký Lớp", Value = "Uploadfile" }, new SelectListItem() { Text = "Đăng Ký Xin Bảng Điểm", Value = "DangKyXBD" } },
                 new
                      {
                     @onchange = "CallChangefunc(this.value)"
                 })
-               
+                
             </div>
         </div>
-
 
     </div>
 
@@ -48,8 +34,8 @@
 }
 
 
-<script>
-    function CallChangefunc(val) {
-        window.location.href = "/SV/" + val;
-    }
-</script>
+    <script>
+        function CallChangefunc(val) {
+            window.location.href = "/SV/" + val;
+        }
+    </script>

@@ -99,7 +99,7 @@ namespace SoLienLacDienTu.Models
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SoLienLacDTConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SoLienLacDTConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -1503,8 +1503,6 @@ namespace SoLienLacDienTu.Models
 		
 		private EntityRef<LoaiDon> _LoaiDon;
 		
-		private EntityRef<SinhVien> _SinhVien;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1530,7 +1528,6 @@ namespace SoLienLacDienTu.Models
 		public Don()
 		{
 			this._LoaiDon = default(EntityRef<LoaiDon>);
-			this._SinhVien = default(EntityRef<SinhVien>);
 			OnCreated();
 		}
 		
@@ -1565,10 +1562,6 @@ namespace SoLienLacDienTu.Models
 			{
 				if ((this._MaSV != value))
 				{
-					if (this._SinhVien.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnMaSVChanging(value);
 					this.SendPropertyChanging();
 					this._MaSV = value;
@@ -1678,7 +1671,7 @@ namespace SoLienLacDienTu.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLD", DbType="Char(10)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLD", DbType="VarChar(10)")]
 		public string IDLD
 		{
 			get
@@ -1732,40 +1725,6 @@ namespace SoLienLacDienTu.Models
 						this._IDLD = default(string);
 					}
 					this.SendPropertyChanged("LoaiDon");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SinhVien_Don", Storage="_SinhVien", ThisKey="MaSV", OtherKey="MaSV", IsForeignKey=true)]
-		public SinhVien SinhVien
-		{
-			get
-			{
-				return this._SinhVien.Entity;
-			}
-			set
-			{
-				SinhVien previousValue = this._SinhVien.Entity;
-				if (((previousValue != value) 
-							|| (this._SinhVien.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SinhVien.Entity = null;
-						previousValue.Dons.Remove(this);
-					}
-					this._SinhVien.Entity = value;
-					if ((value != null))
-					{
-						value.Dons.Add(this);
-						this._MaSV = value.MaSV;
-					}
-					else
-					{
-						this._MaSV = default(string);
-					}
-					this.SendPropertyChanged("SinhVien");
 				}
 			}
 		}
@@ -2860,7 +2819,7 @@ namespace SoLienLacDienTu.Models
 		
 		private string _IDLD;
 		
-		private string _TenLoai;
+		private string _TenLD;
 		
 		private EntitySet<Don> _Dons;
 		
@@ -2872,8 +2831,8 @@ namespace SoLienLacDienTu.Models
     partial void OnSTTChanged();
     partial void OnIDLDChanging(string value);
     partial void OnIDLDChanged();
-    partial void OnTenLoaiChanging(string value);
-    partial void OnTenLoaiChanged();
+    partial void OnTenLDChanging(string value);
+    partial void OnTenLDChanged();
     #endregion
 		
 		public LoaiDon()
@@ -2902,7 +2861,7 @@ namespace SoLienLacDienTu.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLD", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDLD", DbType="VarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string IDLD
 		{
 			get
@@ -2922,22 +2881,22 @@ namespace SoLienLacDienTu.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenLoai", DbType="NVarChar(50)")]
-		public string TenLoai
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenLD", DbType="NVarChar(50)")]
+		public string TenLD
 		{
 			get
 			{
-				return this._TenLoai;
+				return this._TenLD;
 			}
 			set
 			{
-				if ((this._TenLoai != value))
+				if ((this._TenLD != value))
 				{
-					this.OnTenLoaiChanging(value);
+					this.OnTenLDChanging(value);
 					this.SendPropertyChanging();
-					this._TenLoai = value;
-					this.SendPropertyChanged("TenLoai");
-					this.OnTenLoaiChanged();
+					this._TenLD = value;
+					this.SendPropertyChanged("TenLD");
+					this.OnTenLDChanged();
 				}
 			}
 		}
@@ -3426,8 +3385,6 @@ namespace SoLienLacDienTu.Models
 		
 		private EntitySet<SV_MON> _SV_MONs;
 		
-		private EntitySet<ThoiKhoaBieu> _ThoiKhoaBieus;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3449,7 +3406,6 @@ namespace SoLienLacDienTu.Models
 			this._LichThis = new EntitySet<LichThi>(new Action<LichThi>(this.attach_LichThis), new Action<LichThi>(this.detach_LichThis));
 			this._LopMons = new EntitySet<LopMon>(new Action<LopMon>(this.attach_LopMons), new Action<LopMon>(this.detach_LopMons));
 			this._SV_MONs = new EntitySet<SV_MON>(new Action<SV_MON>(this.attach_SV_MONs), new Action<SV_MON>(this.detach_SV_MONs));
-			this._ThoiKhoaBieus = new EntitySet<ThoiKhoaBieu>(new Action<ThoiKhoaBieu>(this.attach_ThoiKhoaBieus), new Action<ThoiKhoaBieu>(this.detach_ThoiKhoaBieus));
 			OnCreated();
 		}
 		
@@ -3614,19 +3570,6 @@ namespace SoLienLacDienTu.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MonHoc_ThoiKhoaBieu", Storage="_ThoiKhoaBieus", ThisKey="MaMon", OtherKey="MaMon")]
-		public EntitySet<ThoiKhoaBieu> ThoiKhoaBieus
-		{
-			get
-			{
-				return this._ThoiKhoaBieus;
-			}
-			set
-			{
-				this._ThoiKhoaBieus.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3690,18 +3633,6 @@ namespace SoLienLacDienTu.Models
 		}
 		
 		private void detach_SV_MONs(SV_MON entity)
-		{
-			this.SendPropertyChanging();
-			entity.MonHoc = null;
-		}
-		
-		private void attach_ThoiKhoaBieus(ThoiKhoaBieu entity)
-		{
-			this.SendPropertyChanging();
-			entity.MonHoc = this;
-		}
-		
-		private void detach_ThoiKhoaBieus(ThoiKhoaBieu entity)
 		{
 			this.SendPropertyChanging();
 			entity.MonHoc = null;
@@ -4053,9 +3984,9 @@ namespace SoLienLacDienTu.Models
 		
 		private string _MaPH;
 		
-		private EntitySet<Diem> _Diems;
+		private System.Nullable<int> _TotNghiep;
 		
-		private EntitySet<Don> _Dons;
+		private EntitySet<Diem> _Diems;
 		
 		private EntitySet<LichThi> _LichThis;
 		
@@ -4089,12 +4020,13 @@ namespace SoLienLacDienTu.Models
     partial void OnPasswordChanged();
     partial void OnMaPHChanging(string value);
     partial void OnMaPHChanged();
+    partial void OnTotNghiepChanging(System.Nullable<int> value);
+    partial void OnTotNghiepChanged();
     #endregion
 		
 		public SinhVien()
 		{
 			this._Diems = new EntitySet<Diem>(new Action<Diem>(this.attach_Diems), new Action<Diem>(this.detach_Diems));
-			this._Dons = new EntitySet<Don>(new Action<Don>(this.attach_Dons), new Action<Don>(this.detach_Dons));
 			this._LichThis = new EntitySet<LichThi>(new Action<LichThi>(this.attach_LichThis), new Action<LichThi>(this.detach_LichThis));
 			this._SinhVien_LopMons = new EntitySet<SinhVien_LopMon>(new Action<SinhVien_LopMon>(this.attach_SinhVien_LopMons), new Action<SinhVien_LopMon>(this.detach_SinhVien_LopMons));
 			this._SV_LOPs = new EntitySet<SV_LOP>(new Action<SV_LOP>(this.attach_SV_LOPs), new Action<SV_LOP>(this.detach_SV_LOPs));
@@ -4287,6 +4219,26 @@ namespace SoLienLacDienTu.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotNghiep", DbType="Int")]
+		public System.Nullable<int> TotNghiep
+		{
+			get
+			{
+				return this._TotNghiep;
+			}
+			set
+			{
+				if ((this._TotNghiep != value))
+				{
+					this.OnTotNghiepChanging(value);
+					this.SendPropertyChanging();
+					this._TotNghiep = value;
+					this.SendPropertyChanged("TotNghiep");
+					this.OnTotNghiepChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SinhVien_Diem", Storage="_Diems", ThisKey="MaSV", OtherKey="MaSV")]
 		public EntitySet<Diem> Diems
 		{
@@ -4297,19 +4249,6 @@ namespace SoLienLacDienTu.Models
 			set
 			{
 				this._Diems.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SinhVien_Don", Storage="_Dons", ThisKey="MaSV", OtherKey="MaSV")]
-		public EntitySet<Don> Dons
-		{
-			get
-			{
-				return this._Dons;
-			}
-			set
-			{
-				this._Dons.Assign(value);
 			}
 		}
 		
@@ -4426,18 +4365,6 @@ namespace SoLienLacDienTu.Models
 		}
 		
 		private void detach_Diems(Diem entity)
-		{
-			this.SendPropertyChanging();
-			entity.SinhVien = null;
-		}
-		
-		private void attach_Dons(Don entity)
-		{
-			this.SendPropertyChanging();
-			entity.SinhVien = this;
-		}
-		
-		private void detach_Dons(Don entity)
 		{
 			this.SendPropertyChanging();
 			entity.SinhVien = null;
@@ -5197,7 +5124,7 @@ namespace SoLienLacDienTu.Models
 		
 		private System.Nullable<int> _TongNgayHoc;
 		
-		private EntityRef<MonHoc> _MonHoc;
+		private bool _IsSelected;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -5233,11 +5160,12 @@ namespace SoLienLacDienTu.Models
     partial void OnHocKyChanged();
     partial void OnTongNgayHocChanging(System.Nullable<int> value);
     partial void OnTongNgayHocChanged();
+    partial void OnIsSelectedChanging(bool value);
+    partial void OnIsSelectedChanged();
     #endregion
 		
 		public ThoiKhoaBieu()
 		{
-			this._MonHoc = default(EntityRef<MonHoc>);
 			OnCreated();
 		}
 		
@@ -5272,10 +5200,6 @@ namespace SoLienLacDienTu.Models
 			{
 				if ((this._MaMon != value))
 				{
-					if (this._MonHoc.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnMaMonChanging(value);
 					this.SendPropertyChanging();
 					this._MaMon = value;
@@ -5545,36 +5469,22 @@ namespace SoLienLacDienTu.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MonHoc_ThoiKhoaBieu", Storage="_MonHoc", ThisKey="MaMon", OtherKey="MaMon", IsForeignKey=true)]
-		public MonHoc MonHoc
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSelected", DbType="Bit NOT NULL")]
+		public bool IsSelected
 		{
 			get
 			{
-				return this._MonHoc.Entity;
+				return this._IsSelected;
 			}
 			set
 			{
-				MonHoc previousValue = this._MonHoc.Entity;
-				if (((previousValue != value) 
-							|| (this._MonHoc.HasLoadedOrAssignedValue == false)))
+				if ((this._IsSelected != value))
 				{
+					this.OnIsSelectedChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._MonHoc.Entity = null;
-						previousValue.ThoiKhoaBieus.Remove(this);
-					}
-					this._MonHoc.Entity = value;
-					if ((value != null))
-					{
-						value.ThoiKhoaBieus.Add(this);
-						this._MaMon = value.MaMon;
-					}
-					else
-					{
-						this._MaMon = default(string);
-					}
-					this.SendPropertyChanged("MonHoc");
+					this._IsSelected = value;
+					this.SendPropertyChanged("IsSelected");
+					this.OnIsSelectedChanged();
 				}
 			}
 		}

@@ -1,77 +1,97 @@
-﻿@model IEnumerable<SoLienLacDienTu.Models.LamQuenCodeFirst.SinhVien>
+﻿@model IEnumerable<SoLienLacDienTu.Models.SinhVien>
 
-    @{
-        ViewBag.Title = "DanhSachSV";
-        Layout = "~/Views/Shared/Admin.cshtml";
-    }
 
-    <h2>DanhSachSV</h2>
-    <div id="layoutSidenav" style="margin-left:0">
-        <div id="layoutSidenav_content">
-            <main>
-                <div class="container-fluid">
-                    <div class="card mb-4">
-                        <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable</div>
-                        <div class="card-body">
-                            <div class="col-12">
-                                <div class="col-2" style="float:left">
-                                    @using (Html.BeginForm("DanhSachSV", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                    {
-                                        <input type="file" name="file" />
-                                        <br />
-                                        <input type="submit" value="Import to database" class="btn btn-primary" />
-                                    }
-                                </div>
-                                <div class="col-2" style="float:left;padding-top:2.3%">
+@{
+    ViewBag.Title = "DanhSachSV";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+
+<h2>DanhSachSV</h2>
+<div id="layoutSidenav" style="margin-left:0">
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable</div>
+                    <div class="card-body">
+                        <div class="col-12">
+                            <div class="col-2" style="float:left">
+                                @using (Html.BeginForm("DanhSachSV", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    <input type="file" name="file" />
+                                    <br />
+                                    <input type="submit" value="Import to database" class="btn btn-primary" />
+                                }
+                            </div>
+                            @* <div class="col-2" style="float:left;padding-top:2.3%">
                                     <a class="btn btn-primary" href="@Url.Action("ExcelToSinhVien","HomeAdmin")">Export Excel</a>
 
-                                </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Mã SV</th>
-                                            <th>Tên SV</th>
-                                            <th>Giới Tính</th>
-                                            <th>Địa Chỉ</th>
-                                            <th>Email</th>
-                                            <th>SDT</th>
-                                            <th>Ngày Sinh</th>
-                                            <th>Password</th>
-                                            <th> </th>
+                                </div>*@
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Mã SV</th>
+                                        <th>Tên SV</th>
+                                        <th>Giới Tính</th>
+                                        <th>Địa Chỉ</th>
+                                        <th>Email</th>
+                                        <th>SDT</th>
+                                        <th>Ngày Sinh</th>
+                                        <th>Password</th>
+                                        <th> </th>
+                                        <th></th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @item.MaSV
-                                                </td>
-                                                <td>@item.TenSV</td>
-                                                <td>@item.GioiTinh</td>
-                                                @*<td width="150px"><img style="width:150px; height:150px" src="@Url.Content("~/Content/ImagesProduct/"+item.IMGPath)" /></td>*@
-                                                <td>@item.Diachi</td>
-                                                <td>@item.Email</td>
-                                                <td>@item.SDT</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>
+                                            @item.MaSV
+                                        </td>
+                                        <td>@item.TenSV</td>
+                                        <td>@item.GioiTinh</td>
+                                        @*<td width="150px"><img style="width:150px; height:150px" src="@Url.Content("~/Content/ImagesProduct/"+item.IMGPath)" /></td>*@
+                                        <td>@item.Diachi</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.SDT</td>
 
-                                                <td>@item.NgaySinh.Value.ToString("dd/MM/yyyy")</td>
-                                                <td>@item.Password</td>
+                                        <td>@item.NgaySinh.Value.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.Password</td>
+                                        <td style="color: #ff6a00">
+                                            <p>
+                                                @{
 
-                                                <td>@Html.ActionLink("Edit", "EditTTSV", new { id = item.MaSV })</td>
+                                                    if (item.TotNghiep == 0)
+                                                    {
+                                                        <div class="alert alert-danger" role="alert">
+                                                            chưa tốt nghiệp
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="alert alert-primary" role="alert">
+                                                            tốt nghiệp
+                                                        </div>
+                                                    }
+                                                }
+                                            </p>
+                                        </td>
+                                        <td>@Html.ActionLink("Edit", "EditTTSV", new { id = item.MaSV })</td>
 
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                                @Html.ActionLink("Create New", "TaoTTSV")
-                            </div>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            @Html.ActionLink("Create New", "TaoTTSV")
                         </div>
                     </div>
                 </div>
-            </main>
-        </div>
+            </div>
+        </main>
     </div>
+</div>
 

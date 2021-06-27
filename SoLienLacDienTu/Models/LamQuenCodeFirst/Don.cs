@@ -12,7 +12,7 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
         [Key]
         public int STT { get; set; }
 
-        [StringLength(50)]
+        [StringLength(20)]
         public string MaSV { get; set; }
 
         [StringLength(50)]
@@ -26,13 +26,6 @@ namespace SoLienLacDienTu.Models.LamQuenCodeFirst
 
         public DateTime? NgayDang { get; set; }
 
-        public int? TrangThai { get; set; }
-
-        [StringLength(10)]
-        public string IDLD { get; set; }
-
-        public virtual LoaiDon LoaiDon { get; set; }
-
-        public virtual SinhVien SinhVien { get; set; }
+        public bool? TrangThai { get; set; }
     }
 }

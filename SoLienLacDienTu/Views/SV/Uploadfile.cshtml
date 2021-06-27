@@ -1,14 +1,16 @@
 ﻿@model SoLienLacDienTu.Models.Don
-@{ 
+
+@{
     ViewBag.Title = "Uploadfile";
     Layout = "~/Views/Shared/_GDSinhVien.cshtml";
 }
 
+<h2>Đăng ký đơn</h2>
 
 @using (Html.BeginForm("Uploadfile", "SV", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <div class="form-horizontal">
+    <div class="form-horizontal" style="padding-bottom:10px">
         <div class="form-group">
             <div class="col-lg-1" style="float:left">
                 <h5 style="color:#353535">Loại đơn: </h5>
@@ -17,13 +19,12 @@
                 <select @*name="dropdown" id="myID"*@ id="ddlselect" onChange="ddlselect();" class="DropDown" name="idLD" @*multiple*@ style="width:300px;">
                     <option onchange="validateSelectBox(this)" value="DKL">Xin đăng ký lớp </option>
                     <option onchange="validateSelectBox(this)" value="XBD">Xin bảng điểm </option>
-
                 </select>
             </div>
         </div>
     </div>
     <div class="form-horizontal">
-        <br />
+        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*<div class="form-group">
@@ -43,21 +44,21 @@
             </div>*@
 
         <div class="form-group">
-            <h5 style="color:#353535">Lí do:</h5>
+            @Html.LabelFor(model => model.LiDo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LiDo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LiDo, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <h5 style="color:#353535">Đính kèm:  </h5>
-            <div class="col-md-10">
+        <!--<div class="form-group">
+            @Html.LabelFor(model => model.FileDon, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">-->
                 @*@Html.EditorFor(model => model.FileDon, new { htmlAttributes = new { @class = "form-control" } })*@
-                <input type="file" value="FileDon" id="file" name="file" accept=".docx, .png, .pdf,.jpeg, .bmp" style="width:100%" />
+                <!--<input type="file" value="FileDon" id="file" name="file" accept=".docx, .png, .pdf,.jpeg, .bmp" style="width:100%" />
                 @Html.ValidationMessageFor(model => model.FileDon, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>-->
 
         @*<div class="form-group">
                 @Html.LabelFor(model => model.NgayDang, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -77,63 +78,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Gửi " class="btn btn-default" />
+                <input type="submit" value="Gửi" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "XemTKB")
+    @Html.ActionLink("Back to List", "Index")
 </div>
-
-<script type="text/javascript">
-
-        $(document).ready(function () {
-            var dropDownVal = $("#dropdown").val();
-            $("#myID").change(function (evt) {
-                alert($("#myID").val());   //Display Selected ID
-
-                alert($("#myID option:selected").text()) //Display Selected Text
-                  @ViewData["d"] = ($("#myID"));
-                $.ajax({
-                    url: SVController / TKBTuanSV,
-                    type: "POST",
-                    data: {
-                        dropdown: dropDownVal
-                    }
-                });
-            });
-
-        });
-</script>
-<script language="javascript">
-    function validateSelectBox(obj) {
-        var options = obj.children;
-        var html = '';
-        for (var i = 0; i < options.length; i++) {
-            if (options[i].selected) {
-                html += '<li>' + options[i].value + '</li>';
-                k = options[i].value;
-
-            }
-        }
-
-        document.getElementById('result').innerHTML = html;
-    }
-    window.onload = function () {
-        var selectBox = document.getElementById("selectBox");
-        selectBox.addEventListener('change', changeFunc);
-        function changeFunc() {
-            alert(this.value);
-        }
-    }
-</script>
-<script>
-    $(document).ready(function () {
-        $("#ddlselect").on('change', function () {
-            $(".data").hide();
-            $("#" + $(this).val()).fadeIn(700);
-        }).change();
-    })
-</script>

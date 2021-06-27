@@ -162,6 +162,30 @@ namespace test.Controllers
             List<SinhVien_Nganh> sv_nganhnames = db.SinhVien_Nganhs.ToList();
 
             string msv = Convert.ToString(Session["idsv"]);
+            int hocky = 0;
+            foreach (var i in TKNnames)
+            {
+                foreach (var g in sv_lopmonnames)
+                    if (g.MaSV == Convert.ToString(idsv))
+                    {
+                        for (int j = 0; j < TKNnames.Count(); j++)
+                        {
+                            if (g.MaLM == i.MaLM)
+                            {
+                                if (i.Nam == DateTime.Now.Year)
+                                {
+                                    if (i.HocKy > hocky)
+                                    {
+                                        hocky = i.HocKy;
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+
+            }
             var XemHocPhi = (from s in SinhViennames
                              where s.MaSV == Convert.ToString(idsv)
                              join sv in sv_lopmonnames on s.MaSV equals sv.MaSV
@@ -172,7 +196,7 @@ namespace test.Controllers
                              //join svl in sv_lopnames on s.MaSV equals svl.MaSV //
                              join svn in sv_nganhnames on s.MaSV equals svn.MaSV
 
-                             where t.HocKy == 2/* && t.ThoiGianHoc == t.ThoiGianHoc *//*&& db.Tonghp(s.MaSV) == "1711061034"*/
+                             where t.HocKy == hocky/* && t.ThoiGianHoc == t.ThoiGianHoc *//*&& db.Tonghp(s.MaSV) == "1711061034"*/
 
 
 
