@@ -35,13 +35,13 @@ namespace DO_AN_Thu_nghiem.Controllers
             if (string.IsNullOrWhiteSpace(tkdangxuat))
             {
 
-                return RedirectToAction("Login","DangNhap");
+                return RedirectToAction("Login", "DangNhap");
             }
             else
             {
                 Session["TKadmin"] = "";
 
-                return RedirectToAction("Login","DangNhap");
+                return RedirectToAction("Login", "DangNhap");
             }
         }
         public ActionResult DanhSachSV()
@@ -49,23 +49,12 @@ namespace DO_AN_Thu_nghiem.Controllers
             var tkuser = Convert.ToString(Session["TKadmin"]);
             if (string.IsNullOrWhiteSpace(tkuser))
             {
-                return RedirectToAction("Login","DangNhap");
+                return RedirectToAction("Login", "DangNhap");
             }
             //var Sinhvien = from p in db.SinhViens
             //               select p;
-            List<SoLienLacDienTu.Models.LamQuenCodeFirst.SinhVien> emplist = db.SinhViens.Select(x => new SoLienLacDienTu.Models.LamQuenCodeFirst.SinhVien
-            {
-                MaSV = x.MaSV,
-                TenSV = x.TenSV,
-                GioiTinh = x.GioiTinh,
-                Diachi = x.Diachi,
-                Email = x.Email,
-                SDT = x.SDT,
-                NgaySinh = x.NgaySinh,
-                MaPH = x.MaPH,
-                Password = x.Password,
-            }).ToList();
-            return View(emplist);
+
+            return View(db.SinhViens.ToList());
         }
         [HttpPost]
         public ActionResult DanhSachSV(HttpPostedFileBase file)
@@ -73,7 +62,7 @@ namespace DO_AN_Thu_nghiem.Controllers
             var tkuser = Convert.ToString(Session["TKadmin"]);
             if (string.IsNullOrWhiteSpace(tkuser))
             {
-                return RedirectToAction("Login","DangNhap");
+                return RedirectToAction("Login", "DangNhap");
             }
             string filePath = string.Empty;
             if (file != null)
@@ -175,7 +164,7 @@ namespace DO_AN_Thu_nghiem.Controllers
         }
         public void ExcelToSinhVien()
         {
-           
+
             List<SoLienLacDienTu.Models.LamQuenCodeFirst.SinhVien> emplist = db.SinhViens.Select(x => new SoLienLacDienTu.Models.LamQuenCodeFirst.SinhVien
             {
                 MaSV = x.MaSV,
@@ -269,7 +258,7 @@ namespace DO_AN_Thu_nghiem.Controllers
         [ValidateInput(false)]
         public ActionResult TaoTTSV([Bind(Include = "MaSV, TenSV, GioiTinh , Diachi, Email , SDT, NgaySinh, Password ")] SinhVien sp)
         {
-           
+
             //var path = "";
             //var filename = "";
             if (ModelState.IsValid)
@@ -284,7 +273,7 @@ namespace DO_AN_Thu_nghiem.Controllers
 
         public SinhVien getMaSV(string id)
         {
-          
+
             return db.SinhViens.Where(m => m.MaSV == id).FirstOrDefault();
         }
         [HttpGet]
@@ -304,7 +293,7 @@ namespace DO_AN_Thu_nghiem.Controllers
         [ValidateInput(false)]
         public ActionResult EditTTSV([Bind(Include = "MaSV, TenSV, GioiTinh , Diachi, Email , SDT, NgaySinh, Password ")] SinhVien lSV)
         {
-          
+
             //var path = "";
             //var filename = "";
             SinhVien temp = getMaSV(lSV.MaSV);
@@ -589,7 +578,7 @@ namespace DO_AN_Thu_nghiem.Controllers
                     {
                         Directory.CreateDirectory(path);
                     }
-
+                    
                     filePath = path + Path.GetFileName(file.FileName);
                     string extension = Path.GetExtension(file.FileName);
                     file.SaveAs(filePath);
@@ -661,8 +650,10 @@ namespace DO_AN_Thu_nghiem.Controllers
                             sqlBulkCopy.ColumnMappings.Add("ThoiGianKT", "ThoiGianKT");
                             sqlBulkCopy.ColumnMappings.Add("Nam", "Nam");
                             sqlBulkCopy.ColumnMappings.Add("HocKy", "HocKy");
+                            sqlBulkCopy.ColumnMappings.Add("IsSelected", "IsSelected");
 
                             con.Open();
+                            
                             sqlBulkCopy.WriteToServer(dt);
                             con.Close();
                         }
@@ -771,6 +762,8 @@ namespace DO_AN_Thu_nghiem.Controllers
                             sqlBulkCopy.ColumnMappings.Add("ThoiGianKT", "ThoiGianKT");
                             sqlBulkCopy.ColumnMappings.Add("Nam", "Nam");
                             sqlBulkCopy.ColumnMappings.Add("HocKy", "HocKy");
+                            sqlBulkCopy.ColumnMappings.Add("IsSelected", "IsSelected");
+
 
                             con.Open();
                             sqlBulkCopy.WriteToServer(dt);
@@ -1494,7 +1487,7 @@ namespace DO_AN_Thu_nghiem.Controllers
 
             return View(ddk);
         }
-       
+
         public ActionResult DangGiaDonDK(int id)
         {
             var DangGiaDonDK = db.Dons.First(m => m.STT == id);
@@ -1583,17 +1576,17 @@ namespace DO_AN_Thu_nghiem.Controllers
             List<SinhVien> svnames = db.SinhViens.ToList();
             var duyetdon = (from s in donname
                             where s.STT == idduyet
-                          select new DuyetDonHomeAdmin
-                          {
-                              STT = s.STT,
-                              MaSV = s.MaSV,
-                              TenSV = s.TenSV,
-                              LiDo = s.LiDo,
-                              TrangThai = s.TrangThai,
-                          }).ToList();
+                            select new DuyetDonHomeAdmin
+                            {
+                                STT = s.STT,
+                                MaSV = s.MaSV,
+                                TenSV = s.TenSV,
+                                LiDo = s.LiDo,
+                                TrangThai = s.TrangThai,
+                            }).ToList();
             donname[1].TrangThai = 1;
             db.SubmitChanges();
-          
+
             foreach (var sv in svnames)
             {
                 if (sv.MaSV == tksv)
@@ -1641,23 +1634,23 @@ namespace DO_AN_Thu_nghiem.Controllers
             List<Admin> Adminnames = db.Admins.ToList();
             List<SinhVien> svnames = db.SinhViens.ToList();
             var khongduyetdon = (from s in donname
-                            where s.STT == duyet
-                            select new KhongDuyetDonHomeAdmin
-                            {
-                                STT = s.STT,
-                                MaSV = s.MaSV,
-                                TenSV = s.TenSV,
-                                LiDo = s.LiDo,
-                                TrangThai =2,
-                            }).ToList();
+                                 where s.STT == duyet
+                                 select new KhongDuyetDonHomeAdmin
+                                 {
+                                     STT = s.STT,
+                                     MaSV = s.MaSV,
+                                     TenSV = s.TenSV,
+                                     LiDo = s.LiDo,
+                                     TrangThai = 2,
+                                 }).ToList();
             foreach (var e in donname)
             {
-                if(e.STT==idkoduyet)
+                if (e.STT == idkoduyet)
                 {
                     e.TrangThai = 2;
                     db.SubmitChanges();
                 }
-             
+
 
 
             }
@@ -1701,9 +1694,89 @@ namespace DO_AN_Thu_nghiem.Controllers
             ViewBag.mess = "không duyệt thành công!";
             return RedirectToAction("DSDONDK");
         }
-        public ActionResult test()
+        public ActionResult xetTotNghiep()
         {
-            return View();
+            List<SinhVien> sinhViens = db.SinhViens.ToList();
+            var tkuser = Convert.ToString(Session["TKadmin"]);
+            if (string.IsNullOrWhiteSpace(tkuser))
+            {
+                return RedirectToAction("Login", "DangNhap");
+            }
+            foreach (var i in sinhViens)
+            {
+                if (string.IsNullOrEmpty(Convert.ToString(i.TotNghiep)))
+                {
+                    i.TotNghiep = 0;
+                }
+                else
+                {
+                }
+            }
+            db.SubmitChanges();
+            return View(db.SinhViens.ToList());
+
+        }
+
+        [HttpPost]
+        public ActionResult svTotNghiep(SinhVien lSV, string idduyet, string de)
+        {
+            List<SinhVien> sinhViens = db.SinhViens.ToList();
+            List<Diem> diems = db.Diems.ToList();
+            List<DiemCT> diemcts = db.DiemCTs.ToList();
+
+            int tongtcd = 0;
+
+            var layDiemSV = (from sv in sinhViens
+                             where sv.MaSV == idduyet
+
+                             join diem in diems on sv.MaSV equals diem.MaSV
+                             join diemct in diemcts on diem.IDDiem equals diemct.IDDiem
+                             where diem.MaSV == sv.MaSV && diem.SoTinChiDat != null
+                             select new layMaMon
+                             {
+                                 IDDiem = diem.IDDiem,
+                                 masv = diem.MaSV,
+                                 mamon = diemct.MaMon,
+                                 Namhoc = diemct.NamHoc,
+                                 tinchidat = diem.SoTinChiDat
+                             }).ToList(); ;
+
+            foreach (var item in layDiemSV)
+            {
+
+                tongtcd += Convert.ToInt32(item.tinchidat);
+
+            }
+            ViewBag.ád = tongtcd;
+
+            if (de == "Có")
+            {
+                foreach (SinhVien sv in sinhViens)
+                {
+                    if (sv.MaSV == idduyet)
+                    {
+                        if (tongtcd == 23)
+                        {
+                            sv.TotNghiep = 1;
+                            Session["xet"] = "1";
+                        }
+                        else
+                        {
+                            Session["xet"] = "2";
+
+                        }
+                    }
+
+                }
+            }
+            else
+            {
+
+            }
+          
+            db.SubmitChanges();
+            return RedirectToAction("xetTotNghiep");
+
         }
     }
 }

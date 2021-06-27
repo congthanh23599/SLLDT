@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SoLienLacDienTu.Models.SVXemDiem>
+﻿@model IEnumerable<SoLienLacDienTu.Models.ThongBao>
 @{
     ViewBag.Title = "XemTB";
     Layout = "~/Views/Shared/_GDSinhVien.cshtml";
@@ -22,9 +22,9 @@
                 <td width="63px" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
                     <span id="ctl00_ContentPlaceHolder1_ctl00_lblMaMH" title="Mã Môn Học" class="Label">Mã Giảng Viên</span>
                 </td>
-                <td width="200px" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                @*<td width="200px" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
                     <span id="ctl00_ContentPlaceHolder1_ctl00_lblTenMH" title="Tên Môn Học" class="Label">Tên Giảng viên</span>
-                </td>
+                </td>*@
                 <td width="35px" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
                     <span id="ctl00_ContentPlaceHolder1_ctl00_lblTTH" title="Thực Hành" class="Label">Nội Dung</span>
                 </td>
@@ -37,33 +37,36 @@
                 <td width="28px" style="color:White;background-color:#6699CC;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
                     <span id="ctl00_ContentPlaceHolder1_ctl00_lblPhong" title="Phòng Học" class="Label">Lớp môn</span>
                 </td>
-                </td>
             </tr>
+            @{ int i = 0;}
+
             @foreach (var item in Model)
             {
                 <tr align="center" style="overflow:scroll;background:white;">
                     <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                        @{i = i + 1; }
+                        @i
                     </td>
 
                     <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                        @item.GVDetail.MaGV
+                        @item.MaGV
 
                     </td>
+                   @* <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
+                        @item.TenGV
+                    </td>*@
                     <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                        @item.GVDetail.TenGV
+                        @item.NoiDung
                     </td>
                     <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                        @item.TBdetail.NoiDung
+                        @item.NgayDang
                     </td>
                     <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                        @item.TBdetail.NgayDang
-                    </td>
-                    <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                        @item.TBdetail.MaLop
+                        @item.MaLop
                     </td>
 
                     <td style="color:Black;height:25px;border-width:1px;border-style:solid;font-size:11px;height:18px;width:25px;white-space:nowrap;">
-                        @item.TBdetail.MaLM
+                        @item.MaLM
                     </td>
 
 

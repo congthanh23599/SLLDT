@@ -12,9 +12,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 
 </head>
-<body class="sb-nav-fixed">
+<body class="sb-nav-fixed menutab">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="@Url.Action("Index", "HomeAdmin")">Start Bootstrap</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
+        <a class="navbar-brand menutab_head" href="@Url.Action("Index", "HomeAdmin")">Start Bootstrap</a>
+        <button onclick="openfullscreen()" class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
             <i class="fas fa-bars"></i>
         </button><!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -101,7 +102,7 @@
             </nav>
         </div>
     </div>
-    <div style="margin-left:15% ; padding-top:5%">
+    <div class="main_admin admin_normal" >
         @RenderBody()
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
@@ -116,6 +117,57 @@
     @*<script src="~/Plugin/ckeditor/ckeditor.js"></script>
         <script src="~/Plugin/ckfinder/ckfinder.js"></script>*@
     @RenderSection("jsFooter", required: false)
+    <style>
+        .menutab .admin_normal {
+            padding-left: 15%
+        }
+    </style>
+    <script>
+       
+        function openfullscreen() {
+            $(".menutab_head").addClass("hide");
+            $("#sidenavAccordion").addClass("hide");
+            $(".main_admin").removeClass("admin_normal").addClass("full");
+            $("#sidebarToggle").attr("onclick", "closefullscreen()")
+
+            if ($(".menutab_head").hasClass("hide")) {
+                $(".menutab_head").hide();
+            }
+            else {
+                $(".menutab_head").show();
+
+            }
+            if ($("#sidenavAccordion").hasClass("hide")) {
+                $("#sidenavAccordion").hide();
+            }
+            else {
+                $("#sidenavAccordion").show();
+
+            }
+        }
+        function closefullscreen() {
+            $("#sidebarToggle").attr("onclick", "openfullscreen()")
+
+            $(".menutab_head").removeClass("hide");
+            $("#sidenavAccordion").removeClass("hide");
+            $(".main_admin").removeClass("full").addClass("admin_normal");
+
+            if ($(".menutab_head").hasClass("hide")) {
+                $(".menutab_head").hide();
+            }
+            else {
+                $(".menutab_head").show();
+
+            }
+            if ($("#sidenavAccordion").hasClass("hide")) {
+                $("#sidenavAccordion").hide();
+            }
+            else {
+                $("#sidenavAccordion").show();
+
+            }
+        }
+    </script>
 </body>
 </html>
 

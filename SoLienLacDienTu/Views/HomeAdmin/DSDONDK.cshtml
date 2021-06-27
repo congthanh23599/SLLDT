@@ -80,8 +80,8 @@
                                                     @using (Html.BeginForm("DuocDuyet", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                     {
                                                         @*@Html.ActionLink("Duyệt", "DSDONDK", new { id = item.STT })*@
-                                                        <input  name="idduyet" id="idduyet" value="@item.STT" />
-                                                        <input  name="tksv" id="tksv" value="@item.MaSV" />
+                                                        <input type="hidden"  name="idduyet" id="idduyet" value="@item.STT" />
+                                                        <input type="hidden"  name="tksv" id="tksv" value="@item.MaSV" />
                                                         <input type="submit" id="duyet" value="Duyệt" class="btn btn-success" />
                                                     }
                                                     @using (Html.BeginForm("KhongDuocDuyet", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))

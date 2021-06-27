@@ -3385,8 +3385,6 @@ namespace SoLienLacDienTu.Models
 		
 		private EntitySet<SV_MON> _SV_MONs;
 		
-		private EntitySet<ThoiKhoaBieu> _ThoiKhoaBieus;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3408,7 +3406,6 @@ namespace SoLienLacDienTu.Models
 			this._LichThis = new EntitySet<LichThi>(new Action<LichThi>(this.attach_LichThis), new Action<LichThi>(this.detach_LichThis));
 			this._LopMons = new EntitySet<LopMon>(new Action<LopMon>(this.attach_LopMons), new Action<LopMon>(this.detach_LopMons));
 			this._SV_MONs = new EntitySet<SV_MON>(new Action<SV_MON>(this.attach_SV_MONs), new Action<SV_MON>(this.detach_SV_MONs));
-			this._ThoiKhoaBieus = new EntitySet<ThoiKhoaBieu>(new Action<ThoiKhoaBieu>(this.attach_ThoiKhoaBieus), new Action<ThoiKhoaBieu>(this.detach_ThoiKhoaBieus));
 			OnCreated();
 		}
 		
@@ -3573,19 +3570,6 @@ namespace SoLienLacDienTu.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MonHoc_ThoiKhoaBieu", Storage="_ThoiKhoaBieus", ThisKey="MaMon", OtherKey="MaMon")]
-		public EntitySet<ThoiKhoaBieu> ThoiKhoaBieus
-		{
-			get
-			{
-				return this._ThoiKhoaBieus;
-			}
-			set
-			{
-				this._ThoiKhoaBieus.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3649,18 +3633,6 @@ namespace SoLienLacDienTu.Models
 		}
 		
 		private void detach_SV_MONs(SV_MON entity)
-		{
-			this.SendPropertyChanging();
-			entity.MonHoc = null;
-		}
-		
-		private void attach_ThoiKhoaBieus(ThoiKhoaBieu entity)
-		{
-			this.SendPropertyChanging();
-			entity.MonHoc = this;
-		}
-		
-		private void detach_ThoiKhoaBieus(ThoiKhoaBieu entity)
 		{
 			this.SendPropertyChanging();
 			entity.MonHoc = null;
@@ -4012,6 +3984,8 @@ namespace SoLienLacDienTu.Models
 		
 		private string _MaPH;
 		
+		private System.Nullable<int> _TotNghiep;
+		
 		private EntitySet<Diem> _Diems;
 		
 		private EntitySet<LichThi> _LichThis;
@@ -4046,6 +4020,8 @@ namespace SoLienLacDienTu.Models
     partial void OnPasswordChanged();
     partial void OnMaPHChanging(string value);
     partial void OnMaPHChanged();
+    partial void OnTotNghiepChanging(System.Nullable<int> value);
+    partial void OnTotNghiepChanged();
     #endregion
 		
 		public SinhVien()
@@ -4239,6 +4215,26 @@ namespace SoLienLacDienTu.Models
 					this._MaPH = value;
 					this.SendPropertyChanged("MaPH");
 					this.OnMaPHChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotNghiep", DbType="Int")]
+		public System.Nullable<int> TotNghiep
+		{
+			get
+			{
+				return this._TotNghiep;
+			}
+			set
+			{
+				if ((this._TotNghiep != value))
+				{
+					this.OnTotNghiepChanging(value);
+					this.SendPropertyChanging();
+					this._TotNghiep = value;
+					this.SendPropertyChanged("TotNghiep");
+					this.OnTotNghiepChanged();
 				}
 			}
 		}
@@ -5130,8 +5126,6 @@ namespace SoLienLacDienTu.Models
 		
 		private bool _IsSelected;
 		
-		private EntityRef<MonHoc> _MonHoc;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5172,7 +5166,6 @@ namespace SoLienLacDienTu.Models
 		
 		public ThoiKhoaBieu()
 		{
-			this._MonHoc = default(EntityRef<MonHoc>);
 			OnCreated();
 		}
 		
@@ -5207,10 +5200,6 @@ namespace SoLienLacDienTu.Models
 			{
 				if ((this._MaMon != value))
 				{
-					if (this._MonHoc.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnMaMonChanging(value);
 					this.SendPropertyChanging();
 					this._MaMon = value;
@@ -5496,40 +5485,6 @@ namespace SoLienLacDienTu.Models
 					this._IsSelected = value;
 					this.SendPropertyChanged("IsSelected");
 					this.OnIsSelectedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MonHoc_ThoiKhoaBieu", Storage="_MonHoc", ThisKey="MaMon", OtherKey="MaMon", IsForeignKey=true)]
-		public MonHoc MonHoc
-		{
-			get
-			{
-				return this._MonHoc.Entity;
-			}
-			set
-			{
-				MonHoc previousValue = this._MonHoc.Entity;
-				if (((previousValue != value) 
-							|| (this._MonHoc.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._MonHoc.Entity = null;
-						previousValue.ThoiKhoaBieus.Remove(this);
-					}
-					this._MonHoc.Entity = value;
-					if ((value != null))
-					{
-						value.ThoiKhoaBieus.Add(this);
-						this._MaMon = value.MaMon;
-					}
-					else
-					{
-						this._MaMon = default(string);
-					}
-					this.SendPropertyChanged("MonHoc");
 				}
 			}
 		}

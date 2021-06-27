@@ -168,6 +168,7 @@ namespace DO_AN_Thu_nghiem.Controllers
             var idgv =Convert.ToString( Session["MaGV"]);
             sp.MaGV = idgv;
             sp.NgayDang = DateTime.Now;
+            
             if (ModelState.IsValid)
             {
 

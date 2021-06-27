@@ -25,6 +25,7 @@ namespace SoLienLacDienTu.Models
         //[DataType(DataType.Date)]
         public DateTime? ThoiGianKT { get; set; }
         public int? HocKy { get; set; }
+     
         public string Montienquyet { get; set; }
         public int? Nam { get; set; }
 

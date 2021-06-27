@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SoLienLacDT" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=LAPTOP-TUUBPQO5\SQLEXPRESS;Initial Catalog=SoLienLacDT;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SoLienLacDTConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=LAPTOP-TUUBPQO5\SQLEXPRESS;Initial Catalog=SoLienLacDT;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="SoLienLacDTConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Admin" Member="Admins">
     <Type Name="Admin">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -167,7 +167,6 @@
       <Association Name="MonHoc_LopMon" Member="LopMons" ThisKey="MaMon" OtherKey="MaMon" Type="LopMon" />
       <Association Name="MonHoc_Nganh_Mon" Member="Nganh_Mons" ThisKey="MaMon" OtherKey="MaMon" Type="Nganh_Mon" />
       <Association Name="MonHoc_SV_MON" Member="SV_MONs" ThisKey="MaMon" OtherKey="MaMon" Type="SV_MON" />
-      <Association Name="MonHoc_ThoiKhoaBieu" Member="ThoiKhoaBieus" ThisKey="MaMon" OtherKey="MaMon" Type="ThoiKhoaBieu" />
     </Type>
   </Table>
   <Table Name="dbo.Nganh" Member="Nganhs">
@@ -207,6 +206,7 @@
       <Column Name="NgaySinh" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="MaPH" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TotNghiep" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SinhVien_Diem" Member="Diems" ThisKey="MaSV" OtherKey="MaSV" Type="Diem" />
       <Association Name="SinhVien_LichThi" Member="LichThis" ThisKey="MaSV" OtherKey="MaSV" Type="LichThi" />
       <Association Name="SinhVien_SinhVien_LopMon" Member="SinhVien_LopMons" ThisKey="MaSV" OtherKey="MaSV" Type="SinhVien_LopMon" />
@@ -271,7 +271,6 @@
       <Column Name="HocKy" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="TongNgayHoc" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IsSelected" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="MonHoc_ThoiKhoaBieu" Member="MonHoc" ThisKey="MaMon" OtherKey="MaMon" Type="MonHoc" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ThongBao" Member="ThongBaos">

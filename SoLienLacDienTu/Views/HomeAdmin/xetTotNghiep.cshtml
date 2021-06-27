@@ -1,0 +1,215 @@
+﻿@model IEnumerable<SoLienLacDienTu.Models.SinhVien>
+@{
+
+    ViewBag.Title = "xetTotNghiep";
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+<style>
+    .modal-footer .danger:hover {
+        background-color: blue;
+        color: white
+    }
+    .hide{
+        display:none
+    }
+    .modal-footer .primary:hover {
+        color: white;
+        background-color: red;
+    }
+
+    .modal-dialog_thongbao {
+        position: absolute;
+        top: 100px;
+        width: 30%;
+        margin: -30px 467px auto;
+    }
+</style>
+<h2 style="margin-left: 6px">Xét tốt nghiệp</h2>
+<div id="result"></div>
+@*@{ if (Session["xet"] == "đủ tín chỉ")
+        {
+            <div class="alert alert-primary" role="alert">
+                Thành công
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger" role="alert">
+                thất bại
+            </div>
+        }
+
+    }*@
+<input hidden type="text" id="xet" value="@Session["xet"]" class="btn btn-primary @Session["xet"]" />
+
+
+<div id="layoutSidenav" style="margin-left:-5px">
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable</div>
+                    <div class="card-body">
+                        <div class="col-12">
+
+                        </div>
+                        <div class="table-responsive">
+                            <div class="" style="float: right; margin-left: 5px">
+                                @using (Html.BeginForm("#", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+
+                                    <input type="submit" value="Xét tốt nghiệp" class="btn btn-primary" />
+                                }
+                            </div>
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Mã SV</th>
+                                        <th>Tên SV</th>
+                                        <th>Giới Tính</th>
+                                        <th>Email</th>
+                                        <th>SDT</th>
+                                        <th>Ngày Sinh</th>
+                                        <th>Trạng thái </th>
+                                        <th></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.MaSV
+                                            </td>
+                                            <td>@item.TenSV</td>
+                                            <td>@item.GioiTinh</td>
+                                            <td>@item.Email</td>
+                                            <td>@item.SDT</td>
+                                            <td>@item.NgaySinh.Value.ToString("dd/MM/yyyy")</td>
+
+                                            <td style="color: #ff6a00">
+                                                <p>
+                                                    @{
+
+                                                        if (item.TotNghiep == 0)
+                                                        {
+                                                            <div class="alert alert-danger" role="alert">
+                                                                chưa tốt nghiệp
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="alert alert-primary" role="alert">
+                                                                tốt nghiệp
+                                                            </div>
+                                                        }
+                                                    }
+                                                </p>
+                                            </td>
+                                            <td>
+
+                                                @using (Html.BeginForm("svTotNghiep", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                {
+                                                    @*@Html.ActionLink("Duyệt", "DSDONDK", new { id = item.STT })*@
+                                                    <input hidden name="idduyet" id="idduyet" value="@item.MaSV" />
+                                                    <input type="button" id="duyet" data="@item.MaSV" value="Duyệt" class="btn btn-success id" data-toggle="modal" data-target="#myModal"/>
+                                                    <div class="col-md-auto">
+                                                        <!-- Trigger the modal with a button -->
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" data-backdrop="false" id="myModal" role="dialog">
+                                                            <div class="modal-dialog">
+
+                                                                <!-- Modal content-->
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+
+                                                                        <h4 class="modal-title" style="font-size: 18px;">Xác nhận xét tốt nghiệp cho không ?  </h4>
+                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    </div>
+                                                                    @*<div class="modal-body">
+                                                                        </div>*@
+                                                                    <div class="modal-footer">
+                                                                        <input type="submit" name="de" id="de" value="Có" class="btn danger" />
+                                                                        <input type="submit" name="de" id="de" value="Không" class="btn primary" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                }
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+<div class="modal-dialog_thongbao hide">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header" style="background-color:#333;color:white">
+
+            <h4 class="modal-title" style="font-size: 18px;">Xác nhận xét tốt nghiệp cho không ?  </h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        @*<div class="modal-body">
+            </div>*@
+        <div class="modal-footer">
+            <input type="submit" name="de" id="de" onclick="test()" value="Có" class="btn danger" />
+            <input type="submit" name="de" id="de" value="Không" class="btn primary" />
+        </div>
+    </div>
+</div>
+
+
+<script>
+  
+    function con() {
+        //var getxet = document.getElementById("xet").value;
+        if (document.getElementById('xet').value()) {
+
+
+            var html = '<div class="alert alert-primary" role="alert">Thành công</div >';
+            document.getElementById('result').insertAdjacentHTML('afterbegin', html);
+        }
+        else {
+
+            var html = '<div class=alert alert-danger" role="alert"> thất bại  </div>';
+            document.getElementById('result').insertAdjacentHTML('afterbegin', html);
+
+        }
+        ////$("#xet").
+
+    }
+   
+  
+</script>
+
+@*<script>
+        function test() {
+            console.log($(".id").attr('data'));
+            console.log($("#idduyet").attr('value'));
+
+            if ($(".id").attr('data') == $("#idduyet").attr('value')) {
+
+            }
+            else {
+                $("#idduyet").attr('id', "ádấdsádsda");
+
+            }
+
+        }
+    </script>*@
+

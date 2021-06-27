@@ -199,6 +199,8 @@
     </Compile>
     <Compile Include="Helper\DuyetDonHomeAdmin.cs" />
     <Compile Include="Helper\KhongDuyetDonHomeAdmin.cs" />
+    <Compile Include="Helper\LUU.cs" />
+    <Compile Include="Helper\trungmon.cs" />
     <Compile Include="Models\DataClasses1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -286,6 +288,7 @@
     <Compile Include="Models\Entry\ThongBaoChung.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\layMaMon.cs" />
     <Compile Include="Models\mondc.cs" />
     <Compile Include="Models\xettq.cs" />
     <Compile Include="Models\DkMon.cs" />
@@ -673,11 +676,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Models\DataClasses1.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\assets\vendor\bootstrap-icons\bootstrap-icons.json" />
     <Content Include="Content\assets\vendor\bootstrap-icons\fonts\bootstrap-icons.woff" />
     <Content Include="Content\assets\vendor\bootstrap-icons\fonts\bootstrap-icons.woff2" />
@@ -723,6 +721,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DataClasses1.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -807,8 +810,10 @@
     <Content Include="Views\HomeAdmin\DangGiaDonDK.cshtml" />
     <Content Include="Views\HomeAdmin\SendEMail.cshtml" />
     <Content Include="Views\HomeAdmin\test.cshtml" />
-    <Content Include="Views\SV\DKm.cshtml" />
+    <Content Include="Views\SV\DangKyMon.cshtml" />
     <Content Include="Views\SV\testView.cshtml" />
+    <Content Include="Views\SV\testlist.cshtml" />
+    <Content Include="Views\HomeAdmin\xetTotNghiep.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
