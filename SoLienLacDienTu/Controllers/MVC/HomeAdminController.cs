@@ -1623,6 +1623,7 @@ namespace DO_AN_Thu_nghiem.Controllers
             return RedirectToAction("DSDONDK");
         }
 
+
         //còn chưa thay đổi được trang thái chỉ gửi email về phía sinh viên được thôi
         [HttpPost]
 
@@ -1778,5 +1779,45 @@ namespace DO_AN_Thu_nghiem.Controllers
             return RedirectToAction("xetTotNghiep");
 
         }
+
+   
+        [HttpPost]
+     
+        public ActionResult addFile( HttpPostedFileBase file, int idSTT, string idsv)
+        {
+            /* int id = (int)Session["idDon"];*/
+            var path = "";
+            var filename = "";
+
+            List<Don> donnames = db.Dons.ToList();
+            // chua biet thông tin nàm ở đâu 
+            foreach(var item in donnames)
+            {
+                if (item.STT == idSTT && item.MaSV == idsv)
+                {
+
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        filename = file.FileName;
+                        path = Path.Combine(Server.MapPath("~/UploadedFiles"), filename);
+                        file.SaveAs(path);
+                        item.FileDon = filename;
+
+                    }
+
+                }
+                else
+                {
+
+                }
+
+            }
+
+            db.SubmitChanges();
+
+
+            return RedirectToAction("DSDONDK");
+        }
+
     }
 }

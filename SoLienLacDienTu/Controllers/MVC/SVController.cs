@@ -1203,55 +1203,6 @@ namespace test.Controllers
         }
 
 
-        // Draft:code test ko dùng đến
-        public ActionResult testlist()
-        {
-            var tkuser = Convert.ToString(Session["idsv"]);
-            if (string.IsNullOrWhiteSpace(tkuser))
-            {
-                return RedirectToAction("DangNhap");
-            }
-
-            return View(db.ThoiKhoaBieus.ToList());
-        }
-        [HttpPost]
-        public ActionResult testsave(List<ThoiKhoaBieu> hobbies)
-        {
-            var idsv = Session["idsv"]; // luu session idsv luc log in vao
-
-            //DS cần thiết để kiểm tra SV DA HOC
-            List<SinhVien_LopMon> svlmnames = db.SinhVien_LopMons.ToList();
-
-            List<ThoiKhoaBieu> tkbnames = db.ThoiKhoaBieus.ToList();
-
-
-
-
-            foreach (ThoiKhoaBieu tkb in hobbies)
-            {
-                ThoiKhoaBieu updatetkb = db.ThoiKhoaBieus.ToList().Find(p => p.IDTKB == tkb.IDTKB);
-
-                updatetkb.IsSelected = tkb.IsSelected;
-                /*  if (updatetkb.IsSelected)
-                  {*/
-
-                /*   }
-                   else
-                   {
-                       Session["test"] = "ko ton tai";
-                   }*/
-                /*
-                Session["Luuchecked"] = updatetkb.MaLM;*/
-            }
-            // vậy thằng này thì sao nó lấy đc cái lúc check á
-
-            //code này để làm j z ông
-            // nó tìm thằng nào có idTKB á r nó lấy cái isselected gán á
-            //nó lưu vô đâu z ông lưu tkb á chỉ có lưu cái check thôi cái  isselected á
-            /*  db.s();*/
-            db.SubmitChanges();
-
-            return RedirectToAction("testlist");
-        }
+    
     }
 }

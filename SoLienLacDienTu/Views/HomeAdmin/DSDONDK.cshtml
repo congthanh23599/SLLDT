@@ -45,11 +45,34 @@
                                             <td>@item.LiDo</td>
 
                                             <td>
-                                                @*@item.FileDon*@
-                                                <a href="~/UploadedFiles/@item.FileDon" download="@item.FileDon">
-                                                    <button type="button">Download</button>
-                                                </a>
 
+
+                                                @using (Html.BeginForm("addFile", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                {
+                                                    @*@Html.ActionLink("Duyệt", "DSDONDK", new { id = item.STT })*@
+                                                    <input type="hidden" name="idSTT" id="idSTT" value="@item.STT" />
+                                                    <input type="hidden" name="idsv" id="idsv" value="@item.MaSV" />
+                                                    <input class="btn_addfile_input" data-name="@item.STT" type="file" hidden name="file" />
+                                                    <br />
+                                                    @*  <input type="submit" value="Import to database" class="btn btn-primary" onclick="myFunction()" />*@
+                                                    <input class="btn btn-primary "  id="addFile" type="submit" value="Add file" />
+
+                                                }
+                                                @if (!string.IsNullOrEmpty(item.FileDon))
+                                                {
+                                                    <div class="ctn_addfile" data-name="@item.STT">
+                                                        @item.FileDon
+
+
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="ctn_addfile" data-name="@item.STT">
+                                                        Chưa xét duyệt
+
+                                                    </div>
+                                                }
 
                                             </td>
 
@@ -80,8 +103,8 @@
                                                     @using (Html.BeginForm("DuocDuyet", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                     {
                                                         @*@Html.ActionLink("Duyệt", "DSDONDK", new { id = item.STT })*@
-                                                        <input type="hidden"  name="idduyet" id="idduyet" value="@item.STT" />
-                                                        <input type="hidden"  name="tksv" id="tksv" value="@item.MaSV" />
+                                                        <input type="hidden" name="idduyet" id="idduyet" value="@item.STT" />
+                                                        <input type="hidden" name="tksv" id="tksv" value="@item.MaSV" />
                                                         <input type="submit" id="duyet" value="Duyệt" class="btn btn-success" />
                                                     }
                                                     @using (Html.BeginForm("KhongDuocDuyet", "HomeAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -89,7 +112,7 @@
                                                         @* <input onclick="myFunction()" class="btn btn-danger" value="Không duyệt" type="button" />*@
                                                         <input type="hidden" name="idkoduyet" id="idkoduyet" value="@item.STT" />
                                                         <input type="hidden" name="tksvkdd" id="tksvkdd" value="@item.MaSV" />
-                                                        <input class="btn btn-danger" id="save_menu_button" value="Không duyệt"  data-toggle="modal" data-target="#myModal" onclick="myFunction()" />
+                                                        <input class="btn btn-danger" id="save_menu_button" value="Không duyệt" data-toggle="modal" data-target="#myModal" onclick="myFunction()" />
 
                                                         <div class="col-md-auto">
                                                             <!-- Trigger the modal with a button -->
@@ -121,7 +144,7 @@
                                             </td>
                                         </tr>
                                     }
-                                     </tbody>
+                                </tbody>
                             </table>
                             @Html.ActionLink("Create New", "TaoTTGV")
                         </div>
@@ -131,31 +154,3 @@
         </main>
     </div>
 </div>
-
-<script>
-    $("#duyet").on("click", function () {
-        var duyet = $('#duyet').attr('value');
-    })
-    function myFunction() {
-@*
-        document.getElementById('idkoduyet').value = document.getElementById('koduyet').value;
-        document.getElementById('tksvkdd').value = document.getElementById('svkdd').value;*@
-        @*$('#idkoduyet').attr('value') = $('#koduyet').attr('value');
-        $('#tksvkdd').attr('value') = $('#svkdd').attr('value');*@
-      @*  $('#koduyet').attr('value');*@
-@*
-        if (typeof (Storage) !== 'undefined') {
-            // Khởi tạo sesionStorage
-            sessionStorage.setItem('idkoduyet', idkd);
-            // get sessionStorage
-            sessionStorage.getItem('idkoduyet');
-            // lấy ra số lượng session đã lưu trữ
-            sessionStorage.length;
-            alert(sessionStorage.getItem('idkoduyet'));
-
-        } else {
-            alert('Trình duyệt của bạn không hỗ trợ!');
-        }*@
-    }
-</script>
-

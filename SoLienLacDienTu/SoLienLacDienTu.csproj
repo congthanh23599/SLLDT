@@ -532,6 +532,7 @@
     <Content Include="Content\js\lightcase.js" />
     <Content Include="Content\js\move-top.js" />
     <Content Include="Content\js\numscroller-1.0.js" />
+    <Content Include="Content\js\QuanLiDDK.js" />
     <Content Include="Content\js\responsiveslides.min.js" />
     <Content Include="Content\js\SmoothScroll.min.js" />
     <Content Include="Content\login.css" />
@@ -811,8 +812,6 @@
     <Content Include="Views\HomeAdmin\SendEMail.cshtml" />
     <Content Include="Views\HomeAdmin\test.cshtml" />
     <Content Include="Views\SV\DangKyMon.cshtml" />
-    <Content Include="Views\SV\testView.cshtml" />
-    <Content Include="Views\SV\testlist.cshtml" />
     <Content Include="Views\HomeAdmin\xetTotNghiep.cshtml" />
   </ItemGroup>
   <ItemGroup>
