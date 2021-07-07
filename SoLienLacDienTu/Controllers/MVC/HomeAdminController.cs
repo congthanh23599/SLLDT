@@ -1584,9 +1584,18 @@ namespace DO_AN_Thu_nghiem.Controllers
                                 LiDo = s.LiDo,
                                 TrangThai = s.TrangThai,
                             }).ToList();
-            donname[1].TrangThai = 1;
-            db.SubmitChanges();
+           
+            foreach (var e in donname)
+            {
+                if (e.STT == idduyet)
+                {
+                    e.TrangThai = 1;
+                    db.SubmitChanges();
+                }
 
+
+
+            }
             foreach (var sv in svnames)
             {
                 if (sv.MaSV == tksv)
